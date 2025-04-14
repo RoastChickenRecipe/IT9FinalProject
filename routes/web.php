@@ -35,9 +35,7 @@ Route::resource('barangay', BrgyController::class);
 Route::resource('subdivision', SubdController::class);
 
 // Functions for HouseHold
-Route::get('/Household/Form', [HouseHoldController::class, 'createForm'])->name('createForm');
-Route::get('household/view/{id}', [HouseHoldController::class, 'viewfamily']);
-Route::post('/Household/Form', [HouseHoldController::class, 'createHousehold'])->name('createHousehold');
+Route::resource('households', HouseHoldController::class);
 
 
 Route::resource('rqDocuments', rqDocumentController::class);

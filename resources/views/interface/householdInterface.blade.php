@@ -15,7 +15,7 @@
 
                 
                 <div class="col col-3">
-                    <a href="{{route('createForm')}}" class="btn btn-dark w-100">Create Form</a>
+                    <a href="{{route('households.create')}}" class="btn btn-dark w-100">Create Form</a>
                 </div>
                 
             </div>
@@ -65,7 +65,7 @@
                                         <h4>{{$row->HholdToCit->sum('income')}}</h4>
                                     </div>
                                     <div class="col col-2 align-self-center">
-                                        <a href="{{url('household/view/' . $row['id'])}}" class="btn btn-success">VIEW</a>
+                                        <a href="{{route('households.show', $row->id)}}" class="btn btn-success">VIEW</a>
                                     </div>
                                 </div>
                                 

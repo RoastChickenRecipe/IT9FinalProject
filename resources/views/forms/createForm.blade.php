@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <h1>Citizen Form</h1>
                         
-                        <form action="{{route('createHousehold')}}" method="post">
+                        <form action="{{route('households.store')}}" method="post">
                             @csrf
 
                             {{-- HOUSE INFO --}}

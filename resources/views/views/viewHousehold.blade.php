@@ -15,12 +15,23 @@
         <h4 class="osh-outline">Family Income: ₱ {{$getCitizen->sum('income')}}</h4>
         <div class="osh-outline row mx-0">
             <div class="col col-6">
-                <a href="" class="btn btn-dark w-100">Edit</a>
+                <a href="" class="btn btn-dark w-100"><h5>Edit</h5></a>
             </div>
             <div class="col col-6">
                 <form action="" method="post" class="m-0">
-                    <button type="submit" class="btn btn-danger w-100">Delete</button>
+                    <button type="submit" class="btn btn-danger w-100"><h5>Delete</h5></button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="osh-bg mb-5">
+        <div class="row">
+            <div class="col col-6 text-center">
+                <a href="" class="osh-btn-add btn w-100"><h5>Add Citizen</h5></a>
+            </div>
+            <div class="col col-6 text-center">
+                <a href="{{route('view.household')}}" class="osh-btn-back btn w-100"><h5>Go Back</h5></a>
             </div>
         </div>
     </div>

@@ -24,7 +24,16 @@
 <body>
     <div class="container-fluid vh-100">
             
-        @yield('sec-content')
+        <div class="row justify-content-center align-items-center">
+            <div class="col col-7">
+                <div class="card shadow">
+                    <div class="card-body">
+                        @yield('sec-content')
+                    </div>
+                </div>
+
+            </div>
+        </div>
             
         
     </div>

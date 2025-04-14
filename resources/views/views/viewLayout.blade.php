@@ -13,6 +13,29 @@
         padding: 5px;
     }
 
+    .osh-btn-add {
+        background-color: rgb(163, 209, 198); 
+        border: solid 2px black;  
+        border-radius:10px;
+        color: black;
+    }
+
+    .osh-btn-add:hover{
+        background-color: rgb(61, 141, 122);
+        color: white;
+    }
+
+    .osh-btn-back {
+        background-color: rgb(179, 216, 168); 
+        border: solid 2px black;  
+        border-radius:10px;
+        color: black;
+    }
+
+    .osh-btn-back:hover{
+        background-color: rgb(61, 141, 122);
+        color: white;
+    }
 
     .osh-bg {
         background-color: rgb(133, 169, 71); 
@@ -22,10 +45,11 @@
     }
 </style>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid vh-100">
+        
+        <div class="row justify-content-center">
             
-        <div class="row justify-content-center" style="margin-top: 50px; margin-bottom: 50px;">
-            <div class="col col-8">
+            <div class="col col-8 py-5">
                 <div class="card shadow">
                     <div class="card-body">
                         @yield('view-content')
