@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('households', function (Blueprint $table) {
             $table->id();
-            $table->string('household_type');
+            $table->string('household_type', 100);
             //$table->string('family_income');
 
             $table->unsignedBigInteger('municipality_id');

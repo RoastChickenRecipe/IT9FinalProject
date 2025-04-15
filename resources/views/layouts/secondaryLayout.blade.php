@@ -24,7 +24,7 @@
 <body>
     <div class="container-fluid vh-100">
             
-        <div class="row justify-content-center align-items-center">
+        <div class="row justify-content-center align-items-center h-100">
             <div class="col col-7">
                 <div class="card shadow">
                     <div class="card-body">
