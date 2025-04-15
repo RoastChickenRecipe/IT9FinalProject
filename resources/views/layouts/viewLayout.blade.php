@@ -13,6 +13,10 @@
         padding: 5px;
     }
 
+    .osh-text-ul {
+        border-bottom: solid 2px black;"
+    }
+
     .osh-btn-add {
         background-color: rgb(163, 209, 198); 
         border: solid 2px black;  
@@ -43,12 +47,15 @@
         border-radius:10px;
         padding: 5px;
     }
+
 </style>
 <body>
+    
     <div class="container-fluid vh-100">
         
         <div class="row justify-content-center">
             
+            @yield('floating')
             <div class="col col-8 py-5">
                 <div class="card shadow">
                     <div class="card-body">

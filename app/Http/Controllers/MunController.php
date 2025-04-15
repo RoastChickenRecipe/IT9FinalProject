@@ -51,7 +51,8 @@ class MunController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = MunModel::findOrFail($id);
+        return view('views.viewMun', ['data' => $data]);
     }
 
     /**

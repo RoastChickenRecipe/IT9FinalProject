@@ -54,14 +54,14 @@
                                     <div class="col col-5 pt-2">
                                         <h4>{{$row->HholdToMun->mun_name}}, {{$row->HholdToBrgy->brgy_name}} {{$row->HholdToSubd->subd_name}}</h4>
                                     </div>
-                                    <div class="col col-1 pt-2">
+                                    <div class="col col-1 pt-2 align-self-center">
                                         <h4>{{$row->HholdToCit->groupBy('id')->Count()}}</h4>
                                 
                                     </div>
-                                    <div class="col col-2 pt-2">
+                                    <div class="col col-2 pt-2 align-self-center">
                                         <h4>{{$row->household_type}}</h4>
                                     </div>
-                                    <div class="col col-2 pt-2">
+                                    <div class="col col-2 pt-2 align-self-center">
                                         <h4>{{$row->HholdToCit->sum('income')}}</h4>
                                     </div>
                                     <div class="col col-2 align-self-center">

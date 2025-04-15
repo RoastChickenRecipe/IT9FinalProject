@@ -30,13 +30,16 @@ class IncidentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'com_name' => 'required',
+            'com_fname' => 'required',
+            'com_lname' => 'required',
+            'com_conNum' => 'required',
+            'address' => 'required',
             'incident' => 'required',
             'rep_date' => 'required',
             'description' => 'required'
         ]);
         IncidentModel::create([
-            'complainant_name' => $request->com_name,
+            'complainant_id' => $request->com_name,
             'incident_type' => $request->incident,
             'description' => $request->description,
             'date_reported' => $request->rep_date,

@@ -76,7 +76,7 @@
                                         <h4>{{$row->MunToHhold->flatMap->HholdToCit->groupBy('id')->count()}}</h4>    
                                     </div>
                                     <div class="col col-2 align-self-center">
-                                        <a href="" class="btn btn-light"><i class="bi bi-view-list"></i>View</a>
+                                        <a href="{{route('municipality.show', $row->id)}}" class="btn btn-light"><i class="bi bi-view-list"></i>View</a>
                                     </div>
 
                                 </div>

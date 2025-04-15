@@ -8,7 +8,7 @@ class IncidentModel extends Model
 {
     protected $table = 'incidents';
     protected $fillable = [
-        'complainant_name',
+        'complainant_id',
         'incident_type',
         'description',
         'date_reported',
@@ -18,6 +18,10 @@ class IncidentModel extends Model
 
     public function IncToEmp(){
         return $this->belongsTo(EmployeeModel::class, 'employee_id');
+    }
+
+    public function IncToCompl(){
+        return $this->belongsTo(ComplainantModel::class, 'complainant_id');
     }
 
 }

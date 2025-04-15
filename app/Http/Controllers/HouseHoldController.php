@@ -94,8 +94,8 @@ class HouseHoldController extends Controller
                 'household_id' => $house
             ]);
         }
-        
-        return redirect(view('views.viewHousehold'));
+        $id = $house;
+        return redirect(route('households.show', $id));
 
     }
 

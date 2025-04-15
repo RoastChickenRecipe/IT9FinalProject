@@ -14,6 +14,9 @@
             <div class="col col-4">
                 <label for="com_name"><h4>First Name:</h4></label>
                 <input type="text" name="com_fname" value="{{old('com_name')}}" class="form-control">
+                @error('com_fname')
+                    <div class="text-danger">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-4">
                 <label for="com_name"><h4>Last Name:</h4></label>

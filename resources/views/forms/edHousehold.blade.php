@@ -52,7 +52,7 @@
                 <button type="submit" class="btn btn-secondary w-100">Update</button>
             </div>
             <div class="col col-6">
-                <a href="{{route('view.household')}}" class="btn btn-dark w-100">Cancel</a>
+                <a href="{{route('households.show', $data->id)}}" class="btn btn-dark w-100">Cancel</a>
             </div>
         </div>
 

@@ -1,10 +1,47 @@
-@extends('views.viewLayout')
+@extends('layouts.viewLayout')
 @section('view-title', 'Household')
+
+<style>
+    .floating-box {
+        position: sticky;
+        top: 50px;
+        left: 20px;
+    }
+</style>
+
+@section('floating')
+
+    
+    <div class="col col-2">
+        <div class="floating-box osh-bg">
+
+            <div class="row justify-content-center mb-3">
+                <div class="col col-10 text-center">
+                    <h4 class="osh-outline">Controls</h4>
+                </div>
+            </div>
+
+            <div class="osh-outline">
+                <div class="row">
+                    <div class="col col-6 text-center">
+                        <a href="" class="osh-btn-add btn w-100"><h5>Add Citizen</h5></a>
+                    </div>
+                    <div class="col col-6 text-center">
+                        <a href="{{route('view.household')}}" class="osh-btn-back btn w-100"><h5>Go Back</h5></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+    
+@endsection
 
 @section('view-content')
     
                     
-    <div class="osh-bg mb-5">
+    <div class="osh-bg">
         <div class="row justify-content-center">
             <div class="col col-4 text-center">
                 <h3 class="osh-outline">HouseHold Info:</h3>
@@ -25,21 +62,12 @@
         </div>
     </div>
 
-    <div class="osh-bg mb-5">
-        <div class="row">
-            <div class="col col-6 text-center">
-                <a href="" class="osh-btn-add btn w-100"><h5>Add Citizen</h5></a>
-            </div>
-            <div class="col col-6 text-center">
-                <a href="{{route('view.household')}}" class="osh-btn-back btn w-100"><h5>Go Back</h5></a>
-            </div>
-        </div>
-    </div>
+    
     
     
     @foreach($getCitizen as $row)
 
-        <div class="osh-bg">
+        <div class="osh-bg mt-5">
             <h3 class="osh-outline">Personal Info:</h3>
             
             <div class="row justify-content-around">
