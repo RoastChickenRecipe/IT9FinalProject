@@ -24,5 +24,11 @@ class NavController extends Controller
         return view('interface.householdInterface', ['data' => $data]);
     }
 
+    public function noww()
+    {
+        return view('forms.crIncidentForm');
+        
+    }
+
 
 }

@@ -1,14 +1,6 @@
 @extends('layouts.viewLayout')
 @section('view-title', 'Household')
 
-<style>
-    .floating-box {
-        position: sticky;
-        top: 50px;
-        left: 20px;
-    }
-</style>
-
 @section('floating')
 
     

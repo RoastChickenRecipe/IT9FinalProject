@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('complainant_id');
             $table->foreign('complainant_id')->references('id')->on('complainants')->onUpdate('cascade')->onDelete('cascade');
             $table->string('incident_type', 50);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->date('date_reported');
             $table->string('status', 20);
             //$table->foreignId('employee_id')->constrained('employees', 'id')->onUpdate('cascade');

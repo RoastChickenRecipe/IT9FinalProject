@@ -47,6 +47,12 @@
         border-radius:10px;
         padding: 5px;
     }
+    
+    .floating-box {
+        position: sticky;
+        top: 50px;
+        left: 20px;
+    }
 
 </style>
 <body>

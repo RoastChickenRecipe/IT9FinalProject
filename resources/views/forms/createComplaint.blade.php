@@ -6,16 +6,30 @@
     
     <h1>File an Incident</h1>
 
-    <form action="{{route('incidents.store')}}" method="post">
+    <form action="{{route('complainants.store')}}" method="post">
         @csrf
 
         <div class="row mt-3">
 
-            <div class="col col-6 mt-3">
-                <label for="name"><h4>Name:</h4></label>
-                <input type="text" name="name" readonly value="{{$data->com_fname}} {{$data->com_lname}}" class="form-control">
-                <input type="text" name="compl_id" hidden value="{{$data->id}}">
+            <div class="col col-4">
+                <label for="com_name"><h4>First Name:</h4></label>
+                <input type="text" name="com_fname" value="{{old('com_name')}}" class="form-control">
+                @error('com_fname')
+                    <div class="text-danger">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="col col-4">
+                <label for="com_name"><h4>Last Name:</h4></label>
+                <input type="text" name="com_lname" value="{{old('com_lname')}}" class="form-control">
+            </div>
+            <div class="col col-4">
+                <label for="com_name"><h4>Contact Number:</h4></label>
+                <input type="text" name="com_conNum" value="{{old('com_conNum')}}" class="form-control">
+            </div>
 
+            <div class="col col-6 mt-3">
+                <label for="address"><h4>Address:</h4></label>
+                <input type="text" name="address" value="{{old('address')}}" class="form-control">
             </div>
             <div class="col col-3 mt-3">
                 <label for="incident"><h4>Incident:</h4></label>
@@ -40,7 +54,7 @@
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </div>
             <div class="col col-6">
-                <a href="{{route('complainants.show', $data->id)}}" class="btn btn-secondary w-100">Cancel</a>
+                <a href="{{route('complainants.index')}}" class="btn btn-secondary w-100">Cancel</a>
             </div>
         </div>
 

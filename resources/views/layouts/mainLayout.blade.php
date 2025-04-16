@@ -57,7 +57,7 @@
                         <a href="{{route('rqDocuments.index')}}" class="osh-btn-outline btn w-100"><h4>Request Doc</h4></a>
                     </div>
                     <div class="col col-10 mt-2">
-                        <a href="{{route('incidents.index')}}" class="osh-btn-outline btn w-100"><h4>Incidents</h4></a>
+                        <a href="{{route('complainants.index')}}" class="osh-btn-outline btn w-100"><h4>Complainants</h4></a>
                     </div>
                     <div class="col col-10 mt-2">
                         <form action="{{route('logout')}}" method="post">

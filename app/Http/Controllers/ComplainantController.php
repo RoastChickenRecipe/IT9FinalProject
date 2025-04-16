@@ -6,29 +6,23 @@ use App\Models\ComplainantModel;
 use App\Models\IncidentModel;
 use Illuminate\Http\Request;
 
-class IncidentController extends Controller
+class ComplainantController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //added to compl
-        /*
         $data = ComplainantModel::all();
         return view('interface.incidentInterface', ['data' => $data]);
-        */
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
-        $data = ComplainantModel::findOrFail($request->id);
-        return view('forms.crIncidentForm', ['data' => $data]);
-        //return 'hello';
+        return view('forms.createComplaint');
     }
 
     /**
@@ -36,23 +30,35 @@ class IncidentController extends Controller
      */
     public function store(Request $request)
     {
-        //return redirect(route('incidents.index'));
         $request->validate([
+            'com_fname' => 'required',
+            'com_lname' => 'required',
+            'com_conNum' => 'required',
+            'address' => 'required',
             'incident' => 'required',
             'rep_date' => 'required',
             'description' => 'required'
         ]);
 
+        ComplainantModel::create([
+            'com_fname' => $request->com_fname,
+            'com_lname' => $request->com_lname,
+            'com_contactNum' => $request->com_conNum,
+            'com_address' => $request->address
+        ]);
+
+        $compl = ComplainantModel::orderBy('id', 'desc')->take(1)->value('id');
+
         IncidentModel::create([
-            'complainant_id' => $request->input('compl_id'),
+            'complainant_id' => $compl,
             'incident_type' => $request->incident,
             'description' => $request->description,
             'date_reported' => $request->rep_date,
             'status' => 'test',
             'employee_id' => session('loginId')
         ]);
-        $id = $request->input('compl_id');
-        return redirect(route('complainants.show', $id));
+
+        return redirect(route('complainants.index'));
     }
 
     /**
@@ -60,8 +66,9 @@ class IncidentController extends Controller
      */
     public function show(string $id)
     {
-
-        return view('forms.crIncidentForm', ['id' => $id]);
+        $compl = ComplainantModel::findOrFail($id);
+        $data = IncidentModel::where('complainant_id', '=', $id)->orderBy('date_reported', 'desc')->get();
+        return view('views.viewIncident', ['compl' => $compl, 'data' => $data]);
     }
 
     /**
@@ -69,8 +76,7 @@ class IncidentController extends Controller
      */
     public function edit(string $id)
     {
-        $data = IncidentModel::findOrFail($id);
-        return view('forms.editIncident', ['data' => $data]);
+        //
     }
 
     /**
@@ -78,20 +84,7 @@ class IncidentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'incident' => 'required',
-            'rep_date' => 'required',
-            'description' => 'required'
-        ]);
-        IncidentModel::findOrFail($id)->update([
-            'incident_type' => $request->incident,
-            'description' => $request->description,
-            'date_reported' => $request->rep_date,
-            'status' => 'test',
-            'employee_id' => session('loginId')
-        ]);
-
-        return redirect(route('complainants.show', $id));
+        //
     }
 
     /**
@@ -99,7 +92,6 @@ class IncidentController extends Controller
      */
     public function destroy(string $id)
     {
-        IncidentModel::findOrFail($id)->delete();
-        return redirect()->back();
+        //
     }
 }
