@@ -47,6 +47,7 @@ Route::post('/incidents/file-incident/store', [IncidentController::class, 'store
 Route::get('/incidents/{id}/edit', [IncidentController::class, 'edit'])->name('incidents.edit');
 Route::put('/incidents/{id}', [IncidentController::class, 'update'])->name('incidents.update');
 Route::delete('/incidents/{id}', [IncidentController::class, 'destroy'])->name('incidents.destroy');
+Route::delete('/incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
 
 
 /*

@@ -76,7 +76,8 @@ class ComplainantController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $editCompl = ComplainantModel::findOrFail($id);
+        return view('forms.editComplainant', ['editCompl' => $editCompl]);
     }
 
     /**
@@ -84,7 +85,20 @@ class ComplainantController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'com_fname' => 'required',
+            'com_lname' => 'required',
+            'com_conNum' => 'required',
+            'address' => 'required'
+        ]);
+
+        ComplainantModel::findOrFail($id)->update([
+            'com_fname' => $request->com_fname,
+            'com_lname' => $request->com_lname,
+            'com_contactNum' => $request->com_conNum,
+            'com_address' => $request->address
+        ]);
+        return redirect(route('complainants.show', $id));
     }
 
     /**
@@ -92,6 +106,7 @@ class ComplainantController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        ComplainantModel::findOrFail($id)->delete();
+        return redirect(route('complainants.index'));
     }
 }

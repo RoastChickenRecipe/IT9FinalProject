@@ -90,8 +90,8 @@ class IncidentController extends Controller
             'status' => 'test',
             'employee_id' => session('loginId')
         ]);
-
-        return redirect(route('complainants.show', $id));
+        session()->put('success', 'Updated successfully');
+        return redirect()->back();
     }
 
     /**
@@ -100,6 +100,12 @@ class IncidentController extends Controller
     public function destroy(string $id)
     {
         IncidentModel::findOrFail($id)->delete();
+        return redirect()->back();
+    }
+
+    public function destroyAll(string $id)
+    {
+        IncidentModel::where('complainant_id', '=', $id)->delete();
         return redirect()->back();
     }
 }
