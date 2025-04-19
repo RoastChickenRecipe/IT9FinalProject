@@ -20,17 +20,17 @@ class HouseHoldController extends Controller
     }
 
     public function create(){
-
+        /*
         $munData = MunModel::all()->toArray();
         $brgyData = BrgyModel::all()->toArray();
         $subdData = SubdModel::all()->toArray();
 
-        return view('forms.createForm', [
+        return view('forms.createHousehold', [
             'mun' => $munData,
             'brgy' => $brgyData,
             'subd' => $subdData
         ]);
-
+        */
     }
 
     public function store(citizenForm $request){
@@ -101,15 +101,23 @@ class HouseHoldController extends Controller
 
     public function show($id){
 
-        $house = HouseholdModel::query()->where('id' , '=', $id)->first();
+        //$house = HouseholdModel::query()->where('id' , '=', $id)->first();
+        $house = HouseholdModel::findOrFail($id);
+        $munData = MunModel::where('id', '<>', $house->municipality_id)->get();
+        $brgyData = BrgyModel::where('id', '<>', $house->barangay_id)->get();
+        $subdData = SubdModel::where('id', '<>', $house->subdivision_id)->get();
         $data = CitizenModel::query()->where('household_id', '=', $id)->get();
-        return view('views.viewHousehold', ['getCitizen' => $data, 'house' => $house]);
+        return view('views.viewHousehold', ['getCitizen' => $data, 'house' => $house,
+            'mun' => $munData,
+            'brgy' => $brgyData,
+            'subd' => $subdData]);
 
     }
     
     public function edit($id){
         //$munData = MunModel::all()->toArray();
         
+        /*
         $data = HouseholdModel::findOrFail($id);
         $munData = MunModel::where('id', '<>', $data->municipality_id)->get();
         $brgyData = BrgyModel::where('id', '<>', $data->barangay_id)->get();
@@ -119,6 +127,7 @@ class HouseHoldController extends Controller
             'mun' => $munData,
             'brgy' => $brgyData,
             'subd' => $subdData]);
+        */
     }
 
     public function update(Request $request, $id){

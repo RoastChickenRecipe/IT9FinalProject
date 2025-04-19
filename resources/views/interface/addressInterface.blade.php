@@ -16,6 +16,7 @@
 
                 <div class="col col-2">
                     <a href="{{route('municipality.create')}}" class="btn btn-dark w-100">Add Mun.</a>
+                    
                 </div>
                 <div class="col col-2">
                     <a href="{{route('barangay.create')}}" class="btn btn-dark w-100">Add Brgy.</a>
@@ -27,6 +28,7 @@
         </div>
     </div>
     {{-- CONTENT --}}
+
 
     <div class="row mt-3 justify-content-center">
         <div class="osh-bg col col-11 justify-content-center p-1" style="height: 590px;">
@@ -85,6 +87,5 @@
          
         </div>
     </div>
-
 
 @endsection

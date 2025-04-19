@@ -7,7 +7,7 @@
     
     {{-- HEADER --}}
     <div class="row mt-2 justify-content-center">
-        <div class="col col-11" style="height: 70px; background-color:hsl(97, 43%, 41%); border-radius:10px;">
+        <div class="col col-11" style="height: 70px;">
             <div class="osh-outline row align-items-center justify-content-between" style="height: 70px">
                 <div class="col col-3">
                     <h1 class="text-center">HouseHold</h1>
