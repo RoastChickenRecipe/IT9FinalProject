@@ -13,6 +13,14 @@
         padding: 5px;
     }
 
+    .osh-outline-sec {
+        background-color: rgb(39, 57, 28); 
+        border: solid 2px rgb(31, 125, 83);  
+        border-radius:10px;
+        padding: 5px;
+        color: white
+    }
+
     .osh-text-ul {
         border-bottom: solid 2px black;"
     }

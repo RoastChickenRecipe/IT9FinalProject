@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BrgyModel;
 use App\Models\MunModel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MunController extends Controller
 {
@@ -29,7 +31,10 @@ class MunController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'munName' => 'required|max:50|unique:municipalities,mun_name',
+            'munName' => ['required',
+                            'max:50',
+                            Rule::unique('municipalities', 'mun_name')
+                            ->where('region', $request->input('region'))],
             'region' => 'required|max:10'
         ] , [
             'munName.required' => '*This Field is Required',
@@ -43,7 +48,9 @@ class MunController extends Controller
             'mun_name' => $request->munName,
             'region' => $request->region
         ]);
-        return redirect(route('view.address'));
+
+        $red = MunModel::orderBy('id', 'desc')->take(1)->get();
+        return redirect(route('municipality.show', $red));
     }
 
     /**
@@ -52,7 +59,11 @@ class MunController extends Controller
     public function show(string $id)
     {
         $data = MunModel::findOrFail($id);
-        return view('views.viewMun', ['data' => $data]);
+        $brgyData = BrgyModel::where('municipality_id', '=', $id)->get();    
+        return view('views.viewMun', [
+            'data' => $data,
+            'brgyData' => $brgyData
+        ]);
     }
 
     /**
@@ -68,7 +79,27 @@ class MunController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'munName' => ['required',
+                            'max:50',
+                            Rule::unique('municipalities', 'mun_name')
+                            ->where('region', $request->input('region'))],
+            'region' => 'required|max:10'
+        ] , [
+            'munName.required' => '*This Field is Required',
+            'munName.unique' => 'Name with Similar Region Already Existed',
+            'munName.max' => 'Maxximum Name of 50 Characters',
+            'region.required' => '*This Field is Required',
+            'region.max' => 'Maxximum Characters is 10',
+        ]);
+
+        MunModel::findOrFail($id)->update([
+            'mun_name' => $request->munName,
+            'region' => $request->region
+        ]);
+
+        
+        return redirect(route('municipality.show', $id));
     }
 
     /**
@@ -76,6 +107,7 @@ class MunController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        MunModel::findOrFail($id)->delete();
+        return redirect(route('view.address'));
     }
 }

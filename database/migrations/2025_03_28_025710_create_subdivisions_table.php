@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('subd_name');
             //$table->foreignId('barangay_id', 5)->constrained()->onUpdate('cascade');
             $table->unsignedBigInteger('barangay_id');
-            $table->foreign('barangay_id')->references('id')->on('barangays')->onUpdate('cascade');
+            $table->foreign('barangay_id')->references('id')->on('barangays')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

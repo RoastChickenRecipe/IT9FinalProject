@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BrgyModel;
+use App\Models\MunModel;
 use App\Models\SubdModel;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,8 @@ class SubdController extends Controller
             'subd_name' => $request->subdName,
             'barangay_id' => $request->s_brgy
         ]);
-        return redirect(route('view.address'));
+        $mun = BrgyModel::where('id', '=', $request->s_brgy)->first();
+        return redirect(route('municipality.show', $mun->municipality_id));
     }
 
     /**
@@ -52,15 +54,20 @@ class SubdController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = BrgyModel::findOrFail($id);
+        return view('forms.addSubdForm', ['brgyData' => $data]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {   
+        $subdData = SubdModel::findOrFail($id);
+        $brgyData = BrgyModel::findOrFail($subdData->barangay_id);
+        return view('forms.editSubd', [
+            'brgyData' => $brgyData,
+            'subdData' => $subdData]);
     }
 
     /**
@@ -68,7 +75,22 @@ class SubdController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            's_brgy' => 'required',
+            'subdName' => 'required|max:50|unique:subdivisions,subd_name'
+        ] , [
+            's_brgy.required' => '*This Field is Required',
+            'subdName.unique' => 'Name Already Added',
+            'subdName.max' => 'Maxximum Name of 50 Characters',
+            'subdName.required' => '*This Field is Required'
+        ]);
+
+        SubdModel::findOrFail($id)->update([
+            'subd_name' => $request->subdName,
+            'barangay_id' => $request->s_brgy
+        ]);
+        $mun = BrgyModel::where('id', '=', $request->s_brgy)->first();
+        return redirect(route('municipality.show', $mun->municipality_id));
     }
 
     /**
@@ -76,6 +98,7 @@ class SubdController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        SubdModel::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

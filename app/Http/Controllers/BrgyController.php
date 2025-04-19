@@ -44,7 +44,7 @@ class BrgyController extends Controller
             'brgy_name' => $request->brgyName,
             'municipality_id' => $request->s_mun
         ]);
-        return redirect(route('view.address'));
+        return redirect(route('municipality.show', $request->s_mun));
     }
 
     /**
@@ -59,8 +59,14 @@ class BrgyController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {   
+        
+        $brgyData = BrgyModel::findOrFail($id);
+        $munData = MunModel::findOrFail($brgyData->municipality_id);
+        return view('forms.editBrgy', [
+            'brgyData' => $brgyData,
+            'munData' => $munData
+        ]);
     }
 
     /**
@@ -68,7 +74,21 @@ class BrgyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            's_mun' => 'required',
+            'brgyName' => 'required|max:50|unique:barangays,brgy_name'
+        ] , [
+            's_mun.required' => '*This Field is Required',
+            'brgyName.unique' => 'Name Already Added',
+            'brgyName.max' => 'Maxximum Name of 50 Characters',
+            'brgyName.required' => '*This Field is Required'   
+        ]);
+
+        BrgyModel::findOrFail($id)->update([
+            'brgy_name' => $request->brgyName,
+            'municipality_id' => $request->s_mun
+        ]);
+        return redirect(route('municipality.show', $request->s_mun));
     }
 
     /**
@@ -76,6 +96,7 @@ class BrgyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        BrgyModel::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

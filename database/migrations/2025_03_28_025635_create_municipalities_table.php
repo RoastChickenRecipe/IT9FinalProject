@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('mun_name');
             $table->string('region', 5);
             $table->timestamps();
+
+            $table->unique(['mun_name', 'region']);
         });
     }
 

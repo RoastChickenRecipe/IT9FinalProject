@@ -6,24 +6,18 @@
     <div class="row mt-2 justify-content-center">
         <div class="osh-outline col col-11" style="height: 70px;">
 
-            <div class="row align-items-center " style="height: 70px">
+            <div class="row align-items-center justify-content-between" style="height: 70px">
                 <div class="col col-3">
                     <h1>Address</h1>
                 </div>
 
-                <div class="col col-3">
-                </div>  
 
                 <div class="col col-2">
-                    <a href="{{route('municipality.create')}}" class="btn btn-dark w-100">Add Mun.</a>
-                    
+                    <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#addMunModal">
+                        Add Mun.
+                    </button>
                 </div>
-                <div class="col col-2">
-                    <a href="{{route('barangay.create')}}" class="btn btn-dark w-100">Add Brgy.</a>
-                </div>
-                <div class="col col-2">
-                    <a href="{{route('subdivision.create')}}" class="btn btn-dark w-100">Add Subd.</a>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -87,5 +81,53 @@
          
         </div>
     </div>
+
+
+    {{-- Modal | Edit mun --}}
+    <div class="modal fade" id="addMunModal" tabindex="-1" aria-labelledby="addMunModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addMunModalLabel">Add Municipality</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+
+                <form action="{{route('municipality.store')}}" method="post">
+                    @csrf
+                    
+                    <div class="modal-body">
+
+                        <div class="row justify-content-center mt-5">
+                            <div class="col col-10">
+                                <label for="munName"><h4>Municipal Name:</h4></label> <br>
+                                <input type="text" name="munName" class="form-control" value="{{old('munName')}}">
+                                @error('munName')
+                                    <h5 style="color: red">{{$message}}</h5>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-2">
+                            <div class="col col-10">
+                                <label for="region"><h4>Region:</h4></label> <br>
+                                <input type="text" name="region" class="form-control" value="{{old('region')}}">
+                                @error('region')
+                                    <h5 style="color: red">{{$message}}</h5>
+                                @enderror
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark">Add Municipality</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>{{-- End Modal | Add mun --}}
 
 @endsection
