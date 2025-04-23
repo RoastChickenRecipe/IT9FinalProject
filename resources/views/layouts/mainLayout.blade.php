@@ -4,76 +4,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Custom')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #5cbf9b; /* Match the green header color */
+            color: white;
+            padding: 10px;
+        }
+        .header h4 {
+            margin: 0;
+        }
+        .sidebar {
+            background-color: #d9f2e6; /* Match the light green sidebar background */
+            height: calc(100vh - 60px); /* Adjust height to account for the header */
+        }
+        .sidebar a {
+            background-color: #b3e6cc; /* Match the button background color */
+            border-radius: 10px;
+            color: black;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            background-color: #91cfb8; /* Slightly darker green for hover */
+            color: white;
+        }
+        .sidebar .logout {
+            background-color: #dc3545;
+            color: white;
+        }
+        .sidebar .logout:hover {
+            background-color: #a71d2a;
+        }
+        .content-header {
+            background-color: #b3e6cc; /* Match the content header background */
+        }
+    </style>
 </head>
-<style>
-    .osh-outline {
-        background-color: rgb(239, 227, 194); 
-        border: solid 2px black;  
-        border-radius:10px;
-    }
-
-    .osh-btn-outline {
-        background-color: rgb(239, 227, 194); 
-        border: solid 2px black;  
-        border-radius:10px;
-        color: black;
-    }
-
-    .osh-btn-outline:hover{
-        background-color: black;
-        color: white;
-    }
-
-    .osh-header {
-        background-color: rgb(62, 123, 39); 
-        border: solid 2px black;  
-        border-radius:10px;
-    }
-
-    .osh-bg {
-        background-color: rgb(133, 169, 71); 
-        border: solid 2px black; 
-        border-radius:10px;
-    }
-</style>
 <body>
-    <div class="container-fluid vh-100">
-        <div class="row h-100">
-
-            {{-- SIDE PANEL --}}
-            <div class="col col-2" style="background-color: rgb(18, 53, 36);">
-
-                <div class="row justify-content-center mt-5">
-                    <div class="col col-10">
-                        <a href="{{route('view.dashboard')}}" class="osh-btn-outline btn w-100"><h4>Dashboard</h4></a>
-                    </div>
-                    <div class="col col-10 mt-2">
-                        <a href="{{route('view.address')}}" class="osh-btn-outline btn w-100"><h4>Address</h4></a>
-                    </div>
-                    <div class="col col-10 mt-2">
-                        <a href="{{route('view.household')}}" class="osh-btn-outline btn w-100"><h4>HouseHold</h4></a>
-                    </div>
-                    <div class="col col-10 mt-2">
-                        <a href="{{route('rqDocuments.index')}}" class="osh-btn-outline btn w-100"><h4>Request Doc</h4></a>
-                    </div>
-                    <div class="col col-10 mt-2">
-                        <a href="{{route('complainants.index')}}" class="osh-btn-outline btn w-100"><h4>Complainants</h4></a>
-                    </div>
-                    <div class="col col-10 mt-2">
-                        <form action="{{route('logout')}}" method="post">
-                            @csrf
-                            <button class="osh-btn-outline btn w-100"><h4>Logout</h4></button>
-                        </form>
-                    </div>
+    <div class="container-fluid">
+        {{-- Header --}}
+        <div class="row header align-items-center">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <h4 class="ms-3">Barangay Profiling System</h4>
+                <div class="me-3">
+                    {{-- Optional: Add user info or logout button here --}}
                 </div>
-
             </div>
-            {{-- MAIN PANEL --}}
-            <div class="col col-10" style="background-color: rgb(62, 123, 39);">
-                @yield('content')
+        </div>
+
+        <div class="row">
+            {{-- Sidebar --}}
+            <div class="col-2 sidebar p-3">
+                <div class="text-center mb-4">
+                    <img src="{{ asset('images/barangaylogo.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 80px;">
+                </div>
+                <a href="{{ route('view.dashboard') }}">Dashboard</a>
+                <a href="{{ route('view.address') }}">Address</a>
+                <a href="{{ route('view.household') }}">HouseHold</a>
+                <a href="{{ route('rqDocuments.index') }}">Request Doc</a>
+                <a href="{{ route('complainants.index') }}">Complainants</a>
+                <form action="{{ route('logout') }}" method="post" class="mt-3">
+                    @csrf
+                    <button type="submit" class="btn logout w-100">Logout</button>
+                </form>
+            </div>
+
+            {{-- Main Content --}}
+            <div class="col-10">
+                <div class="p-4">
+                    @yield('content')
+                </div>
             </div>
         </div>
     </div>
-    
 </body>
 </html>
