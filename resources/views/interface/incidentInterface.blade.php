@@ -1,70 +1,54 @@
 @extends('layouts.mainLayout')
 @section('title', 'Complainants')
+
 @section('content')
 
-    {{-- HEADER --}}
-    <div class="row border mt-2 justify-content-center">
-        <div class="col col-11" style="height: 70px; background-color:hsl(97, 43%, 41%); border-radius:10px;">
-            <div class="row border align-items-center justify-content-between" style="height: 70px">
-                <div class="col col-3 border ">
-                    <h1 class="text-center" style="color: white">Complainants</h1>
-                </div>
+    {{-- MAIN CONTENT --}}
+    <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
+        {{-- HEADER --}}
+        <div class="row align-items-center mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+            <div class="col-6">
+                <h4 class="text-dark">Complainants</h4>
+            </div>
+            <div class="col-3">
+                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Report Incident</a>
+            </div>
+        </div>
 
-                
-                <div class="col col-3">
-                    <a href="{{route('complainants.create')}}" class="btn btn-dark w-100">Report Incident</a>
+        {{-- LINE --}}
+        <hr style="border: 1px solid #91cfb8; margin: 0;">
+
+        {{-- TABLE --}}
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive" style="background-color: #d9f2e6; border-radius: 10px; padding: 10px;">
+                    <table class="table table-bordered text-center">
+                        <thead style="background-color: #91cfb8; color: black;">
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Contact #</th>
+                                <th>Incident Reported</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($data as $row)
+                                <tr>
+                                    <td>{{ $row->com_fname }} {{ $row->com_lname }}</td>
+                                    <td>{{ $row->com_address }}</td>
+                                    <td>{{ $row->com_contactNum }}</td>
+                                    <td>{{ $row->ComplToInc->groupBy('id')->count() }}</td>
+                                    <td>
+                                        <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-success btn-sm">Show</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                
             </div>
         </div>
     </div>
 
-    <div class="row mt-3 justify-content-center">
-        <div class="col col-11 border justify-content-center" style="height: 590px; background-color:hsl(90, 2%, 52%); border-radius:10px;">
-            
-            <div class="row mx-1 border border-dark text-center text-white mt-2" style="background-color:hsl(97, 43%, 41%); border-radius: 10px;">
-                <div class="col col-4 align-self-center">
-                    <h4>Name</h4>
-                </div>
-                <div class="col col-2 align-self-center">
-                    <h4>Address</h4>
-                </div>
-                <div class="col col-2 align-self-center">
-                    <h4>Contact #</h4>
-                </div>
-                <div class="col col-2 align-self-center">
-                    <h4>Incident Reported:</h4>
-                </div>
-                <div class="col col-2 align-self-center">
-                    <h4>Action</h4>
-                </div>
-            </div>
-
-            @foreach($data as $row)
-
-                <div class="row mx-1 border border-dark text-center text-white mt-2" style="background-color:hsl(97, 43%, 41%); border-radius: 10px;">
-                    <div class="col col-4">
-                        <h5>{{$row->com_fname}} {{$row->com_fname}}</h5>
-                    </div>
-                    <div class="col col-2 align-self-center">
-                        <h5>{{$row->com_address}}</h5>
-                    </div>
-                    <div class="col col-2 align-self-center">
-                        <h5>{{$row->com_contactNum}}</h5>
-                    </div>
-                    <div class="col col-2 align-self-center">
-                        <h5>{{$row->ComplToInc->groupBy('id')->count()}}</h5>
-                    </div>
-                    <div class="col col-2 align-self-center">
-                        <a href="{{route('complainants.show', $row->id)}}" class="btn btn-success">Show</a>
-                    </div>
-                   
-                </div>
-                
-            @endforeach
-
-
-        </div>
-    </div>
-    
 @endsection
