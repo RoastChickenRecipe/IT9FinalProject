@@ -1,17 +1,33 @@
 @extends('layouts.viewLayout')
 @section('view-title', 'View | Incident')
 @section('floating')
+
+    {{-- Floating Box --}}
     <div class="col col-2">
         <div class="floating-box osh-bg">
 
             <div class="osh-outline row m-0 align-items-center text-center">
+
                 <div class="col col-12">
+
+                    <a href="{{route('complainants.edit', $compl->id)}}" class="btn btn-dark w-100"><h5>Edit Complainant</h5></a>
+                    
+                </div>
+                <div class="col col-12 mt-4">
                     <form action="{{route('incidents.create')}}" method="POST" class="m-0">
                         @csrf
                         <input type="text" name="id" hidden value="{{$compl->id}}">
                         <button type="submit" class="btn btn-dark w-100"><h5>File Incident</h5></button>
                     </form>
                 </div>
+                <div class="col col-12 mt-4">
+                    <form action="{{route('incidents.destroyAll', $compl->id)}}" method="POST" class="m-0">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger w-100"><h5>Delete All</h5></button>
+                    </form>
+                </div>
+
             </div>
 
             <div class="osh-outline row m-0 mt-5 align-items-center text-center">
@@ -26,7 +42,7 @@
 
 @section('view-content')
     
-
+    {{-- Main Content --}}
     <div class="osh-bg">
 
         <div class="row justify-content-center m-0 mb-2">

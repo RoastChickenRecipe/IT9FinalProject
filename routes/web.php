@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrgyController;
+use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\ComplainantController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HouseHoldController;
@@ -35,8 +36,12 @@ Route::resource('municipality', MunController::class);
 Route::resource('barangay', BrgyController::class);
 Route::resource('subdivision', SubdController::class);
 
-// Functions for HouseHold
+
 Route::resource('households', HouseHoldController::class);
+
+// Functions for Citizens
+//Route::get('/citizens/{id}/add', [CitizenController::class, 'create'])->name('citizens.create');
+Route::resource('citizens', CitizenController::class);
 
 
 Route::resource('rqDocuments', rqDocumentController::class);
@@ -47,6 +52,7 @@ Route::post('/incidents/file-incident/store', [IncidentController::class, 'store
 Route::get('/incidents/{id}/edit', [IncidentController::class, 'edit'])->name('incidents.edit');
 Route::put('/incidents/{id}', [IncidentController::class, 'update'])->name('incidents.update');
 Route::delete('/incidents/{id}', [IncidentController::class, 'destroy'])->name('incidents.destroy');
+Route::delete('/incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
 
 
 /*

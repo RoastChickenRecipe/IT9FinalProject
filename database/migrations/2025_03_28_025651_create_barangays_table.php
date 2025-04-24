@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('brgy_name');
             //$table->foreignId('municipality_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('municipality_id');
-            $table->foreign('municipality_id')->references('id')->on('municipalities')->onUpdate('cascade');
+            $table->foreign('municipality_id')->references('id')->on('municipalities')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

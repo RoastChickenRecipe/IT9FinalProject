@@ -13,6 +13,14 @@
         padding: 5px;
     }
 
+    .osh-outline-sec {
+        background-color: rgb(39, 57, 28); 
+        border: solid 2px rgb(31, 125, 83);  
+        border-radius:10px;
+        padding: 5px;
+        color: white
+    }
+
     .osh-text-ul {
         border-bottom: solid 2px black;"
     }
@@ -73,6 +81,7 @@
             
         
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     
 </body>
 </html>

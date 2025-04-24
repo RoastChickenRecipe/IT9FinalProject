@@ -23,6 +23,13 @@
                     <label for="description">Description</label>
                 </div>
             </div>
+            
+                <div class="row justify-content-center mt-2">
+                    <div class="col col-8">
+                        <h6 class="text-success text-center">{{session()->pull('success')}}</h6>
+                    </div>
+                </div>
+            
         </div>
 
         {{-- For Buttons --}}
@@ -31,7 +38,7 @@
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </div>
             <div class="col col-6">
-                <a href="{{route('complainants.show', $data->id)}}" class="btn btn-secondary w-100">Cancel</a>
+                <a href="{{route('complainants.show', $data->complainant_id)}}" class="btn btn-secondary w-100">Cancel</a>
             </div>
         </div>
 

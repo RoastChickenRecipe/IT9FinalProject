@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\citizenForm;
+use App\Models\CitizenModel;
 
 class CitizenController extends Controller
 {
@@ -27,7 +29,63 @@ class CitizenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'fname' => 'required|max:50',
+            'lname' => 'required|max:50',
+            'mname' => 'required|max:50',
+            'suff' => 'max:10',
+            
+            'sex' => 'required|max:10',
+            'age' => 'required|max:10',
+            'religion' => 'required|max:50',
+            'frole' => 'required|max:50',
+            'bType' => 'required',
+            'contactNumber' => 'required|max:15',
+            
+            'yrsOfResidency' => 'required|max:50',
+            'birth' => 'required|max:50',
+            'placeOfBirth' => 'required|max:50',
+            'educAttainment' => 'required|max:100',
+
+            'citStatus' => 'max:100',
+            'empStatus' => 'required|max:100',
+            'income' => 'required'
+        ], [
+            'htype.required' => 'This field is required.',
+            'fhead.required' => 'This field is required.',
+            's_mun.required' => 'This field is required.',
+            's_brgy.required' => 'This field is required.',
+            's_subd.required' => 'This field is required.',
+        ]);
+        
+        CitizenModel::create([
+            'fname' => $request->fname,
+            'mname' => $request->mname,
+            'lname' => $request->lname,
+            'suffix' => $request->suff,
+            
+            'sex' => $request->sex,
+            'age' => $request->age,
+            'religion' => $request->religion,
+            'family_role' => $request->frole,
+            'blood_type' => $request->bType,
+            'contactNum' => $request->contactNumber,
+            
+            'years_of_residency' => $request->yrsOfResidency,
+            'birth_date' => $request->birth,
+            'place_of_birth' => $request->placeOfBirth,
+            'educational_attainment' => $request->educAttainment,
+
+            'citizen_status' => $request->citStatus,
+            'employment_status' => $request->empStatus,
+            'income' => $request->income,
+
+            'household_id' => $request->hholdId
+
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -43,7 +101,8 @@ class CitizenController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $citData = CitizenModel::findOrFail($id);
+        return view('forms.editCitizen', ['citData' => $citData]);
     }
 
     /**
@@ -51,7 +110,61 @@ class CitizenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+
+            'fname' => 'required|max:50',
+            'lname' => 'required|max:50',
+            'mname' => 'required|max:50',
+            'suff' => 'max:10',
+            
+            'sex' => 'required|max:10',
+            'age' => 'required|max:10',
+            'religion' => 'required|max:50',
+            'frole' => 'required|max:50',
+            'bType' => 'required',
+            'contactNumber' => 'required|max:15',
+            
+            'yrsOfResidency' => 'required|max:50',
+            'birth' => 'required|max:50',
+            'placeOfBirth' => 'required|max:50',
+            'educAttainment' => 'required|max:100',
+
+            'citStatus' => 'max:100',
+            'empStatus' => 'required|max:100',
+            'income' => 'required'
+        ], [
+            'htype.required' => 'This field is required.',
+            'fhead.required' => 'This field is required.',
+            's_mun.required' => 'This field is required.',
+            's_brgy.required' => 'This field is required.',
+            's_subd.required' => 'This field is required.',
+        ]);
+        
+        CitizenModel::findOrFail($id)->update([
+            'fname' => $request->fname,
+            'mname' => $request->mname,
+            'lname' => $request->lname,
+            'suffix' => $request->suff,
+            
+            'sex' => $request->sex,
+            'age' => $request->age,
+            'religion' => $request->religion,
+            'family_role' => $request->frole,
+            'blood_type' => $request->bType,
+            'contactNum' => $request->contactNumber,
+            
+            'years_of_residency' => $request->yrsOfResidency,
+            'birth_date' => $request->birth,
+            'place_of_birth' => $request->placeOfBirth,
+            'educational_attainment' => $request->educAttainment,
+
+            'citizen_status' => $request->citStatus,
+            'employment_status' => $request->empStatus,
+            'income' => $request->income
+
+        ]);
+
+        return redirect(route('households.show', $request->hholdId));
     }
 
     /**
@@ -59,6 +172,7 @@ class CitizenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        CitizenModel::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }
