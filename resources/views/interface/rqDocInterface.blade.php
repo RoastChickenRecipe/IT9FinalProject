@@ -1,83 +1,60 @@
 @extends('layouts.mainLayout')
 @section('title', 'Documents')
+
 @section('content')
 
-    {{-- HEADER --}}
-    <div class="row border mt-2 justify-content-center">
-        <div class="col col-11" style="height: 70px; background-color:hsl(97, 43%, 41%); border-radius:10px;">
-            <div class="row border align-items-center justify-content-between" style="height: 70px">
-                <div class="col col-3 border ">
-                    <h1 class="text-center" style="color: white">Documents</h1>
-                </div>
+    {{-- MAIN CONTENT --}}
+    <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
+        {{-- HEADER --}}
+        <div class="row align-items-center mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+            <div class="col-6">
+                <h4 class="text-dark">Documents</h4>
+            </div>
+            <div class="col-3">
+                <a href="{{ route('rqDocuments.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Request</a>
+            </div>
+        </div>
 
-                
-                <div class="col col-3">
-                    <a href="{{route('rqDocuments.create')}}" class="btn btn-dark w-100">Request</a>
+        {{-- LINE --}}
+        <hr style="border: 1px solid #91cfb8; margin: 0;">
+
+        {{-- TABLE --}}
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive" style="background-color: #d9f2e6; border-radius: 10px; padding: 10px;">
+                    <table class="table table-bordered text-center">
+                        <thead style="background-color: #91cfb8; color: black;">
+                            <tr>
+                                <th>Doc. Type</th>
+                                <th>Date Issued</th>
+                                <th>Name</th>
+                                <th>Issued By</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($doc as $row)
+                                <tr>
+                                    <td>{{ $row->document_type }}</td>
+                                    <td>{{ $row->issue_date }}</td>
+                                    <td>{{ $row->RqDocToCit->lname }}, {{ $row->RqDocToCit->fname }} {{ $row->RqDocToCit->mname }}</td>
+                                    <td>{{ $row->RqDocToEmp->e_fname }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="" class="btn btn-success btn-sm me-1">E</a>
+                                            <form action="" method="post" class="m-0">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-sm">D</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                
             </div>
         </div>
     </div>
 
-    <div class="row mt-3 justify-content-center">
-        <div class="col col-11 border justify-content-center" style="height: 590px; background-color:hsl(90, 2%, 52%); border-radius:10px;">
-
-            <div class="row mx-1 border border-dark text-center text-white mt-2" style="background-color:hsl(97, 43%, 41%); border-radius: 10px;">
-                <div class="col col-2">
-                    <h4>Doc. Type</h4>
-                </div>
-                <div class="col col-2">
-                    <h4>Date Issued</h4>
-                </div>
-                <div class="col col-3">
-                    <h4>Name</h4>
-                </div>
-                <div class="col col-3">
-                    <h4>Issued By</h4>
-                </div>
-                <div class="col col-2">
-                    <h4>Action</h4>
-                </div>
-            </div>
-
-            <div class="row mx-1 text-white mt-2" style="height: 520px; overflow:auto;">
-                <div class="col col-12 border">
-
-                    @foreach($doc as $row)
-                        
-                        <div class="row border border-dark text-center text-white mt-2" style="background-color:hsl(97, 43%, 41%); border-radius: 10px;">
-                            <div class="col col-2">
-                                <h4>{{$row->document_type}}</h4>
-                            </div>
-                            <div class="col col-2">
-                                <h4>{{$row->issue_date}}</h4>
-                            </div>
-                            <div class="col col-3">
-                                <h4>{{$row->RqDocToCit->lname}}, {{$row->RqDocToCit->fname}} {{$row->RqDocToCit->mname}}</h4>
-                            </div>
-                            <div class="col col-3">
-                                <h4>{{$row->RqDocToEmp->e_fname}}</h4>
-                            </div>
-                            <div class="col col-1 align-self-center">
-                                <a href="" class="btn btn-success w-100">E</a>
-                            </div>
-                            <div class="col col-1 align-self-center">
-                                <form action="" method="post" class="m-0">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger w-100">D</button>
-                                </form>
-                            </div>
-                        </div>
-
-                    @endforeach
-
-                </div>
-            </div>
-
-
-            
-
-        </div>
-    </div>
-    
 @endsection

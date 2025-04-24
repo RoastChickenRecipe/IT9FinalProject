@@ -1,45 +1,38 @@
 @extends('layouts.mainLayout')
 @section('title', 'Dashboard')
+
 @section('content')
-    
-    {{-- HEADER --}}
-    <div class="row border mt-2 justify-content-center">
-        <div class="col col-11" style="height: 70px; background-color:hsl(97, 43%, 41%); border-radius:10px;">
 
-            <div class="row border align-items-center" style="height: 70px">
-                <div class="col col-3 border ">
-                    <h1 class="text-center" style="color: white">Dashboard</h1>
-                </div>
-
-                
+    {{-- MAIN CONTENT --}}
+    <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
+        {{-- HEADER --}}
+        <div class="row align-items-center mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+            <div class="col-12 text-center">
+                <h4 class="text-dark">Dashboard</h4>
             </div>
         </div>
-    </div>
-    {{-- CONTENT --}}
 
-    <div class="row mt-3 justify-content-center">
-        <div class="col col-11 border justify-content-center p-1" style="height: 570px; background-color:hsl(90, 2%, 52%); border-radius:10px;">
-            <div class="row justify-content-center">
-                <div class="col col-11 border mt-1" style="height: 545px;">
+        {{-- CONTENT --}}
+        <div class="row mt-3 justify-content-center">
+            <div class="col-11" style="background-color: #d9f2e6; border-radius: 10px; padding: 10px;">
+                <div class="row justify-content-center">
+                    <div class="col-11" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+                        {{-- Header Content --}}
+                        <div class="row text-center mb-3" style="background-color: #91cfb8; border-radius: 10px; color: black; padding: 10px;">
+                            <h5>Content</h5>
+                        </div>
 
-                    <div class="row border text-center" style="height: 50px; background-color:hsl(97, 43%, 41%); border-radius:10px; color:white;">
-                        {{-- Header for Sub Content Here --}}
+                        {{--Content --}}
+                        <div class="row">
+                            <div class="col-12 text-center" style="height: 490px; overflow: auto;">
+                                {{--Content--}}
+                                <p>Diri ang content</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="row mt-1">
-                        <div class="col col-12 border text-center" style="height: 490px; overflow:auto;">
-                            {{-- Sub Content Here --}}
-
-
-
-                        </div>    
-                    </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-
 
 @endsection
