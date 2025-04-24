@@ -88,7 +88,8 @@ class BrgyController extends Controller
             'brgy_name' => $request->brgyName,
             'municipality_id' => $request->s_mun
         ]);
-        return redirect(route('municipality.show', $request->s_mun));
+        return redirect(route('municipality.show', $request->s_mun))->with('success', 'Updated Successfully!');
+   
     }
 
     /**
