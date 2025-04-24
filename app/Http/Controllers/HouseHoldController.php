@@ -20,7 +20,7 @@ class HouseHoldController extends Controller
     }
 
     public function create(){
-        /*
+        
         $munData = MunModel::all()->toArray();
         $brgyData = BrgyModel::all()->toArray();
         $subdData = SubdModel::all()->toArray();
@@ -30,7 +30,7 @@ class HouseHoldController extends Controller
             'brgy' => $brgyData,
             'subd' => $subdData
         ]);
-        */
+        
     }
 
     public function store(citizenForm $request){
