@@ -9,6 +9,7 @@ use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MunController;
 use App\Http\Controllers\NavController;
+use App\Http\Controllers\OtherFunctionController;
 use App\Http\Controllers\rqDocumentController;
 use App\Http\Controllers\SubdController;
 use App\Http\Middleware\AuthCheck;
@@ -46,13 +47,20 @@ Route::resource('citizens', CitizenController::class);
 
 Route::resource('rqDocuments', rqDocumentController::class);
 Route::resource('complainants', ComplainantController::class);
-//Route::resource('incidents', IncidentController::class);
+
+Route::post('complainants/export', [ComplainantController::class, 'exportcomplainants'])->name('complainants.export');
+
+Route::resource('incidents', IncidentController::class);
+Route::delete('incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
+
+/*
 Route::post('/incidents/file-incident', [IncidentController::class, 'create'])->name('incidents.create');
 Route::post('/incidents/file-incident/store', [IncidentController::class, 'store'])->name('incidents.store');
 Route::get('/incidents/{id}/edit', [IncidentController::class, 'edit'])->name('incidents.edit');
 Route::put('/incidents/{id}', [IncidentController::class, 'update'])->name('incidents.update');
 Route::delete('/incidents/{id}', [IncidentController::class, 'destroy'])->name('incidents.destroy');
-Route::delete('/incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
+*/
+
 
 
 /*

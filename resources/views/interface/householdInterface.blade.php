@@ -59,6 +59,7 @@
                 </div>
             </div>
 
+            {{--
             <div class="row mt-1">
                 <div class="col col-12 text-center" style="height: 470; overflow:auto;">
 
@@ -90,7 +91,7 @@
                 </div>    
             </div>
 
-        </div>
+        </div>--}}
     </div>
 
 @endsection

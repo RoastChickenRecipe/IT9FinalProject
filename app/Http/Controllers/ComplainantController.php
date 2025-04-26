@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\IncidentsExport;
 use App\Models\ComplainantModel;
 use App\Models\IncidentModel;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ComplainantController extends Controller
 {
@@ -68,7 +70,7 @@ class ComplainantController extends Controller
     {
         $compl = ComplainantModel::findOrFail($id);
         $data = IncidentModel::where('complainant_id', '=', $id)->orderBy('date_reported', 'desc')->get();
-        return view('views.viewIncident', ['compl' => $compl, 'data' => $data]);
+        return view('views.viewIncident', ['compl' => $compl, 'incData' => $data]);
     }
 
     /**
@@ -108,5 +110,11 @@ class ComplainantController extends Controller
     {
         ComplainantModel::findOrFail($id)->delete();
         return redirect(route('complainants.index'));
+    }
+
+    public function exportcomplainants()
+    {
+        
+        return Excel::download(new IncidentsExport, 'Incidents.xlsx');
     }
 }

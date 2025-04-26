@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\IncidentsExport;
 use App\Models\ComplainantModel;
 use App\Models\IncidentModel;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IncidentController extends Controller
 {
@@ -24,11 +26,9 @@ class IncidentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
-        $data = ComplainantModel::findOrFail($request->id);
-        return view('forms.crIncidentForm', ['data' => $data]);
-        //return 'hello';
+        //
     }
 
     /**
@@ -61,7 +61,8 @@ class IncidentController extends Controller
     public function show(string $id)
     {
 
-        return view('forms.crIncidentForm', ['id' => $id]);
+        $data = ComplainantModel::findOrFail($id);
+        return view('forms.crIncidentForm', ['data' => $data]);
     }
 
     /**
@@ -108,4 +109,7 @@ class IncidentController extends Controller
         IncidentModel::where('complainant_id', '=', $id)->delete();
         return redirect()->back();
     }
+
+    
+
 }

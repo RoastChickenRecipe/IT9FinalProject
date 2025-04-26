@@ -14,12 +14,22 @@
                     
                 </div>
                 <div class="col col-12 mt-4">
+                    {{--
                     <form action="{{route('incidents.create')}}" method="POST" class="m-0">
                         @csrf
                         <input type="text" name="id" hidden value="{{$compl->id}}">
                         <button type="submit" class="btn btn-dark w-100"><h5>File Incident</h5></button>
+                    </form>--}}
+                    <a href="{{route('incidents.show', $compl->id)}}" class="btn btn-dark w-100"><h5>File Incident</h5></a>
+                </div>
+
+                <div class="col col-12 mt-4">
+                    <form action="{{route('complainants.export')}}" method="post" class="m-0">
+                        @csrf
+                        <button type="submit" class="btn btn-dark w-100"><h5>Export</h5></button>
                     </form>
                 </div>
+
                 <div class="col col-12 mt-4">
                     <form action="{{route('incidents.destroyAll', $compl->id)}}" method="POST" class="m-0">
                         @csrf
@@ -64,7 +74,7 @@
             </div>
         </div>
 
-        @foreach($data as $row)
+        @foreach($incData as $row)
             <div class="osh-outline row m-0 mt-5">
                 <div class="col col-4 text-center">
                     <h4>Incident Type:</h4>
