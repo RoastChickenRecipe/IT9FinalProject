@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\DB;
 class HouseHoldController extends Controller
 {
     public function index(){
-
+        $data = HouseholdModel::all();
+        return view('interface.householdInterface', ['data' => $data]);
     }
 
     public function create(){

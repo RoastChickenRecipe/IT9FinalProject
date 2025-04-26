@@ -19,8 +19,8 @@
         <hr style="border: 1px solid #91cfb8; margin: 0;">
 
         {{-- TABLE --}}
-        <div class="row">
-            <div class="col-12">
+        <div class="content-main row">
+            <div class="col-12" style="overflow: auto;">
                 <div class="table-responsive" style="background-color: #d9f2e6; border-radius: 10px; padding: 10px;">
                     <table class="table table-bordered text-center">
                         <thead style="background-color: #91cfb8; color: black;">

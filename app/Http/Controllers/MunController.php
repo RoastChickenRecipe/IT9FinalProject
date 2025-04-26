@@ -14,7 +14,8 @@ class MunController extends Controller
      */
     public function index()
     {
-        //
+        $data = MunModel::all();
+        return view('interface.addressInterface', ["data" => $data]);
     }
 
     /**

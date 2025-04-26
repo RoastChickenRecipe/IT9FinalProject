@@ -44,6 +44,10 @@
         .content-header {
             background-color: #b3e6cc; /* Match the content header background */
         }
+
+        .content-main{
+            height: 55vh;
+        }
     </style>
 </head>
 <body>
@@ -64,9 +68,9 @@
                 <div class="text-center mb-4">
                     <img src="{{ asset('images/barangaylogo.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 80px;">
                 </div>
-                <a href="{{ route('view.dashboard') }}">Dashboard</a>
-                <a href="{{ route('view.address') }}">Address</a>
-                <a href="{{ route('view.household') }}">HouseHold</a>
+                <a href="{{ route('dashboard.index') }}">Dashboard</a>
+                <a href="{{ route('municipality.index') }}">Address</a>
+                <a href="{{ route('households.index') }}">HouseHold</a>
                 <a href="{{ route('rqDocuments.index') }}">Request Doc</a>
                 <a href="{{ route('complainants.index') }}">Complainants</a>
                 <form action="{{ route('logout') }}" method="post" class="mt-3">

@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col col-12 mt-5">
-                        <a href="{{route('view.address')}}" class="btn btn-dark w-100"><h5>Go Back</h5></a>
+                        <a href="{{route('municipality.index')}}" class="btn btn-dark w-100"><h5>Go Back</h5></a>
                     </div>
                 </div>
             </div>

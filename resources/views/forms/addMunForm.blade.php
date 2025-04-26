@@ -39,16 +39,14 @@
                         </div>
                     </div>
 
-                    {{-- Buttons --}}
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="submit" style="background-color:rgb(22, 105, 230);" class="btn btn-success w-100">Add</button>
-                        </div>
-                        <div class="col-6">
-                            <a href="{{ route('view.address') }}" class="btn btn-dark w-100">Cancel</a>
-                        </div>
-                    </div>
-                </form>
+        {{-- For Button --}}
+        <div class="row mt-5">
+            <div class="col col-6">
+                <button type="submit" class="btn btn-success w-100">Add</button>
+            </div>
+
+            <div class="col col-6">
+                <a href="{{route('view.address')}}" class="btn btn-dark w-100">Cancel</a>
             </div>
         </div>
     </div>

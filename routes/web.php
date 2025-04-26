@@ -9,7 +9,6 @@ use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MunController;
 use App\Http\Controllers\NavController;
-use App\Http\Controllers\OtherFunctionController;
 use App\Http\Controllers\rqDocumentController;
 use App\Http\Controllers\SubdController;
 use App\Http\Middleware\AuthCheck;
@@ -22,36 +21,33 @@ Route::post('/register/new', [LoginController::class, 'registerNew'])->name('reg
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //Route::get('/Dashboard', [DashboardController::class, 'viewDashboard'])->name('dashView')->middleware(AuthCheck::class);
-Route::get('/Household', [HouseHoldController::class, 'viewHouseHold'])->name('hholdView');
+//Route::get('/Household', [HouseHoldController::class, 'viewHouseHold'])->name('hholdView');
 
 //For Navigation
-Route::get('/dashboard/view', [NavController::class, 'viewDashboard'])->name('view.dashboard')->middleware(AuthCheck::class);
-Route::get('/address/view', [NavController::class, 'viewAddress'])->name('view.address');
-Route::get('/household/view', [NavController::class, 'viewHousehold'])->name('view.household');
+//Route::get('/dashboard/view', [NavController::class, 'viewDashboard'])->name('view.dashboard')->middleware(AuthCheck::class);
+//Route::get('/address/view', [NavController::class, 'viewAddress'])->name('view.address');
+//Route::get('/household/view', [NavController::class, 'viewHousehold'])->name('view.household');
 
-//Resource for Dashboard
-Route::resource('dashboard', DashboardController::class);
+//Resource
+Route::resource('dashboard', DashboardController::class)->middleware(AuthCheck::class); // Dashboard
 
-//Resoure For Address 
-Route::resource('municipality', MunController::class);
+Route::resource('municipality', MunController::class); // Address
 Route::resource('barangay', BrgyController::class);
 Route::resource('subdivision', SubdController::class);
 
-
-Route::resource('households', HouseHoldController::class);
-
-// Functions for Citizens
-//Route::get('/citizens/{id}/add', [CitizenController::class, 'create'])->name('citizens.create');
+Route::resource('households', HouseHoldController::class); // Household
 Route::resource('citizens', CitizenController::class);
 
+Route::resource('rqDocuments', rqDocumentController::class); // Request Doc
 
-Route::resource('rqDocuments', rqDocumentController::class);
-Route::resource('complainants', ComplainantController::class);
-
+Route::resource('complainants', ComplainantController::class); // incidents
 Route::post('complainants/export', [ComplainantController::class, 'exportcomplainants'])->name('complainants.export');
 
 Route::resource('incidents', IncidentController::class);
 Route::delete('incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
+
+// Functions for Citizens
+//Route::get('/citizens/{id}/add', [CitizenController::class, 'create'])->name('citizens.create');
 
 /*
 Route::post('/incidents/file-incident', [IncidentController::class, 'create'])->name('incidents.create');
