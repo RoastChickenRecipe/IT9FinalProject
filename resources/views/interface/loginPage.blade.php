@@ -80,6 +80,9 @@
                                     @error('pass')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
+                                    @if(session()->pull('fail'))
+                                        <small class="text-danger d-block mt-2">Incorrect Username And Password</small>
+                                    @endif
                                 </div>
                                 <div class="form-check mb-3">
                                     <input type="checkbox" class="form-check-input" id="rememberMe">
@@ -88,9 +91,7 @@
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
-                                @if(session()->pull('fail'))
-                                    <small class="text-danger d-block mt-2">Incorrect Username And Password</small>
-                                @endif
+                                
                                 <div class="text-center mt-3">
                                     <small>Don't have an account? <a href="{{ route('register') }}">Register here</a></small>
                                 </div>

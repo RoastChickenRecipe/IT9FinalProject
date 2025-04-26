@@ -2,17 +2,6 @@
 @section('title', 'HouseHold')
 
 @section('content')
-<<<<<<< HEAD
-=======
-    
-    {{-- HEADER --}}
-    <div class="row mt-2 justify-content-center">
-        <div class="col col-11" style="height: 70px;">
-            <div class="osh-outline row align-items-center justify-content-between" style="height: 70px">
-                <div class="col col-3">
-                    <h1 class="text-center">HouseHold</h1>
-                </div>
->>>>>>> 42681888f42d79db47ad8a2cc83a6add7ddb4326
 
     {{-- MAIN CONTENT --}}
     <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
@@ -26,7 +15,6 @@
             </div>
         </div>
 
-<<<<<<< HEAD
         {{-- LINE --}}
         <hr style="border: 1px solid #91cfb8; margin: 0;">
 
@@ -68,29 +56,10 @@
                             @endforeach
                         </tbody>
                     </table>
-=======
-    <div class="row mt-3 justify-content-center">
-        <div class="osh-bg col col-11 justify-content-center p-1" style="height: 590px;">
-            
-            <div class="osh-outline row m-0 mt-2 text-center" style="height: 70px;">
-                <div class="col col-5 pt-3" >
-                    <h4>Address</h4>
-                </div>
-                <div class="col col-1">
-                    <h4>Fam. Count</h4>
-                </div>
-                <div class="col col-2 pt-3">
-                    <h4>HH. Type</h4>
-                </div>
-                <div class="col col-2 pt-3">
-                    <h4>Fam. Income</h4>
-                </div>
-                <div class="col col-2 pt-3">
-                    <h4>Action</h4>
->>>>>>> 42681888f42d79db47ad8a2cc83a6add7ddb4326
                 </div>
             </div>
 
+            {{--
             <div class="row mt-1">
                 <div class="col col-12 text-center" style="height: 470; overflow:auto;">
 
@@ -122,7 +91,7 @@
                 </div>    
             </div>
 
-        </div>
+        </div>--}}
     </div>
 
 @endsection
