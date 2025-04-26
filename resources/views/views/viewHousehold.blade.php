@@ -18,7 +18,7 @@
             <div class="osh-outline mt-5">
                 <div class="row">
                     <div class="col text-center">
-                        <a href="{{route('view.household')}}" class="osh-btn-back btn w-100"><h5>Go Back</h5></a>
+                        <a href="{{route('households.index')}}" class="osh-btn-back btn w-100"><h5>Go Back</h5></a>
                     </div>
                 </div>
             </div>

@@ -5,18 +5,12 @@
     {{-- MAIN CONTENT --}}
     <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
         {{-- HEADER --}}
-        <div class="row align-items-center mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+        <div class="row align-items-center justify-content-between mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
             <div class="col-6">
                 <h4 class="text-dark">Address</h4>
             </div>
-            <div class="col-2">
-                <a href="{{ route('municipality.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Add Mun</a>
-            </div>
-            <div class="col-2">
-                <a href="{{ route('barangay.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Add Brgy</a>
-            </div>
-            <div class="col-2">
-                <a href="{{ route('subdivision.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Add Subd</a>
+            <div class="col-3">
+                <a href="{{ route('municipality.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Add Municipality</a>
             </div>
         </div>
 
@@ -35,7 +29,7 @@
         </div>
 
         {{-- TABLE --}}
-        <div class="row">
+        <div class="content-main row">
             <div class="col-12">
                 <div class="table-responsive" style="background-color: #d9f2e6; border-radius: 10px; padding: 10px;">
                     <table class="table table-bordered text-center">

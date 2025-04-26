@@ -11,17 +11,17 @@ class NavController extends Controller
 {
     
     public function viewDashboard(){
-        return view('interface.dashboardInterface');
+        //return view('interface.dashboardInterface');
     }
 
     public function viewAddress(){
-        $data = MunModel::all();
-        return view('interface.addressInterface', ["data" => $data]);
+        //$data = MunModel::all();
+        //return view('interface.addressInterface', ["data" => $data]);
     }
 
     public function viewHousehold(){
-        $data = HouseholdModel::all();
-        return view('interface.householdInterface', ['data' => $data]);
+        //$data = HouseholdModel::all();
+        //return view('interface.householdInterface', ['data' => $data]);
     }
 
     public function noww()

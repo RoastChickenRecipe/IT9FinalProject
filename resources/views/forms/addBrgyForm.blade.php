@@ -38,7 +38,7 @@
             </div>
 
             <div class="col col-6">
-                <a href="{{route('view.address')}}" class="btn btn-dark w-100">Cancel</a>
+                <a href="{{route('municipality.index')}}" class="btn btn-dark w-100">Cancel</a>
             </div>
         </div>
     </form>
