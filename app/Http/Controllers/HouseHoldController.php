@@ -21,6 +21,21 @@ class HouseHoldController extends Controller
     }
 
     public function create(){
+
+        $address = DB::table('municipalities')
+                ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                ->join('subdivisions', 'barangays.id', 'subdivisions.barangay_id')
+                ->select('municipalities.id AS mun_id',
+                        'barangays.id AS brgy_id',
+                        'subdivisions.id AS subd_id',
+                        'municipalities.mun_name',
+                        'barangays.brgy_name',
+                        'subdivisions.subd_name')
+                ->orderBy('mun_name', 'ASC')
+                ->orderBy('brgy_name', 'ASC')
+                ->orderBy('subd_name', 'ASC')
+                ->get();
+        
         
         $munData = MunModel::all()->toArray();
         $brgyData = BrgyModel::all()->toArray();
@@ -29,7 +44,8 @@ class HouseHoldController extends Controller
         return view('forms.createHousehold', [
             'mun' => $munData,
             'brgy' => $brgyData,
-            'subd' => $subdData
+            'subd' => $subdData,
+            'address' => $address
         ]);
         
     }
@@ -62,9 +78,9 @@ class HouseHoldController extends Controller
    
         HouseholdModel::create([
             'household_type' => $request->htype,
-            'municipality_id' => $request->s_mun,
-            'barangay_id' => $request->s_brgy,
-            'subdivision_id' => $request->s_subd,
+            'municipality_id' => $request->mun_id,
+            'barangay_id' => $request->brgy_id,
+            'subdivision_id' => $request->subd_id,
             'employee_id' => session('loginId')
         ]);
 
@@ -108,10 +124,27 @@ class HouseHoldController extends Controller
         $brgyData = BrgyModel::where('id', '<>', $house->barangay_id)->get();
         $subdData = SubdModel::where('id', '<>', $house->subdivision_id)->get();
         $data = CitizenModel::query()->where('household_id', '=', $id)->get();
+
+        $address = DB::table('municipalities')
+                ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                ->join('subdivisions', 'barangays.id', 'subdivisions.barangay_id')
+                ->select('municipalities.id AS mun_id',
+                        'barangays.id AS brgy_id',
+                        'subdivisions.id AS subd_id',
+                        'municipalities.mun_name',
+                        'barangays.brgy_name',
+                        'subdivisions.subd_name')
+                ->where('subdivisions.id', '<>', $house->subdivision_id)
+                ->orderBy('mun_name', 'ASC')
+                ->orderBy('brgy_name', 'ASC')
+                ->orderBy('subd_name', 'ASC')
+                ->get();
+
         return view('views.viewHousehold', ['getCitizen' => $data, 'house' => $house,
             'mun' => $munData,
             'brgy' => $brgyData,
-            'subd' => $subdData]);
+            'subd' => $subdData,
+            'address' => $address]);
 
     }
     
@@ -134,16 +167,19 @@ class HouseHoldController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'householdType' => 'required|max:100',
-            's_mun' => 'required',
-            's_brgy' => 'required',
-            's_subd' => 'required'
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
+            'subd_id' => 'required'
+        ],[
+            'householdType.required' => 'This Field is Required',
+            'householdType.max' => 'Cannot Exceed to 100 Characters'
         ]);
 
         HouseholdModel::findOrFail($id)->update([
             'household_type' => $request->householdType,
-            'municipality_id' => $request->s_mun,
-            'barangay_id' => $request->s_brgy,
-            'subdivision_id' => $request->s_subd,
+            'municipality_id' => $request->mun_id,
+            'barangay_id' => $request->brgy_id,
+            'subdivision_id' => $request->subd_id,
             'employee_id' => session('loginId')
         ]);
 
@@ -152,6 +188,7 @@ class HouseHoldController extends Controller
 
     public function destroy($id){
         HouseholdModel::findOrFail($id)->delete();
+        return redirect(route('household.index'));
     }
     
 }

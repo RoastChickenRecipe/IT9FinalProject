@@ -14,20 +14,35 @@ use App\Http\Controllers\SubdController;
 use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LoginController::class, 'loginPage'])->name('showLogin');
+Route::get('/', [LoginController::class, 'set'])->name('setLogin');
+Route::get('/login', [LoginController::class, 'loginPage'])->name('showLogin');
+
 Route::post('/', [LoginController::class, 'login'])->name('login');
 Route::get('/register', [LoginController::class, 'registerPage'])->name('register');
 Route::post('/register/new', [LoginController::class, 'registerNew'])->name('registerNew');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-//Route::get('/Dashboard', [DashboardController::class, 'viewDashboard'])->name('dashView')->middleware(AuthCheck::class);
-//Route::get('/Household', [HouseHoldController::class, 'viewHouseHold'])->name('hholdView');
+Route::middleware(AuthCheck::class)->group(function(){
+    //Resource
+    Route::resource('dashboard', DashboardController::class); // Dashboard
 
-//For Navigation
-//Route::get('/dashboard/view', [NavController::class, 'viewDashboard'])->name('view.dashboard')->middleware(AuthCheck::class);
-//Route::get('/address/view', [NavController::class, 'viewAddress'])->name('view.address');
-//Route::get('/household/view', [NavController::class, 'viewHousehold'])->name('view.household');
+    Route::resource('municipality', MunController::class); // Address
+    Route::resource('barangay', BrgyController::class);
+    Route::resource('subdivision', SubdController::class);
 
+    Route::resource('households', HouseHoldController::class); // Household
+    Route::resource('citizens', CitizenController::class);
+
+    Route::resource('rqDocuments', rqDocumentController::class); // Request Doc
+
+    Route::resource('complainants', ComplainantController::class); // incidents
+    Route::post('complainants/export', [ComplainantController::class, 'exportcomplainants'])->name('complainants.export');
+
+    Route::resource('incidents', IncidentController::class);
+    Route::delete('incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
+});
+
+/*
 //Resource
 Route::resource('dashboard', DashboardController::class)->middleware(AuthCheck::class); // Dashboard
 
@@ -45,6 +60,9 @@ Route::post('complainants/export', [ComplainantController::class, 'exportcomplai
 
 Route::resource('incidents', IncidentController::class);
 Route::delete('incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
+*/
+
+
 
 // Functions for Citizens
 //Route::get('/citizens/{id}/add', [CitizenController::class, 'create'])->name('citizens.create');

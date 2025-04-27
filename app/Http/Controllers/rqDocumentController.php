@@ -37,6 +37,10 @@ class rqDocumentController extends Controller
             'date' => 'required',
             'sel_cit' => 'required',
             'docType' => 'required|string'
+        ],[
+            'date.required' => 'This field is empty',
+            'sel_cit.required' => 'This field is empty',
+            'docType.required' => 'This field is empty'
         ]);
         rqDocumentModel::create([
             'document_type' => $request->docType,
