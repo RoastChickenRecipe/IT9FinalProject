@@ -41,48 +41,48 @@
                                 <div class="col col-12">
                                     <h3>Address</h3>                        
                                 </div>
+                                <div class="col col-12 mt-3">
+                                    <select name="address" id="address" class="form-select"  onchange="getId()">
+                                        <option value="">None</option>
+                                        @foreach($address as $row)
+                                            <option value="{{$row->mun_id}},{{$row->brgy_id}}:{{$row->subd_id}}">{{$row->mun_name}} - {{$row->brgy_name}} - {{$row->subd_name}}</option>
+                                        @endforeach
+    
+                                    </select>
+                                    @error('address')
+                                        <span style="color: red">* {{$message}}</span>
+                                    @enderror
+                                    <input type="text" name="mun_id" id="mun_id" class="form-control" hidden>
+                                    <input type="text" name="brgy_id" id="brgy_id" class="form-control" hidden>
+                                    <input type="text" name="subd_id" id="subd_id" class="form-control" hidden> 
+
+                                </div>
+
+                                <script>
+
+                                    function getId(){
+                                        var check = document.getElementById('address').value;
+                                        var selected = document.getElementById('address');
+                                    
+                                        if(check){
+                                            var data = selected.options[selected.selectedIndex].value;
+                                            let formun = data.slice(0, data.indexOf(","));
+                                            let forbrgy = data.slice(data.indexOf(",") + 1, data.indexOf(":"));
+                                            let forsubd = data.slice(data.indexOf(":") + 1);
+
+                                            document.getElementById('mun_id').value = formun;
+                                            document.getElementById("brgy_id").value = forbrgy;
+                                            document.getElementById("subd_id").value = forsubd;
+                                        }else{
+                                            document.getElementById('mun_id').value = '';
+                                            document.getElementById("brgy_id").value = '';
+                                            document.getElementById("subd_id").value = '';
+                                        }
+
+                                    }
+
+                                </script>
                                 
-                                <div class="col col-4">
-                                    <label for="s_mun">Municipality</label>
-                                    <select name="s_mun" id="s_mun" class="form-select">
-                                        <option value="">None</option>
-                                        @foreach($mun as $row)
-                                            <option value="{{$row['id']}}">{{$row['mun_name']}}</option>
-                                        @endforeach
-    
-                                    </select>
-                                    @error('s_mun')
-                                        <span style="color: red">* {{$message}}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="col col-4">
-                                    <label for="s_brgy">Barangay</label>
-                                    <select name="s_brgy" id="s_brgy" class="form-select">
-                                        <option value="">None</option>
-                                        @foreach($brgy as $row)
-                                            <option value="{{$row['id']}}">{{$row['brgy_name']}}</option>
-                                        @endforeach
-    
-                                    </select>
-                                    @error('s_brgy')
-                                        <span style="color: red">* {{$message}}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="col col-4">
-                                    <label for="s_subd">Subdivision</label>
-                                    <select name="s_subd" id="s_subd" class="form-select">
-                                        <option value="">None</option>
-                                        @foreach($subd as $row)
-                                            <option value="{{$row['id']}}">{{$row['subd_name']}}</option>
-                                        @endforeach
-    
-                                    </select>
-                                    @error('s_subd')
-                                        <span style="color: red">* {{$message}}</span>
-                                    @enderror
-                                </div>
                                 
                             </div>
 
@@ -204,7 +204,7 @@
                                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                                 </div>
                                 <div class="col col-6">
-                                    <a href="{{route('view.household')}}" class="btn btn-dark w-100">Cancel</a>
+                                    <a href="{{route('households.index')}}" class="btn btn-dark w-100">Cancel</a>
                                 </div>
                             </div>
 

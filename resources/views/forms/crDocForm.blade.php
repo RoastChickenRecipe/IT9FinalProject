@@ -19,7 +19,12 @@
                             </div>
                             <div class="col col-6">
                                 <label for="issue_date"><h3>Issued At:</h3></label>
-                                <input type="date" name="date" class="form-control">
+                                <input type="date" name="date" class="form-control" value="{{old('date')}}">
+                                @error('date')
+                                    <div>
+                                        <h5 class="text-danger">{{$message}}</h5>
+                                    </div>
+                                @enderror
                             </div>
                             <div class="col col-6">
                                 <label for="sel_cit"><h3>Citizen:</h3></label>
@@ -29,14 +34,24 @@
                                         <option value="{{$row->id}}">{{$row->lname}}, {{$row->fname}} {{$row->mname}}</option>
                                     @endforeach
                                 </select>
+                                @error('sel_cit')
+                                    <div>
+                                        <h5 class="text-danger">{{$message}}</h5>
+                                    </div>
+                                @enderror
                             </div>
                             <div class="col col-6">
                                 <label for="docType"><h3>Document Type</h3></label>
-                                <input type="text" name="docType" class="form-control">
+                                <input type="text" name="docType" class="form-control" value="{{old('docType')}}">
+                                @error('docType')
+                                    <div>
+                                        <h5 class="text-danger">{{$message}}</h5>
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mt-5">
                             <div class="col col-6">
                                 <button type="submit" class="btn btn-primary w-100">Submit</button>
                             </div>

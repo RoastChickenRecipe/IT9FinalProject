@@ -49,7 +49,9 @@
                 </button>
             </div>
             <div class="col col-6">
-                <form action="" method="post" class="m-0">
+                <form action="{{route('households.destroy', $house->id)}}" method="post" class="m-0">
+                    @csrf
+                    @method('delete')
                     <button type="submit" class="btn btn-danger w-100"><h5>Delete Household</h5></button>
                 </form>
             </div>
@@ -312,34 +314,47 @@
                                 <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col col-6">
-                            <label for="s_mun"><h4>Municipality:</h4></label>
-                            <select name="s_mun" id="s_mun" class="form-select">
-                                <option value="{{$house->municipality_id}}">{{$house->HholdToMun->mun_name}}</option>
-                                @foreach($mun as $munRow)
-                                    <option value="{{$munRow->id}}">{{$munRow->mun_name}}</option>
+
+
+                        <div class="col col-12">
+                            <label for="address"><h4>Address:</h4></label>
+                            <select name="address" id="address" class="form-select" onchange="getId()">
+                                <option value="{{$house->municipality_id}},{{$house->barangay_id}}:{{$house->subdivision_id}}">{{$house->HholdToMun->mun_name}} - {{$house->HholdToBrgy->brgy_name}} - {{$house->HholdToSubd->subd_name}}</option>
+                                @foreach($address as $addressRow)
+                                    <option value="{{$addressRow->mun_id}},{{$addressRow->brgy_id}}:{{$addressRow->subd_id}}">{{$addressRow->mun_name}} - {{$addressRow->brgy_name}} - {{$addressRow->subd_name}}</option>
                                 @endforeach
                             </select>
-                
+                            <input type="text" name="mun_id" id="mun_id" class="form-control" hidden>
+                            <input type="text" name="brgy_id" id="brgy_id" class="form-control" hidden>
+                            <input type="text" name="subd_id" id="subd_id" class="form-control" hidden> 
                         </div>
-                        <div class="col col-6">
-                            <label for="s_brgy"><h4>Barangay:</h4></label>
-                            <select name="s_brgy" id="s_brgy" class="form-select">
-                                <option value="{{$house->barangay_id}}">{{$house->HholdToBrgy->brgy_name}}</option>
-                                @foreach($brgy as $brgyRow)
-                                    <option value="{{$brgyRow->id}}">{{$brgyRow->brgy_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col col-6">
-                            <label for="s_subd"><h4>Subdivision:</h4></label>
-                            <select name="s_subd" id="s_subd" class="form-select">
-                                <option value="{{$house->subdivision_id}}">{{$house->HholdToSubd->subd_name}}</option>
-                                @foreach($subd as $subdRow)
-                                    <option value="{{$subdRow->id}}">{{$subdRow->subd_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
+                        <script>
+
+                            function getId(){
+                                var check = document.getElementById('address').value;
+                                var selected = document.getElementById('address');
+                            
+                                if(check){
+                                    var data = selected.options[selected.selectedIndex].value;
+                                    let formun = data.slice(0, data.indexOf(","));
+                                    let forbrgy = data.slice(data.indexOf(",") + 1, data.indexOf(":"));
+                                    let forsubd = data.slice(data.indexOf(":") + 1);
+
+                                    document.getElementById('mun_id').value = formun;
+                                    document.getElementById("brgy_id").value = forbrgy;
+                                    document.getElementById("subd_id").value = forsubd;
+                                }else{
+                                    document.getElementById('mun_id').value = '';
+                                    document.getElementById("brgy_id").value = '';
+                                    document.getElementById("subd_id").value = '';
+                                }
+
+                            }
+
+                        </script>
+
+
                     </div>
                 </div>
                 <div class="modal-footer">

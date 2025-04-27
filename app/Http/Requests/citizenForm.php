@@ -24,9 +24,10 @@ class citizenForm extends FormRequest
         return [
             'htype' => 'required|max:50',
             
-            's_mun' => 'required',
-            's_brgy' => 'required',
-            's_subd' => 'required',
+            'address' => 'required',
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
+            'subd_id' => 'required',
 
             'fname' => 'required|max:50',
             'lname' => 'required|max:50',
@@ -57,9 +58,7 @@ class citizenForm extends FormRequest
             
             'htype.required' => 'This field is required.',
             'fhead.required' => 'This field is required.',
-            's_mun.required' => 'This field is required.',
-            's_brgy.required' => 'This field is required.',
-            's_subd.required' => 'This field is required.',
+            'address.required' => 'This field is required.'
         ];
     }
 }

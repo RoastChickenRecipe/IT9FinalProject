@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    public function set(){
+        return redirect(route('showLogin'));
+    }
+
     public function loginPage(){
         return view('interface.loginPage');
     }
@@ -54,7 +58,7 @@ class LoginController extends Controller
             if(Hash::check($request->pass,$user->e_password)){
                 $request->session()->put('loginId', $user->id);
                 $request->session()->regenerate();
-                return redirect(route('view.dashboard'));
+                return redirect(route('dashboard.index'));
             }else{
                 return back()->with('fail', 'Incorrect Password');
             }
@@ -66,6 +70,7 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         $request->session()->invalidate();
+        $request->session()->flush();
         return redirect(route('showLogin'));
     }
 }
