@@ -34,7 +34,7 @@ return new class extends Migration
             $table->decimal('income', total:10, places:2)->nullable();
 
             $table->unsignedBigInteger('household_id');
-            $table->foreign('household_id')->references('id')->on('households')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('household_id')->references('id')->on('households')->onUpdate('cascade');
             //$table->foreignId('household_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

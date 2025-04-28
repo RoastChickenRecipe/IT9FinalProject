@@ -8,7 +8,6 @@ use App\Http\Controllers\HouseHoldController;
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MunController;
-use App\Http\Controllers\NavController;
 use App\Http\Controllers\rqDocumentController;
 use App\Http\Controllers\SubdController;
 use App\Http\Middleware\AuthCheck;
