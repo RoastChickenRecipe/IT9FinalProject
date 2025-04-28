@@ -100,7 +100,7 @@ class ComplainantController extends Controller
             'com_contactNum' => $request->com_conNum,
             'com_address' => $request->address
         ]);
-        return redirect(route('complainants.show', $id));
+        return redirect(route('complainants.show', $id))->with('edit-compl', 'Updated Successfully');
     }
 
     /**

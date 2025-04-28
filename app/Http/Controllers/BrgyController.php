@@ -44,7 +44,7 @@ class BrgyController extends Controller
             'brgy_name' => $request->brgyName,
             'municipality_id' => $request->s_mun
         ]);
-        return redirect(route('municipality.show', $request->s_mun));
+        return redirect(route('municipality.show', $request->s_mun))->with('add-brgy', $request->brgyName . ' Added Successfully');
     }
 
     /**
@@ -88,7 +88,7 @@ class BrgyController extends Controller
             'brgy_name' => $request->brgyName,
             'municipality_id' => $request->s_mun
         ]);
-        return redirect(route('municipality.show', $request->s_mun))->with('success', 'Updated Successfully!');
+        return redirect(route('municipality.show', $request->s_mun))->with('edit-brgy', 'Updated Successfully');
    
     }
 
@@ -98,6 +98,6 @@ class BrgyController extends Controller
     public function destroy(string $id)
     {
         BrgyModel::findOrFail($id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('del-brgy', 'Deleted Successfully');
     }
 }

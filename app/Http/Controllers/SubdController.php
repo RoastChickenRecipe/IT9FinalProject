@@ -46,7 +46,7 @@ class SubdController extends Controller
             'barangay_id' => $request->s_brgy
         ]);
         $mun = BrgyModel::where('id', '=', $request->s_brgy)->first();
-        return redirect(route('municipality.show', $mun->municipality_id));
+        return redirect(route('municipality.show', $mun->municipality_id))->with('add-subd', $request->subdName . ' Added Successfully');
     }
 
     /**
@@ -90,7 +90,7 @@ class SubdController extends Controller
             'barangay_id' => $request->s_brgy
         ]);
         $mun = BrgyModel::where('id', '=', $request->s_brgy)->first();
-        return redirect(route('municipality.show', $mun->municipality_id));
+        return redirect(route('municipality.show', $mun->municipality_id))->with('edit-subd', 'Updated Successfully');
     }
 
     /**
@@ -99,6 +99,6 @@ class SubdController extends Controller
     public function destroy(string $id)
     {
         SubdModel::findOrFail($id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('del-subd', 'Deleted Successfully');
     }
 }

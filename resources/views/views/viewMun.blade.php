@@ -63,6 +63,32 @@
                 </form>
             </div>
 
+            @session('add-mun')
+                <div class="bg-success rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+            @session('add-brgy')
+                <div class="bg-success rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+            @session('add-subd')
+                <div class="bg-success rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+            @session('edit-mun')
+                <div class="bg-success rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+            @session('edit-brgy')
+                <div class="bg-success rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+            @session('edit-subd')
+                <div class="bg-success rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+
+            @session('del-brgy')
+                <div class="bg-danger rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+            @session('del-subd')
+                <div class="bg-danger rounded-3 mt-2 p-2 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+            @endsession
+
         </div>
     </div>
 
@@ -84,7 +110,6 @@
 
                                 <div class="col col-12 text-center">
                                     <h5>{{$brgyRow->brgy_name}}</h5>
-                                                
                                 </div>
                             </div>
 
