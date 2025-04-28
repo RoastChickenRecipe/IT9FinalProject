@@ -139,7 +139,7 @@ class HouseHoldController extends Controller
                 ->orderBy('brgy_name', 'ASC')
                 ->orderBy('subd_name', 'ASC')
                 ->get();
-
+        
         return view('views.viewHousehold', ['getCitizen' => $data, 'house' => $house,
             'mun' => $munData,
             'brgy' => $brgyData,
@@ -188,7 +188,7 @@ class HouseHoldController extends Controller
 
     public function destroy($id){
         HouseholdModel::findOrFail($id)->delete();
-        return redirect(route('household.index'));
+        return redirect(route('households.index'));
     }
     
 }

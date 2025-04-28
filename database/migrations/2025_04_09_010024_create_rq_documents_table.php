@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('document_type');
             $table->string('issue_date');
-            $table->foreignId('citizen_id')->constrained('citizens', 'id')->onUpdate('cascade');
-            $table->foreignId('employee_id')->constrained('employees', 'id')->onUpdate('cascade');
+            //$table->foreignId('citizen_id')->constrained('citizens', 'id')->onUpdate('cascade');
+            $table->unsignedBigInteger('citizen_id')->nullable();
+            $table->foreign('citizen_id')->references('id')->on('citizens')->onUpdate('cascade')->nullOnDelete();
+            //$table->foreignId('employee_id')->constrained('employees', 'id')->onUpdate('cascade');
+            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->foreign('employee_id')->references('id')->on('employees')->onUpdate('cascade')->nullOnDelete();
             $table->timestamps();
         });
     }

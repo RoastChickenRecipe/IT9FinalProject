@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subdivisions', function (Blueprint $table) {
             $table->id();
-            $table->string('subd_name');
+            $table->string('subd_name')->unique();
             //$table->foreignId('barangay_id', 5)->constrained()->onUpdate('cascade');
             $table->unsignedBigInteger('barangay_id');
             $table->foreign('barangay_id')->references('id')->on('barangays')->onUpdate('cascade')->onDelete('cascade');

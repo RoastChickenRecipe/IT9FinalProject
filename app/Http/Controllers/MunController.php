@@ -109,6 +109,6 @@ class MunController extends Controller
     public function destroy(string $id)
     {
         MunModel::findOrFail($id)->delete();
-        return redirect(route('view.address'));
+        return redirect(route('municipality.index'));
     }
 }
