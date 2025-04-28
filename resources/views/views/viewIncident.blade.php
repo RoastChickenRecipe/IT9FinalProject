@@ -64,6 +64,22 @@
         <h4 class="osh-outline">Contact #: {{$compl->com_contactNum}}</h4>
         <h4 class="osh-outline">Address: {{$compl->com_address}}</h4>
 
+        @session('add-inc')
+            <div class="bg-success rounded-3 mt-2 p-3 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+        @endsession
+
+        @session('edit-compl')
+            <div class="bg-success rounded-3 mt-2 p-3 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+        @endsession
+
+        @session('del-all-inc')
+            <div class="bg-danger rounded-3 mt-2 p-3 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+        @endsession
+
+        @session('del-inc')
+            <div class="bg-danger rounded-3 mt-2 p-3 text-light" style="text-align: center;"><h5>{{$value}}</h5></div>
+        @endsession
+
     </div>
 
     <div class="osh-bg mt-4">
