@@ -52,7 +52,7 @@ class IncidentController extends Controller
             'employee_id' => session('loginId')
         ]);
         $id = $request->input('compl_id');
-        return redirect(route('complainants.show', $id))->with('add-inc', 'Added Successfully');
+        return redirect(route('complainants.show', $id))->with('message', 'Incident Created Successfully');
     }
 
     /**
@@ -91,7 +91,7 @@ class IncidentController extends Controller
             'status' => 'test',
             'employee_id' => session('loginId')
         ]);
-        session()->put('success', 'Updated successfully');
+        session()->put('success', 'Updated Successfully');
         return redirect()->back();
     }
 
@@ -101,13 +101,13 @@ class IncidentController extends Controller
     public function destroy(string $id)
     {
         IncidentModel::findOrFail($id)->delete();
-        return redirect()->back()->with('del-inc', 'Deleted Successfully');
+        return redirect()->back()->with('message', 'Incident Deleted Successfully');
     }
 
     public function destroyAll(string $id)
     {
         IncidentModel::where('complainant_id', '=', $id)->delete();
-        return redirect()->back()->with('del-all-inc', 'Successfully Deleted All Incidents');
+        return redirect()->back()->with('message', 'Successfully Deleted All Incidents');
     }
 
     
