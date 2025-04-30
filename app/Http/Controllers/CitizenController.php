@@ -85,7 +85,7 @@ class CitizenController extends Controller
 
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', $request->lname. ', ' . $request->fname. ' ' . $request->mname. ' Added Successfully');
     }
 
     /**
@@ -117,7 +117,7 @@ class CitizenController extends Controller
             'mname' => 'required|max:50',
             'suff' => 'max:10',
             
-            'sex' => 'required|max:10',
+            'sex' => 'required|max:20',
             'age' => 'required|max:10',
             'religion' => 'required|max:50',
             'frole' => 'required|max:50',
@@ -163,16 +163,15 @@ class CitizenController extends Controller
             'income' => $request->income
 
         ]);
-
-        return redirect(route('households.show', $request->hholdId));
+        return redirect(route('households.show', $request->hholdId))->with('message', $request->lname. ', ' . $request->fname. ' ' . $request->mname. ' Updataed Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
+    {   
         CitizenModel::findOrFail($id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', ' Deleted Successfully');
     }
 }

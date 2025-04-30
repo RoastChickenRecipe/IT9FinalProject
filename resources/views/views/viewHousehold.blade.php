@@ -11,6 +11,17 @@
                 <button type="button" class="osh-btn-add btn w-100" data-bs-toggle="modal" data-bs-target="#addCitizenModal">
                     <h5>Add Citizen</h5>
                 </button>
+
+                <button type="button" class="btn btn-dark w-100 mt-3" data-bs-toggle="modal" data-bs-target="#editHouseholdModal">
+                    <h5>Edit Household</h5>
+                </button>
+
+                <form action="{{route('households.destroy', $house->id)}}" method="post" class="m-0">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger w-100 mt-3"><h5>Delete Household</h5></button>
+                </form>
+
             </div>
             
 
@@ -41,25 +52,13 @@
         <h4 class="osh-outline">House Type: {{$house->household_type}}</h4>
         <h4 class="osh-outline">Address: {{$house->HHoldToMun->mun_name}}, {{$house->HHoldToBrgy->brgy_name}} {{$house->HHoldToSubd->subd_name}}</h4>
         <h4 class="osh-outline">Family Income: ₱ {{$getCitizen->sum('income')}}</h4>
-        <div class="osh-outline row mx-0">
-            <div class="col col-6">
-                {{--<a href="{{route('households.edit', $house->id)}}" class="btn btn-dark w-100"><h5>Edit Household</h5></a>--}}
-                <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#editHouseholdModal">
-                    <h5>Edit Household</h5>
-                </button>
-            </div>
-            <div class="col col-6">
-                <form action="{{route('households.destroy', $house->id)}}" method="post" class="m-0">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger w-100"><h5>Delete Household</h5></button>
-                </form>
-            </div>
-        </div>
+
+        @session('message')
+            <div class="bg-info rounded-3 mt-2 p-2" style="text-align: center;"><h5>{{$value}}</h5></div>            
+        @endsession
+        
     </div>
 
-    
-    
     
     @foreach($getCitizen as $row)
 
@@ -309,7 +308,12 @@
                     <div class="row justify-content-center">
                         <div class="col col-6">
                             <label for="householdType"><h4>Household Type:</h4></label>
-                            <input type="text" name="householdType" class="form-control" value="{{$house->household_type}}">
+                            <input type="text" name="householdType" class="form-control" list="datalistOptions" value="{{$house->household_type}}">
+                            <datalist id="datalistOptions">
+                                <option value="Own House">
+                                <option value="Boarding House">
+                                <option value="Apartment">
+                            </datalist>
                             @error('householdType')
                                 <div class="text-danger">{{$message}}</div>
                             @enderror
@@ -324,9 +328,9 @@
                                     <option value="{{$addressRow->mun_id}},{{$addressRow->brgy_id}}:{{$addressRow->subd_id}}">{{$addressRow->mun_name}} - {{$addressRow->brgy_name}} - {{$addressRow->subd_name}}</option>
                                 @endforeach
                             </select>
-                            <input type="text" name="mun_id" id="mun_id" class="form-control" hidden>
-                            <input type="text" name="brgy_id" id="brgy_id" class="form-control" hidden>
-                            <input type="text" name="subd_id" id="subd_id" class="form-control" hidden> 
+                            <input type="text" name="mun_id" id="mun_id" class="form-control" value="{{$house->municipality_id}}" hidden>
+                            <input type="text" name="brgy_id" id="brgy_id" class="form-control" value="{{$house->barangay_id}}" hidden>
+                            <input type="text" name="subd_id" id="subd_id" class="form-control" value="{{$house->subdivision_id}}" hidden> 
                         </div>
 
                         <script>

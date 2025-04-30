@@ -51,7 +51,7 @@ class MunController extends Controller
         ]);
 
         $red = MunModel::orderBy('id', 'desc')->take(1)->get();
-        return redirect(route('municipality.show', $red))->with('add-mun', $request->munName . 'Added Successfully');
+        return redirect(route('municipality.show', $red))->with('message', $request->munName . 'Added Successfully');
     }
 
     /**
@@ -100,7 +100,7 @@ class MunController extends Controller
         ]);
 
         
-        return redirect(route('municipality.show', $id))->with('add-mun', 'Updated Successfully');
+        return redirect(route('municipality.show', $id))->with('message', 'Updated Successfully');
     }
 
     /**

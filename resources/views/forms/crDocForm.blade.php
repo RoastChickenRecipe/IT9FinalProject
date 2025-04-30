@@ -42,7 +42,11 @@
                             </div>
                             <div class="col col-6">
                                 <label for="docType"><h3>Document Type</h3></label>
-                                <input type="text" name="docType" class="form-control" value="{{old('docType')}}">
+                                <input type="text" name="docType" class="form-control" list="docTypeList" value="{{old('docType')}}">
+                                <datalist id="docTypeList">
+                                    <option value="Barangay Certificate">
+                                    <option value="Barangay Clearance">
+                                </datalist>
                                 @error('docType')
                                     <div>
                                         <h5 class="text-danger">{{$message}}</h5>

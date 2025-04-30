@@ -60,7 +60,7 @@ class ComplainantController extends Controller
             'employee_id' => session('loginId')
         ]);
 
-        return redirect(route('complainants.index'));
+        return redirect(route('complainants.show', $compl))->with('message', 'Complaint Created Successfully');
     }
 
     /**
@@ -100,7 +100,7 @@ class ComplainantController extends Controller
             'com_contactNum' => $request->com_conNum,
             'com_address' => $request->address
         ]);
-        return redirect(route('complainants.show', $id))->with('edit-compl', 'Updated Successfully');
+        return redirect(route('complainants.show', $id))->with('message', 'Complainant Updated Successfully');
     }
 
     /**

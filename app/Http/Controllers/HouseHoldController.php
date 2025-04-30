@@ -112,7 +112,7 @@ class HouseHoldController extends Controller
             ]);
         }
         $id = $house;
-        return redirect(route('households.show', $id));
+        return redirect(route('households.show', $id))->with('message', 'Household and Citizen/s Added Successfully');
 
     }
 
@@ -183,7 +183,7 @@ class HouseHoldController extends Controller
             'employee_id' => session('loginId')
         ]);
 
-        return redirect(route('households.show', $id));
+        return redirect(route('households.show', $id))->with('message', 'Household Updated Successfully');
     }
 
     public function destroy($id){
