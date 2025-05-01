@@ -34,16 +34,27 @@
                 <table class="table table-bordered text-center">
                     <thead style="background-color:rgb(47, 218, 132); color: black;">
                         <tr>
-                            <th>Municipality</th>
-                            <th>Region</th>
-                            <th>Total Brgy</th>
-                            <th>Total Subd</th>
-                            <th>Population</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Contact#</th>
+                            <th>Bus. Structure</th>
+                            <th>Applied</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @foreach ($busData as $row)
+                            
+                            <tr>
+                                <td>{{$row->b_lname}}, {{$row->b_fname}} {{$row->b_mname}}</td>
+                                <td>{{$row->b_address}}</td>
+                                <td>{{$row->b_contactNum}}</td>
+                                <td>{{$row->bus_structure}}</td>
+                                <td>{{$row->created_at}}</td>
+                                <td><a href="{{route('business-permits.show', $row->id)}}" class="btn btn-success w-100">view</a></td>
+                            </tr>
+
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -29,4 +29,8 @@ class EmployeeModel extends Model
         return $this->hasMany(IncidentModel::class, 'employee_id');
     } 
 
+    public function EmpToBus(){
+        return $this->hasMany(BusPermitModel::class, 'employee_id');
+    } 
+
 }

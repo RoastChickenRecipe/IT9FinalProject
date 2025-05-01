@@ -30,4 +30,8 @@ class BusPermitModel extends Model
 
         'employee_id'
     ];
+
+    public function BusToEmp(){
+        return $this->belongsTo(EmployeeModel::class, 'employee_id');
+    }
 }
