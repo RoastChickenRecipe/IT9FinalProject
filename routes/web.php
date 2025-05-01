@@ -12,6 +12,7 @@ use App\Http\Controllers\MunController;
 use App\Http\Controllers\rqDocumentController;
 use App\Http\Controllers\SubdController;
 use App\Http\Middleware\AuthCheck;
+use App\Models\BusPermitModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'set'])->name('setLogin');

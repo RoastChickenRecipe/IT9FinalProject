@@ -382,4 +382,5 @@ class BusPermitController extends Controller
         $category->delete();
         return redirect(route('business-permits.index'));
     }
+
 }
