@@ -66,6 +66,7 @@
     <div class="osh-bg mt-5">
 
         <div class="row m-0">
+
             <div class="col col-10 p-0 pe-1">
                 <div class="osh-outline">
                     <h4>DTI/CDA Certificate:</h4>
@@ -137,6 +138,47 @@
 
     </div>
 
+    <div class="osh-bg mt-5">
+
+        <div class="row m-0">
+
+            <div class="col col-10 p-0 pe-1">
+                <div class="osh-outline">
+                    <h4>Sanitary Permit:</h4>
+                    <h5 style="border-bottom: 3px solid black;">{{$busData->sanitary_permit}}</h5>
+                </div>
+            </div>
+            <div class="col col-2 p-0 ps-1 align-self-center">
+                <div class="osh-outline">
+                    <button class="btn btn-info w-100" {{$busData->sanitary_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->sanitary_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
+
+                </div>
+            </div>
+
+            <div class="osh-outline col col-10 mt-2">
+                <h4>Fire Safety Permit:</h4>
+                <h5 style="border-bottom: 3px solid black;">{{$busData->fire_safety_permit}}</h5>
+            </div>
+            <div class="col col-2 p-0 ps-1 align-self-center">
+                <div class="osh-outline">
+                    <button class="btn btn-info w-100" {{$busData->fire_safety_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->fire_safety_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
+
+                </div>
+            </div>
+
+            <div class="osh-outline col col-10 mt-2">
+                <h4>BFAD Permit:</h4>
+                <h5 style="border-bottom: 3px solid black;">{{$busData->bfad_permit}}</h5>
+            </div>
+            <div class="col col-2 p-0 ps-1 align-self-center">
+                <div class="osh-outline">
+                    <button class="btn btn-info w-100" {{$busData->bfad_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->bfad_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
     
 
 

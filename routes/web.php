@@ -40,6 +40,8 @@ Route::middleware(AuthCheck::class)->group(function(){
 
     Route::resource('complainants', ComplainantController::class); // incidents
     Route::post('complainants/export', [ComplainantController::class, 'exportcomplainants'])->name('complainants.export');
+    Route::post('complainants/export-pdf', [ComplainantController::class, 'getPdf'])->name('complainants.export-pdf');
+
 
     Route::resource('incidents', IncidentController::class);
     Route::delete('incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');

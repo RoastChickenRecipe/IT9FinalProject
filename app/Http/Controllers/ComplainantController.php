@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\IncidentsExport;
 use App\Models\ComplainantModel;
 use App\Models\IncidentModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -116,5 +117,18 @@ class ComplainantController extends Controller
     {
         
         return Excel::download(new IncidentsExport, 'Incidents.xlsx');
+    }
+
+    public function getPdf()
+    {
+        $data = [
+            'title' => 'example title',
+            'date' => date('m/d/Y')
+
+        ];
+
+        $pdf = Pdf::loadView('pdfTemplate.incidentTemp', $data);
+        return $pdf->download('test.pdf');
+
     }
 }

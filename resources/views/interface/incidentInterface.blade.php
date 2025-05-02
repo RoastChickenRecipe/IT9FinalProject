@@ -11,6 +11,12 @@
                 <h4 class="text-dark">Complainants</h4>
             </div>
             <div class="col-3">
+                <form action="{{ route('complainants.export-pdf') }}" method="post" class="m-0">
+                    @csrf
+                    <button type="submit" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Report Pdf</button>
+                </form>
+            </div>
+            <div class="col-3">
                 <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Report Incident</a>
             </div>
         </div>

@@ -177,7 +177,8 @@ class BusPermitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = BusPermitModel::findOrFail($id);
+        return view('forms.editBusPermit', ['busData' => $data]);
     }
 
     /**
