@@ -40,7 +40,7 @@
                                     <td>{{ $row->com_contactNum }}</td>
                                     <td>{{ $row->ComplToInc->groupBy('id')->count() }}</td>
                                     <td>
-                                        <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-success btn-sm">Show</a>
+                                        <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-primary btn-sm">Show</a>
                                     </td>
                                 </tr>
                             @endforeach

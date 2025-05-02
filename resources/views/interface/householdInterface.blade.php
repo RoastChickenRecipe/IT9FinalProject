@@ -6,7 +6,7 @@
     {{-- MAIN CONTENT --}}
     <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
         {{-- HEADER --}}
-        <div class="row align-items-center mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+        <div class="row align-items-center justify-content-between mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
             <div class="col-6">
                 <h4 class="text-dark">HouseHold</h4>
             </div>
@@ -50,7 +50,7 @@
                                     <td>{{ $row->household_type }}</td>
                                     <td>{{ $row->HholdToCit->sum('income') }}</td>
                                     <td>
-                                        <a href="{{ route('households.show', $row->id) }}" class="btn btn-success btn-sm">View</a>
+                                        <a href="{{ route('households.show', $row->id) }}" class="btn btn-primary btn-sm">View</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -6,7 +6,7 @@
     {{-- MAIN CONTENT --}}
     <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
         {{-- HEADER --}}
-        <div class="row align-items-center mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+        <div class="row align-items-center justify-content-between mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
             <div class="col-6">
                 <h4 class="text-dark">Documents</h4>
             </div>
@@ -40,11 +40,11 @@
                                     <td>{{ $row->RqDocToCit->lname }}, {{ $row->RqDocToCit->fname }} {{ $row->RqDocToCit->mname }}</td>
                                     <td>{{ $row->RqDocToEmp->e_fname }}</td>
                                     <td>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="" class="btn btn-success btn-sm me-1">E</a>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a href="" class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post" class="m-0">
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger btn-sm">D</button>
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </div>
                                     </td>

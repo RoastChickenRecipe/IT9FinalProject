@@ -6,82 +6,106 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <style>
-    .osh-outline {
-        background-color: rgb(239, 227, 194); 
-        border: solid 2px black;  
-        border-radius:10px;
-        padding: 5px;
-    }
+        body {
+            background-color: #f8f9fa; /* Light gray background for contrast */
+            font-family: 'Inter', sans-serif;
+        }
 
-    .osh-outline-sec {
-        background-color: rgb(39, 57, 28); 
-        border: solid 2px rgb(31, 125, 83);  
-        border-radius:10px;
-        padding: 5px;
-        color: white
-    }
+        /* General Styling */
+        .osh-outline {
+            background-color: #b3e6cc; /* Light green background */
+            border: solid 2px #1f3d2a; /* Dark green border */
+            border-radius: 10px;
+            padding: 10px;
+        }
 
-    .osh-text-ul {
-        border-bottom: solid 2px black;"
-    }
+        .osh-bg {
+            background-color: #d9f2e6; /* Light green background */
+            border: solid 2px #1f3d2a; /* Dark green border */
+            border-radius: 10px;
+            padding: 15px;
+        }
 
-    .osh-btn-add {
-        background-color: rgb(163, 209, 198); 
-        border: solid 2px black;  
-        border-radius:10px;
-        color: black;
-    }
+        /* Header Section */
+        .content-header {
+            background-color: #1f3d2a; /* Dark green background */
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
 
-    .osh-btn-add:hover{
-        background-color: rgb(61, 141, 122);
-        color: white;
-    }
+        /* Button Styling */
+        .btn-custom {
+            background-color: #1f3d2a; /* Dark green button */
+            color: white;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-weight: 500;
+        }
 
-    .osh-btn-back {
-        background-color: rgb(179, 216, 168); 
-        border: solid 2px black;  
-        border-radius:10px;
-        color: black;
-    }
+        .btn-custom:hover {
+            background-color: #91cfb8; /* Lighter green on hover */
+            color: black;
+        }
 
-    .osh-btn-back:hover{
-        background-color: rgb(61, 141, 122);
-        color: white;
-    }
+        .btn-danger {
+            background-color: #dc3545; /* Red for danger buttons */
+            border-radius: 5px;
+            padding: 8px 15px;
+        }
 
-    .osh-bg {
-        background-color: rgb(133, 169, 71); 
-        border: solid 2px black; 
-        border-radius:10px;
-        padding: 5px;
-    }
-    
-    .floating-box {
-        position: sticky;
-        top: 50px;
-        left: 20px;
-    }
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
 
-</style>
+        /* Floating Box */
+        .floating-box {
+            background-color: #b3e6cc; /* Light green background */
+            border: solid 2px #1f3d2a; /* Dark green border */
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table Styling */
+        .table-header {
+            background-color: #1f3d2a; /* Dark green for table headers */
+            color: white;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #eafaf1; /* Light green for alternating rows */
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #ffffff; /* White for alternating rows */
+        }
+    </style>
+</head>
 <body>
-    
-    <div class="container-fluid vh-100">
-        
+    <div class="container-fluid vh-100 p-4">
+        {{-- Header Section --}}
+        <div class="row mb-3">
+            <div class="col-12">
+                <h4 class="content-header">@yield('view-title', 'Custom Title')</h4>
+            </div>
+        </div>
+
+        {{-- Main Content Section --}}
         <div class="row justify-content-center">
-            
             @yield('floating')
-            <div class="col col-8 py-5">
-                <div class="card shadow">
-                    <div class="card-body">
+            <div class="col col-10 py-5">
+                <div class="osh-bg shadow">
+                    <div class="osh-outline">
                         @yield('view-content')
                     </div>
                 </div>
             </div>
         </div>
-            
-        
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    
 </body>
 </html>
