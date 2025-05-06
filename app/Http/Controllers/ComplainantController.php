@@ -7,6 +7,8 @@ use App\Models\BrgyModel;
 use App\Models\ComplainantModel;
 use App\Models\EmployeeModel;
 use App\Models\IncidentModel;
+use App\Models\MunModel;
+use App\Models\SubdModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -67,6 +69,16 @@ class ComplainantController extends Controller
             'mun_id' => 'required',
             'brgy_id' => 'required',
             'subd_id' => 'required'
+        ],[
+            'com_fname.required' => 'This Field is Required',
+            'com_lname.required' => 'This Field is Required',
+            'com_conNum.required' => 'This Field is Required',
+            'address.required' => 'This Field is Required',
+            'defendant.required' => 'This Field is Required',
+            'defContact.required' => 'This Field is Required',
+            'defAddress.required' => 'This Field is Required',
+            'rep_date.required' => 'This Field is Required',
+            'mun_id.required' => 'This Field is Required',
         ]);
 
         ComplainantModel::create([
@@ -109,7 +121,24 @@ class ComplainantController extends Controller
     public function edit(string $id)
     {
         $editCompl = ComplainantModel::findOrFail($id);
-        return view('forms.editComplainant', ['editCompl' => $editCompl]);
+        $address = DB::table('municipalities')
+                ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                ->join('subdivisions', 'barangays.id', 'subdivisions.barangay_id')
+                ->select('municipalities.id AS mun_id',
+                        'barangays.id AS brgy_id',
+                        'subdivisions.id AS subd_id',
+                        'municipalities.mun_name',
+                        'barangays.brgy_name',
+                        'subdivisions.subd_name')
+                ->where('subdivisions.id', '<>', $editCompl->com_subd_id)
+                ->orderBy('mun_name', 'ASC')
+                ->orderBy('brgy_name', 'ASC')
+                ->orderBy('subd_name', 'ASC')
+                ->get();
+
+        $emp = EmployeeModel::where('id', '=', session('loginId'))->first();
+
+        return view('forms.editComplaint', ['complData' => $editCompl, 'address' => $address, 'emp' => $emp]);
     }
 
     /**
@@ -121,16 +150,41 @@ class ComplainantController extends Controller
             'com_fname' => 'required',
             'com_lname' => 'required',
             'com_conNum' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'defendant' => 'required',
+            'defContact' => 'nullable',
+            'defAddress' => 'nullable',
+            'rep_date' => 'required',
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
+            'subd_id' => 'required'
+        ],[
+            'com_fname.required' => 'This Field is Required',
+            'com_lname.required' => 'This Field is Required',
+            'com_conNum.required' => 'This Field is Required',
+            'address.required' => 'This Field is Required',
+            'defendant.required' => 'This Field is Required',
+            'defContact.required' => 'This Field is Required',
+            'defAddress.required' => 'This Field is Required',
+            'rep_date.required' => 'This Field is Required',
+            'mun_id.required' => 'This Field is Required',
         ]);
 
         ComplainantModel::findOrFail($id)->update([
             'com_fname' => $request->com_fname,
             'com_lname' => $request->com_lname,
             'com_contactNum' => $request->com_conNum,
-            'com_address' => $request->address
+            'com_address' => $request->address,
+            'def_name' => $request->defendant,
+            'def_conNum' => $request->defContact,
+            'def_address' => $request->defAddress,
+            'date_reported' => $request->rep_date,
+            'com_mun_id' => $request->mun_id,
+            'com_brgy_id' => $request->brgy_id,
+            'com_subd_id' => $request->subd_id,
+            'employee_id' => session('loginId')
         ]);
-        return redirect(route('complainants.show', $id))->with('message', 'Complainant Updated Successfully');
+        return redirect(route('complainants.show', $id))->with('message', 'Updated Successfully');
     }
 
     /**
@@ -144,26 +198,20 @@ class ComplainantController extends Controller
 
     public function exportcomplainants(Request $request)
     {
-        $request->validate([
-            'com_fname' => 'required',
-            'com_lname' => 'required',
-            'com_contact' => 'required',
-            'com_address' => 'required',
-            'def_name' => 'required',
-            'def_contact' => 'required',
-            'def_address' => 'required',
-            'date_rep' => 'required',
-            'brgy' => 'required'
-        ]);
+        $request->validate(['complId' => 'required']);
+
+        $get = ComplainantModel::where('id', '=', $request->complId)->first();
+
         $data = [
             'title' => 'Complainant',
-            'date' => $request->date_rep,
-            'compName' => $request->com_fname . ' '. $request->com_lname,
-            'conNum' => $request->com_contact,
-            'compAddress' => $request->com_address,
-            'brgy' => $request->brgy,
+            'no' => $get->id,
+            'date' => $get->date_reported,
+            'compName' => $get->com_fname . ' '. $get->com_lname,
+            'defName' => $get->def_name,
+            'mun' => $get->ComplToMun->mun_name,
+            'brgy' => $get->ComplToBrgy->brgy_name,
+            'subd' => $get->ComplToSubd->subd_name
             
-
         ];
 
         
