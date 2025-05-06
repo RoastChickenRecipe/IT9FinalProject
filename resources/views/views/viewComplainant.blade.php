@@ -10,7 +10,7 @@
 
                 <div class="col col-12 p-0">
 
-                    <a href="" class="btn btn-dark w-100"><h5>Edit Complaint</h5></a>
+                    <a href="{{route('complainants.edit', $compl->id)}}" class="btn btn-dark w-100"><h5>Edit Complaint</h5></a>
                     
                 </div>
 
@@ -23,7 +23,15 @@
                     
                 </div>
 
+                
+
             </div>
+
+            @session('message')
+                <div class="osh-outline mt-3">
+                    <div class="bg-info rounded-3 p-3" style="text-align: center;"><h5>{{$value}}</h5></div>
+                </div>
+            @endsession
 
             <div class="osh-outline row m-0 mt-5 align-items-center text-center">
                 <div class="col col-12 p-0">
@@ -46,6 +54,7 @@
             <div class="row justify-content-center m-0 mb-2">
                 <div class="osh-outline col col-5 text-center">
                     <h3>Complaint</h3>
+                    <input type="text" name="complId" value="{{$compl->id}}" class="form-control">
                 </div>
             </div>
 
@@ -123,10 +132,6 @@
                 </div>
 
             </div>
-
-            @session('message')
-                <div class="bg-info rounded-3 mt-2 p-3" style="text-align: center;"><h5>{{$value}}</h5></div>
-            @endsession
 
             <button type="submit" class="btn btn-dark w-100 mt-4"><h5>Export</h5></button>
 
