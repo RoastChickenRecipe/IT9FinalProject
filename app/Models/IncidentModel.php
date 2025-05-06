@@ -20,8 +20,4 @@ class IncidentModel extends Model
         return $this->belongsTo(EmployeeModel::class, 'employee_id');
     }
 
-    public function IncToCompl(){
-        return $this->belongsTo(ComplainantModel::class, 'complainant_id');
-    }
-
 }

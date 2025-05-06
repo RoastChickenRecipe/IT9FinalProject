@@ -1,12 +1,12 @@
 @extends('layouts.addressLayout')
 
-@section('title', 'Request Form')
+@section('title', 'Form | File Incident')
 
 @section('add-content')
     
     <h1>File an Incident</h1>
 
-    <form action="{{route('incidents.store')}}" method="post">
+    <form action="" method="post">
         @csrf
 
         <div class="row mt-3">

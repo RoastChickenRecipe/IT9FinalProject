@@ -73,7 +73,8 @@
                 <a href="{{ route('households.index') }}">HouseHolds</a>
                 <a href="{{ route('rqDocuments.index') }}">Request Doc.</a>
                 <a href="{{ route('business-permits.index') }}">Bus. Permits</a>
-                <a href="{{ route('complainants.index') }}">Complainants</a>
+                <a href="{{ route('complainants.index') }}">Complaints</a>
+                <a href="">Incidents</a>
                 <form action="{{ route('logout') }}" method="post" class="mt-3">
                     @csrf
                     <button type="submit" class="btn logout w-100">Logout</button>

@@ -16,4 +16,8 @@ class SubdModel extends Model
     public function SubdToHhold(){
         return $this->hasMany(HouseholdModel::class, 'barangay_id');
     }
+
+    public function SubdToCompl(){
+        return $this->hasMany(ComplainantModel::class, 'com_barangay_id');
+    }
 }

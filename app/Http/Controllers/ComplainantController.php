@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\IncidentsExport;
+use App\Models\BrgyModel;
 use App\Models\ComplainantModel;
+use App\Models\EmployeeModel;
 use App\Models\IncidentModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ComplainantController extends Controller
@@ -16,16 +19,35 @@ class ComplainantController extends Controller
      */
     public function index()
     {
-        $data = ComplainantModel::all();
-        return view('interface.incidentInterface', ['data' => $data]);
+        $data = ComplainantModel::orderBy('created_at', 'DESC')->get();
+        return view('interface.complaintInterface', ['data' => $data]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('forms.createComplaint');
+    {   
+        $address = DB::table('municipalities')
+                    ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                    ->join('subdivisions', 'barangays.id', 'subdivisions.barangay_id')
+                    ->select('municipalities.id AS mun_id',
+                            'barangays.id AS brgy_id',
+                            'subdivisions.id AS subd_id',
+                            'municipalities.mun_name',
+                            'barangays.brgy_name',
+                            'subdivisions.subd_name')
+                    ->orderBy('mun_name', 'ASC')
+                    ->orderBy('brgy_name', 'ASC')
+                    ->orderBy('subd_name', 'ASC')
+                    ->get();
+
+        $brgy = BrgyModel::all();
+        $emp = EmployeeModel::where('id', '=', session('loginId'))->first();
+        return view('forms.createComplaint', 
+                    ['address' => $address,
+                    'brgy' => $brgy,
+                    'emp' => $emp]);
     }
 
     /**
@@ -38,30 +60,38 @@ class ComplainantController extends Controller
             'com_lname' => 'required',
             'com_conNum' => 'required',
             'address' => 'required',
-            'incident' => 'required',
+            'defendant' => 'required',
+            'defContact' => 'nullable',
+            'defAddress' => 'nullable',
             'rep_date' => 'required',
-            'description' => 'required'
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
+            'subd_id' => 'required'
         ]);
 
         ComplainantModel::create([
             'com_fname' => $request->com_fname,
             'com_lname' => $request->com_lname,
             'com_contactNum' => $request->com_conNum,
-            'com_address' => $request->address
-        ]);
-
-        $compl = ComplainantModel::orderBy('id', 'desc')->take(1)->value('id');
-
-        IncidentModel::create([
-            'complainant_id' => $compl,
-            'incident_type' => $request->incident,
-            'description' => $request->description,
+            'com_address' => $request->address,
+            'def_name' => $request->defendant,
+            'def_conNum' => $request->defContact,
+            'def_address' => $request->defAddress,
             'date_reported' => $request->rep_date,
-            'status' => 'test',
+            'com_mun_id' => $request->mun_id,
+            'com_brgy_id' => $request->brgy_id,
+            'com_subd_id' => $request->subd_id,
             'employee_id' => session('loginId')
         ]);
 
-        return redirect(route('complainants.show', $compl))->with('message', 'Complaint Created Successfully');
+        //$compl = ComplainantModel::orderBy('id', 'desc')->take(1)->value('id');
+        //return redirect(route('complainants.show', $compl))->with('message', 'Complaint Created Successfully');
+
+
+        $id =  ComplainantModel::orderBy('id', 'desc')->take(1)->value('id');
+
+        return redirect(route('complainants.show', $id));
+
     }
 
     /**
@@ -69,9 +99,8 @@ class ComplainantController extends Controller
      */
     public function show(string $id)
     {
-        $compl = ComplainantModel::findOrFail($id);
-        $data = IncidentModel::where('complainant_id', '=', $id)->orderBy('date_reported', 'desc')->get();
-        return view('views.viewIncident', ['compl' => $compl, 'incData' => $data]);
+        $compl = ComplainantModel::where('id', '=', $id)->first();
+        return view('views.viewComplainant', ['compl' => $compl]);
     }
 
     /**
@@ -113,21 +142,50 @@ class ComplainantController extends Controller
         return redirect(route('complainants.index'));
     }
 
-    public function exportcomplainants()
+    public function exportcomplainants(Request $request)
     {
+        $request->validate([
+            'com_fname' => 'required',
+            'com_lname' => 'required',
+            'com_contact' => 'required',
+            'com_address' => 'required',
+            'def_name' => 'required',
+            'def_contact' => 'required',
+            'def_address' => 'required',
+            'date_rep' => 'required',
+            'brgy' => 'required'
+        ]);
+        $data = [
+            'title' => 'Complainant',
+            'date' => $request->date_rep,
+            'compName' => $request->com_fname . ' '. $request->com_lname,
+            'conNum' => $request->com_contact,
+            'compAddress' => $request->com_address,
+            'brgy' => $request->brgy,
+            
+
+        ];
+
         
-        return Excel::download(new IncidentsExport, 'Incidents.xlsx');
+
+        $pdf = Pdf::loadView('pdfTemplate.complaintTemp', $data);
+        return $pdf->download($request->com_fname. '_'. $request->com_lname. '.pdf');
     }
 
     public function getPdf()
     {
         $data = [
             'title' => 'example title',
-            'date' => date('m/d/Y')
+            'date' => date('m/d/Y'),
+            'compName' => 'Tanio, Randmart L.',
+            'conNum' => '099706479345',
+            'mun' => 'Davao City',
+            'brgy' => 'Buhangin(Prob)',
+            'subd' => 'Zone 1 San Vicente'
 
         ];
 
-        $pdf = Pdf::loadView('pdfTemplate.incidentTemp', $data);
+        $pdf = Pdf::loadView('pdfTemplate.complaintTemp', $data);
         return $pdf->download('test.pdf');
 
     }

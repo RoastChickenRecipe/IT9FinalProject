@@ -213,7 +213,7 @@ class BusPermitController extends Controller
         $sanitaryFilefilename = '';
         $fireSafetyFilefilename = '';
         $bfadFilefilename = '';
-
+        
         if($request->has('dticdaCertFile')){ 
             $dticdaCertFilefile = $request->file('dticdaCertFile');
             $dticdaCertFileextention = $dticdaCertFilefile->getClientOriginalExtension();

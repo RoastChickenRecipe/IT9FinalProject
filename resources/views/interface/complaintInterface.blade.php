@@ -10,14 +10,9 @@
             <div class="col-6">
                 <h4 class="text-dark">Complainants</h4>
             </div>
+            
             <div class="col-3">
-                <form action="{{ route('complainants.export-pdf') }}" method="post" class="m-0">
-                    @csrf
-                    <button type="submit" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Report Pdf</button>
-                </form>
-            </div>
-            <div class="col-3">
-                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Log Incident</a>
+                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">File Complaint</a>
             </div>
         </div>
 
@@ -34,7 +29,8 @@
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Contact #</th>
-                                <th>Incident Reported</th>
+                                <th>Barangay</th>
+                                <th>Date Reported</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -42,9 +38,10 @@
                             @foreach($data as $row)
                                 <tr>
                                     <td>{{ $row->com_fname }} {{ $row->com_lname }}</td>
-                                    <td>{{ $row->com_address }}</td>
+                                    <td>{{$row->ComplToMun->mun_name}}, {{$row->ComplToBrgy->brgy_name}} - {{$row->ComplToSubd->subd_name}}</td>
                                     <td>{{ $row->com_contactNum }}</td>
-                                    <td>$row->ComplToInc->groupBy'id'->count()</td>
+                                    <td>{{ $row->ComplToBrgy->brgy_name}}</td>
+                                    <td>{{$row->date_reported}}</td>
                                     <td>
                                         <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-success btn-sm">Show</a>
                                     </td>

@@ -20,4 +20,8 @@ class BrgyModel extends Model
     public function BrgyToHhold(){
         return $this->hasMany(HouseholdModel::class, 'barangay_id');
     }
+
+    public function BrgyToCompl(){
+        return $this->hasMany(ComplainantModel::class, 'com_barangay_id');
+    }
 }

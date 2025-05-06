@@ -16,4 +16,8 @@ class MunModel extends Model
     public function MunToHhold(){
         return $this->hasMany(HouseholdModel::class, 'municipality_id');
     }
+
+    public function MunToCompl(){
+        return $this->hasMany(ComplainantModel::class, 'com_mun_id');
+    }
 }
