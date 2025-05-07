@@ -21,7 +21,7 @@
     <p style="text-align: center;">C O M P L A I N T</p>
 
     <p>
-        One of the main thrust of the Barangay Justice System is to provide an easy and accessible venue för disputing parties to 
+        One of the main thrust of the Barangay Justice System is to provide an easy and accessible venue for disputing parties to 
         settle their disagreement and come up with a mutually acceptable agreement.
     </p>
     <br>

@@ -217,7 +217,7 @@ class ComplainantController extends Controller
         
 
         $pdf = Pdf::loadView('pdfTemplate.complaintTemp', $data);
-        return $pdf->download($request->com_fname. '_'. $request->com_lname. '.pdf');
+        return $pdf->download($get->com_fname. '_'. $get->com_lname. '.pdf');
     }
 
     public function getPdf()

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Exports\IncidentsExport;
 use App\Models\ComplainantModel;
+use App\Models\EmployeeModel;
 use App\Models\IncidentModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class IncidentController extends Controller
@@ -16,11 +19,8 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        //added to compl
-        /*
-        $data = ComplainantModel::all();
+        $data = IncidentModel::latest()->get();
         return view('interface.incidentInterface', ['data' => $data]);
-        */
     }
 
     /**
@@ -28,7 +28,18 @@ class IncidentController extends Controller
      */
     public function create()
     {
-        //
+        $brgy = FacadesDB::table('municipalities')
+                ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                ->select('municipalities.id AS mun_id',
+                        'barangays.id AS brgy_id',
+                        'municipalities.mun_name',
+                        'barangays.brgy_name')
+                ->orderBy('mun_name', 'ASC')
+                ->orderBy('brgy_name', 'ASC')
+                ->get();
+        $emp = EmployeeModel::where('id', '=', session('loginId'))->first();
+
+        return view('forms.createIncident', ['brgy' => $brgy, 'emp' => $emp]);
     }
 
     /**
@@ -38,21 +49,41 @@ class IncidentController extends Controller
     {
         //return redirect(route('incidents.index'));
         $request->validate([
-            'incident' => 'required',
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
             'rep_date' => 'required',
-            'description' => 'required'
+            'empId' => 'required',
+            'location' => 'required',
+            'dates_time' => 'required',
+
+            'typeOfIncident' => 'required',
+            'description' => 'nullable',
+            'involved' => 'nullable',
+            'action_taken' => 'nullable'
+
+        ], [
+            'mun_id.required' => 'This field is required',
+            'rep_date.required' => 'This field is required',
+            'location.required' => 'This field is required',
+            'typeOfIncident.required' => 'This field is required',
+    
         ]);
 
         IncidentModel::create([
-            'complainant_id' => $request->input('compl_id'),
-            'incident_type' => $request->incident,
+            'incident_type' => $request->typeOfIncident,
             'description' => $request->description,
+            'inc_address' => $request->location,
+            'dates_time' => $request->dates_time,
+            'involved' => $request->involved,
+            'action_taken' => $request->action_taken,
             'date_reported' => $request->rep_date,
-            'status' => 'test',
-            'employee_id' => session('loginId')
+            'mun_id' => $request->mun_id,
+            'brgy_id' => $request->brgy_id,
+            'employee_id' => $request->empId
         ]);
         $id = $request->input('compl_id');
-        return redirect(route('complainants.show', $id))->with('message', 'Incident Created Successfully');
+        //return redirect(route('complainants.show', $id))->with('message', 'Incident Created Successfully');
+        return redirect(route('incidents.index'));
     }
 
     /**
@@ -61,8 +92,8 @@ class IncidentController extends Controller
     public function show(string $id)
     {
 
-        $data = ComplainantModel::findOrFail($id);
-        return view('forms.crIncidentForm', ['data' => $data]);
+        $data = IncidentModel::findOrFail($id);
+        return view('views.viewIncident', ['data' => $data]);
     }
 
     /**
@@ -71,7 +102,18 @@ class IncidentController extends Controller
     public function edit(string $id)
     {
         $data = IncidentModel::findOrFail($id);
-        return view('forms.editIncident', ['data' => $data]);
+        $brgy = FacadesDB::table('municipalities')
+                ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                ->select('municipalities.id AS mun_id',
+                        'barangays.id AS brgy_id',
+                        'municipalities.mun_name',
+                        'barangays.brgy_name')
+                ->where('barangays.id', '<>', $data->brgy_id)
+                ->orderBy('mun_name', 'ASC')
+                ->orderBy('brgy_name', 'ASC')
+                ->get();
+        $emp = EmployeeModel::findOrFail(session('loginId'));
+        return view('forms.editIncident', ['incData' => $data, 'brgy' => $brgy, 'emp' => $emp]);
     }
 
     /**
@@ -80,19 +122,39 @@ class IncidentController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'incident' => 'required',
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
             'rep_date' => 'required',
-            'description' => 'required'
+            'empId' => 'required',
+            'location' => 'required',
+            'dates_time' => 'required',
+
+            'typeOfIncident' => 'required',
+            'description' => 'nullable',
+            'involved' => 'nullable',
+            'action_taken' => 'nullable'
+
+        ], [
+            'mun_id.required' => 'This field is required',
+            'rep_date.required' => 'This field is required',
+            'location.required' => 'This field is required',
+            'typeOfIncident.required' => 'This field is required',
+    
         ]);
         IncidentModel::findOrFail($id)->update([
-            'incident_type' => $request->incident,
+            'incident_type' => $request->typeOfIncident,
             'description' => $request->description,
+            'inc_address' => $request->location,
+            'dates_time' => $request->dates_time,
+            'involved' => $request->involved,
+            'action_taken' => $request->action_taken,
             'date_reported' => $request->rep_date,
-            'status' => 'test',
-            'employee_id' => session('loginId')
+            'mun_id' => $request->mun_id,
+            'brgy_id' => $request->brgy_id,
+            'employee_id' => $request->empId
         ]);
-        session()->put('success', 'Updated Successfully');
-        return redirect()->back();
+        
+        return redirect(route('incidents.show', $id))->with('message', 'Update Successfully');
     }
 
     /**
@@ -101,13 +163,34 @@ class IncidentController extends Controller
     public function destroy(string $id)
     {
         IncidentModel::findOrFail($id)->delete();
-        return redirect()->back()->with('message', 'Incident Deleted Successfully');
+        return redirect(route('incidents.index'));
     }
 
-    public function destroyAll(string $id)
+    public function exportIncident(Request $request)
     {
-        IncidentModel::where('complainant_id', '=', $id)->delete();
-        return redirect()->back()->with('message', 'Successfully Deleted All Incidents');
+        $request->validate(['incId' => 'required']);
+
+        $get = IncidentModel::findOrFail($request->incId);
+
+        $data = [
+            'title' => 'Incident',
+            'no' => $get->id,
+            'mun' =>$get->IncToMun->mun_name,
+            'brgy' =>$get->IncToBrgy->brgy_name,
+            'date' => $get->date_reported,
+            'issued_by' => $get->IncToEmp->e_fname. ' '. $get->IncToEmp->e_lname,
+
+            'incType' => $get->incident_type,
+            'location' => $get->inc_address,
+            'dates_time' => $get->dates_time,
+            'description' => $get->description,
+            'involved' => $get->involved,
+            'action' => $get->action_taken   
+            
+        ];
+
+        $pdf = Pdf::loadView('pdfTemplate.incidentTemp', $data);
+        return $pdf->download(date('d-m-Y') . '_'.$get->id. '_'. $get->incident_type. '.pdf');
     }
 
     

@@ -20,4 +20,8 @@ class SubdModel extends Model
     public function SubdToCompl(){
         return $this->hasMany(ComplainantModel::class, 'com_barangay_id');
     }
+
+    public function SubdToInc(){
+        return $this->hasMany(IncidentModel::class, 'subd_id');
+    }
 }

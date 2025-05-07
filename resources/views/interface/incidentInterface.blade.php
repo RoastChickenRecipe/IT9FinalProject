@@ -1,5 +1,5 @@
 @extends('layouts.mainLayout')
-@section('title', 'Complainants')
+@section('title', 'Incidents')
 
 @section('content')
 
@@ -8,16 +8,11 @@
         {{-- HEADER --}}
         <div class="row align-items-center justify-content-between mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
             <div class="col-6">
-                <h4 class="text-dark">Complainants</h4>
+                <h4 class="text-dark">Incidents</h4>
             </div>
+            
             <div class="col-3">
-                <form action="{{ route('complainants.export-pdf') }}" method="post" class="m-0">
-                    @csrf
-                    <button type="submit" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Report Pdf</button>
-                </form>
-            </div>
-            <div class="col-3">
-                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Log Incident</a>
+                <a href="{{ route('incidents.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Log Incident</a>
             </div>
         </div>
 
@@ -31,9 +26,9 @@
                     <table class="table table-bordered text-center">
                         <thead style="background-color: #91cfb8; color: black;">
                             <tr>
-                                <th>Name</th>
+                                <th>Incident Type</th>
                                 <th>Address</th>
-                                <th>Contact #</th>
+                                <th>Issued By</th>
                                 <th>Incident Reported</th>
                                 <th>Action</th>
                             </tr>
@@ -41,12 +36,12 @@
                         <tbody>
                             @foreach($data as $row)
                                 <tr>
-                                    <td>{{ $row->com_fname }} {{ $row->com_lname }}</td>
-                                    <td>{{ $row->com_address }}</td>
-                                    <td>{{ $row->com_contactNum }}</td>
-                                    <td>$row->ComplToInc->groupBy'id'->count()</td>
+                                    <td>{{$row->incident_type}}</td>
+                                    <td>{{$row->inc_address}}</td>
+                                    <td>{{$row->IncToEmp->e_fname}} {{$row->IncToEmp->e_fname}}</td>
+                                    <td>{{$row->date_reported}}</td>
                                     <td>
-                                        <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-success btn-sm">Show</a>
+                                        <a href="{{route('incidents.show', $row->id)}}" class="btn btn-success btn-sm">Show</a>
                                     </td>
                                 </tr>
                             @endforeach

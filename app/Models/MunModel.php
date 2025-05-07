@@ -20,4 +20,8 @@ class MunModel extends Model
     public function MunToCompl(){
         return $this->hasMany(ComplainantModel::class, 'com_mun_id');
     }
+
+    public function MunToInc(){
+        return $this->hasMany(IncidentModel::class, 'mun_id');
+    }
 }

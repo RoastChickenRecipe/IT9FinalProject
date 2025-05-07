@@ -24,4 +24,8 @@ class BrgyModel extends Model
     public function BrgyToCompl(){
         return $this->hasMany(ComplainantModel::class, 'com_barangay_id');
     }
+
+    public function BrgyToInc(){
+        return $this->hasMany(IncidentModel::class, 'brgy_id');
+    }
 }

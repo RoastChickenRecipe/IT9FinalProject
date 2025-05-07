@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('incident_type', 50);
             $table->longText('description')->nullable();
             $table->string('inc_address', 150);
+            $table->longText('dates_time');
             $table->longText('involved')->nullable();
             $table->longText('action_taken')->nullable();
             $table->date('date_reported');
@@ -24,8 +25,6 @@ return new class extends Migration
             $table->foreign('mun_id')->references('id')->on('municipalities')->onUpdate('cascade');
             $table->unsignedBigInteger('brgy_id');
             $table->foreign('brgy_id')->references('id')->on('barangays')->onUpdate('cascade');
-            $table->unsignedBigInteger('subd_id');
-            $table->foreign('subd_id')->references('id')->on('subdivisions')->onUpdate('cascade');
             
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees')->onUpdate('cascade');

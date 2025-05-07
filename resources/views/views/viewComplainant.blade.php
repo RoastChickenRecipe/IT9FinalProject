@@ -54,7 +54,7 @@
             <div class="row justify-content-center m-0 mb-2">
                 <div class="osh-outline col col-5 text-center">
                     <h3>Complaint</h3>
-                    <input type="text" name="complId" value="{{$compl->id}}" class="form-control">
+                    <input type="text" name="complId" value="{{$compl->id}}" class="form-control" hidden>
                 </div>
             </div>
 
@@ -63,13 +63,13 @@
                 <div class="col col-6 p-0">
                     <div class="osh-outline me-1">
                         <h4>First Name:</h4>
-                        <input type="text" readonly name="com_fname" value="{{$compl->com_fname}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->com_fname}}</h3>
                     </div>
                 </div>
                 <div class="col col-6 p-0">
                     <div class="osh-outline ms-1">
                         <h4>Last Name:</h4>
-                        <input type="text" readonly name="com_lname" value="{{$compl->com_lname}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->com_lname}}</h3>
                     </div>
                 </div>
 
@@ -77,17 +77,17 @@
 
             <div class="row m-0 mt-2">
 
-                <div class="col col-6 p-0">
+                <div class="col col-6 p-0 align-self-center">
                     <div class="osh-outline me-1">
                         <h4>Contact #:</h4>
-                        <input type="text" readonly name="com_contact" value="{{$compl->com_contactNum}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->com_contactNum}}</h3>
                     </div>
                 </div>
                 <div class="col col-6 p-0">
                     <div class="osh-outline ms-1">
                         <h4>Address:</h4>
-                        <input type="text" readonly name="com_address" value="{{$compl->ComplToMun->mun_name}}, {{$compl->ComplToBrgy->brgy_name}} - {{$compl->ComplToSubd->subd_name}}" class="form-control">
-                        <input type="text" name="brgy" value="{{$compl->ComplToBrgy->brgy_name}}" hidden>
+                        <h3>{{$compl->ComplToMun->mun_name}},</h3>
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->ComplToBrgy->brgy_name}} - {{$compl->ComplToSubd->subd_name}}</h3>
                     </div>
                 </div>
 
@@ -98,13 +98,13 @@
                 <div class="col col-6 p-0">
                     <div class="osh-outline me-1">
                         <h4>Defendant Name:</h4>
-                        <input type="text" readonly name="def_name" value="{{$compl->def_name}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->def_name}}</h3>
                     </div>
                 </div>
                 <div class="col col-6 p-0">
                     <div class="osh-outline ms-1">
                         <h4>Defendant Contact #:</h4>
-                        <input type="text" readonly name="def_contact" value="{{$compl->def_conNum ? $compl->def_conNum : 'None'}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->def_conNum ? $compl->def_conNum : 'None'}}</h3>
                     </div>
                 </div>
 
@@ -115,19 +115,19 @@
                 <div class="col col-5 p-0">
                     <div class="osh-outline me-1">
                         <h4>Defendant Address:</h4>
-                        <input type="text" readonly name="def_address" value="{{$compl->def_address ? $compl->def_address : 'None'}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->def_address ? $compl->def_address : 'None'}}</h3>
                     </div>
                 </div>
                 <div class="col col-3 p-0">
                     <div class="osh-outline mx-1">
                         <h4>Date Reported:</h4>
-                        <input type="text" readonly name="date_rep" value="{{$compl->date_reported}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->date_reported}}</h3>
                     </div>
                 </div>
                 <div class="col col-4 p-0">
                     <div class="osh-outline ms-1">
                         <h4>Barangay:</h4>
-                        <input type="text" readonly name="brgy" value="{{$compl->ComplToBrgy->brgy_name}}" class="form-control">
+                        <h3 style="border-bottom: solid 2px black ;">{{$compl->ComplToBrgy->brgy_name}}</h3>
                     </div>
                 </div>
 

@@ -112,16 +112,6 @@
 
                         </div>
 
-                        <div class="row">
-                            <div class="col">
-                                @session('success')
-                                    <div class="alert alert-success w-100 mt-3"> 
-                                        {{$value}}
-                                    </div>
-                                @endsession
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 

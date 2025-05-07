@@ -1,8 +1,8 @@
-@extends('layouts.addressLayout')
+@extends('layouts.secondaryLayout')
 
-@section('title', 'Request Form')
+@section('sec-title', 'Form | File Complaint')
 
-@section('add-content')
+@section('sec-content')
     
     <h1>File Complaint</h1>
 

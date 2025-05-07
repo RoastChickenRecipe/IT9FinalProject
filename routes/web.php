@@ -44,7 +44,7 @@ Route::middleware(AuthCheck::class)->group(function(){
 
 
     Route::resource('incidents', IncidentController::class);
-    Route::delete('incidents/{id}/all', [IncidentController::class, 'destroyAll'])->name('incidents.destroyAll');
+    Route::post('incidents/export', [IncidentController::class, 'exportIncident'])->name('incidents.export');
 });
 
 /*
