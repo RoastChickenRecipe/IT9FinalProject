@@ -46,6 +46,7 @@
                         <tbody>
                             @foreach($data as $row)
                                 <tr>
+                                    
                                     <td>{{ $row->mun_name }}</td>
                                     <td>{{ $row->region }}</td>
                                     <td>{{ $row->MunToBrgy->groupBy('id')->count() }}</td>
