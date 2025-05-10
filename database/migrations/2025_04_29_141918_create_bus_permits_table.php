@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('b_fname', 100);
             $table->string('b_mname', 50);
             $table->string('b_lname', 50);
-            $table->string('b_address', 200);
             $table->string('b_contactNum', 15);
             $table->string('b_age', 3);
             $table->date('b_birthDate');
@@ -32,6 +31,13 @@ return new class extends Migration
             $table->string('sanitary_permit')->nullable();
             $table->string('fire_safety_permit')->nullable();
             $table->string('bfad_permit')->nullable();
+
+            $table->unsignedBigInteger('mun_id');
+            $table->foreign('mun_id')->references('id')->on('municipalities')->onUpdate('cascade');
+            $table->unsignedBigInteger('brgy_id');
+            $table->foreign('brgy_id')->references('id')->on('barangays')->onUpdate('cascade');
+            $table->unsignedBigInteger('subd_id');
+            $table->foreign('subd_id')->references('id')->on('subdivisions')->onUpdate('cascade');
 
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees')->onUpdate('cascade');

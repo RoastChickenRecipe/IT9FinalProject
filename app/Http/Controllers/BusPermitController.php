@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusPermitModel;
+use App\Models\EmployeeModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class BusPermitController extends Controller
@@ -22,7 +25,21 @@ class BusPermitController extends Controller
      */
     public function create()
     {
-        return view('forms.createBusPermit');
+        $address = DB::table('municipalities')
+                    ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                    ->join('subdivisions', 'barangays.id', 'subdivisions.barangay_id')
+                    ->select('municipalities.id AS mun_id',
+                            'barangays.id AS brgy_id',
+                            'subdivisions.id AS subd_id',
+                            'municipalities.mun_name',
+                            'barangays.brgy_name',
+                            'subdivisions.subd_name')
+                    ->orderBy('mun_name', 'ASC')
+                    ->orderBy('brgy_name', 'ASC')
+                    ->orderBy('subd_name', 'ASC')
+                    ->get();
+        $emp = EmployeeModel::findOrFail(session('loginId'));
+        return view('forms.createBusPermit', ['address' => $address, 'emp' => $emp]);
     }
 
     /**
@@ -34,33 +51,44 @@ class BusPermitController extends Controller
             'fname' => 'required|max:100',
             'mname' => 'required|max:50',
             'lname' => 'required|max:50',
-            'address' => 'required|max:200',
             'contactNum' => 'required|max:15',
             'age' => 'required|max:3',
             'bDate' => 'required',
 
             'bStructure' => 'required',
+
             'dticdaCertFile' => 'required',
+            'get_dticdaCertFile' => 'required',
             'busPermitFile' => 'required',
+            'get_busPermitFile' => 'required',
             'brgyClearanceFile' => 'required',
+            'get_brgyClearanceFile' => 'required',
             'ctcFile' => 'required',
+            'get_ctcFile' => 'required',
             'contOfLeaseFile' => 'required',
+            'get_contOfLeaseFile' => 'required',
             'zoningClearanceFile' => 'required',
+            'get_zoningClearanceFile' => 'required',
 
             'sanitaryFile' => 'nullable',
+            'get_sanitaryFile' => 'nullable',
             'fireSafetyFile' => 'nullable',
-            'bfadFile' => 'nullable'
+            'get_fireSafetyFile' => 'nullable',
+            'bfadFile' => 'nullable',
+            'get_bfadFile' => 'nullable',
+
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
+            'subd_id' => 'required',
+            'empId' => 'required'
         ]);
-        $docFormat = $request->fname . '_' . $request->mname . '_' . $request->lname . '(' . time() . ')';
+        $docFormat = $request->fname . '_' . $request->mname . '_' . $request->lname . '(' . date("d-m-Y") . ')';
         $path = 'uploadFiles/files/';
-        $sanitaryFilefilename = '';
-        $fireSafetyFilefilename = '';
-        $bfadFilefilename = '';
 
         $content = ['dticdaCertFile', 'busPermitFile', 'brgyClearanceFile', 'ctcFile', 'contOfLeaseFile','zoningClearanceFile',
                     'sanitaryFile', 'fireSafetyFile', 'bfadFile'];
-        $fileformat = ['DTI-CDA_Certificate_', 'BusinessPermit_', 'Brgy.Clearance_', 'CTC_', 'k.OfLease-TitleOfLand_',
-                        'ZoningClearance_', 'SanitaryPermit_', 'FireSafetyPermit_', 'BFAD_Permit_'];
+        $fileformat = [$request->get_dticdaCertFile, $request->get_busPermitFile, $request->get_brgyClearanceFile, $request->get_ctcFile, $request->get_contOfLeaseFile,
+                    $request->get_zoningClearanceFile, $request->get_sanitaryFile, $request->get_fireSafetyFile, $request->get_bfadFile];
 
         $filenames = [];
 
@@ -68,70 +96,12 @@ class BusPermitController extends Controller
             if($request->has($content[$i])){
                 $file = $request->file($content[$i]);
                 $extention = $file->getClientOriginalExtension();
-                $filenames[] = $fileformat[$i]. $docFormat .'.'.$extention;
+                $filenames[] = $fileformat[$i]. '_'. $docFormat .'.'.$extention;
                 $file->move($path, $filenames[$i]);
             }else{
                 $filenames[] = '';
             }
         }
-
-        /*
-        if($request->has('dticdaCertFile')){
-            $dticdaCertFilefile = $request->file('dticdaCertFile');
-            $dticdaCertFileextention = $dticdaCertFilefile->getClientOriginalExtension();
-            $dticdaCertFilefilename = 'DTI-CDA_Certificate_'. $docFormat .'.'.$dticdaCertFileextention;
-            $dticdaCertFilefile->move($path, $dticdaCertFilefilename);
-        }
-        if($request->has('busPermitFile')){
-            $busPermitFilefile = $request->file('busPermitFile');
-            $busPermitFileextention = $busPermitFilefile->getClientOriginalExtension();
-            $busPermitFilefilename = 'BusinessPermit_'. $docFormat .'.'.$busPermitFileextention;
-            $busPermitFilefile->move($path, $busPermitFilefilename);
-        }
-        if($request->has('brgyClearanceFile')){
-            $brgyClearanceFilefile = $request->file('brgyClearanceFile');
-            $brgyClearanceFileextention = $brgyClearanceFilefile->getClientOriginalExtension();
-            $brgyClearanceFilefilename = 'Brgy.Clearance_'. $docFormat .'.'.$brgyClearanceFileextention;
-            $brgyClearanceFilefile->move($path, $brgyClearanceFilefilename);
-        }
-        if($request->has('ctcFile')){
-            $ctcFilefile = $request->file('ctcFile');
-            $ctcFileextention = $ctcFilefile->getClientOriginalExtension();
-            $ctcFilefilename = 'CTC_'. $docFormat .'.'.$ctcFileextention;
-            $ctcFilefile->move($path, $ctcFilefilename);
-        }
-        if($request->has('contOfLeaseFile')){
-            $contOfLeaseFilefile = $request->file('contOfLeaseFile');
-            $contOfLeaseFileextention = $contOfLeaseFilefile->getClientOriginalExtension();
-            $contOfLeaseFilefilename = 'k.OfLease-TitleOfLand_'. $docFormat .'.'.$contOfLeaseFileextention;
-            $contOfLeaseFilefile->move($path, $contOfLeaseFilefilename);
-        }
-        if($request->has('zoningClearanceFile')){
-            $zoningClearanceFilefile = $request->file('zoningClearanceFile');
-            $zoningClearanceFileextention = $zoningClearanceFilefile->getClientOriginalExtension();
-            $zoningClearanceFilefilename = 'ZoningClearance_'. $docFormat .'.'.$zoningClearanceFileextention;
-            $zoningClearanceFilefile->move($path, $zoningClearanceFilefilename);
-        }
-
-        if($request->has('sanitaryFile')){
-            $sanitaryFilefile = $request->file('sanitaryFile');
-            $sanitaryFileextention = $sanitaryFilefile->getClientOriginalExtension();
-            $sanitaryFilefilename = 'SanitaryPermit_'. $docFormat .'.'.$sanitaryFileextention;
-            $sanitaryFilefile->move($path, $sanitaryFilefilename);
-        }
-        if($request->has('fireSafetyFile')){
-            $fireSafetyFilefile = $request->file('fireSafetyFile');
-            $fireSafetyFileextention = $fireSafetyFilefile->getClientOriginalExtension();
-            $fireSafetyFilefilename = 'FireSafetyPermit_'. $docFormat .'.'.$fireSafetyFileextention;
-            $fireSafetyFilefile->move($path, $fireSafetyFilefilename);
-        }
-        if($request->has('bfadFile')){
-            $bfadFilefile = $request->file('bfadFile');
-            $bfadFileextention = $bfadFilefile->getClientOriginalExtension();
-            $bfadFilefilename = 'BFAD_Permit_'. $docFormat .'.'.$bfadFileextention;
-            $bfadFilefile->move($path, $bfadFilefilename);
-        }
-        */
         
         BusPermitModel::create([
             'b_fname' => $request->fname,
@@ -154,7 +124,10 @@ class BusPermitController extends Controller
             'fire_safety_permit' => $filenames[7],
             'bfad_permit' => $filenames[8],
 
-            'employee_id' => session('loginId')
+            'mun_id' => $request->mun_id,
+            'brgy_id' => $request->brgy_id,
+            'subd_id' => $request->subd_id,
+            'employee_id' => $request->empId
         ]);
         
 
@@ -178,7 +151,22 @@ class BusPermitController extends Controller
     public function edit(string $id)
     {
         $data = BusPermitModel::findOrFail($id);
-        return view('forms.editBusPermit', ['busData' => $data]);
+        $address = DB::table('municipalities')
+                    ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
+                    ->join('subdivisions', 'barangays.id', 'subdivisions.barangay_id')
+                    ->select('municipalities.id AS mun_id',
+                            'barangays.id AS brgy_id',
+                            'subdivisions.id AS subd_id',
+                            'municipalities.mun_name',
+                            'barangays.brgy_name',
+                            'subdivisions.subd_name')
+                    ->where('subdivisions.id', '<>', $data->subd_id)
+                    ->orderBy('mun_name', 'ASC')
+                    ->orderBy('brgy_name', 'ASC')
+                    ->orderBy('subd_name', 'ASC')
+                    ->get();
+        $emp = EmployeeModel::findOrFail(session('loginId'));
+        return view('forms.editBusPermit', ['busData' => $data, 'address' => $address, 'emp' => $emp]);
     }
 
     /**
@@ -191,118 +179,70 @@ class BusPermitController extends Controller
             'fname' => 'required|max:100',
             'mname' => 'required|max:50',
             'lname' => 'required|max:50',
-            'address' => 'required|max:200',
             'contactNum' => 'required|max:15',
             'age' => 'required|max:3',
             'bDate' => 'required',
 
             'bStructure' => 'required',
-            'dticdaCertFile' => 'required',
-            'busPermitFile' => 'required',
-            'brgyClearanceFile' => 'required',
-            'ctcFile' => 'required',
-            'contOfLeaseFile' => 'required',
-            'zoningClearanceFile' => 'required',
+
+            'dticdaCertFile' => 'nullable',
+            'get_dticdaCertFile' => 'required',
+            'busPermitFile' => 'nullable',
+            'get_busPermitFile' => 'required',
+            'brgyClearanceFile' => 'nullable',
+            'get_brgyClearanceFile' => 'required',
+            'ctcFile' => 'nullable',
+            'get_ctcFile' => 'required',
+            'contOfLeaseFile' => 'nullable',
+            'get_contOfLeaseFile' => 'required',
+            'zoningClearanceFile' => 'nullable',
+            'get_zoningClearanceFile' => 'required',
 
             'sanitaryFile' => 'nullable',
+            'get_sanitaryFile' => 'nullable',
             'fireSafetyFile' => 'nullable',
-            'bfadFile' => 'nullable'
+            'get_fireSafetyFile' => 'nullable',
+            'bfadFile' => 'nullable',
+            'get_bfadFile' => 'nullable',
+            
+            'mun_id' => 'required',
+            'brgy_id' => 'required',
+            'subd_id' => 'required',
+            'empId' => 'required'
         ]);
-        $docFormat = $request->fname . '_' . $request->mname . '_' . $request->lname . '(' . time() . ')';
+
+        $docFormat = $request->fname . '_' . $request->mname . '_' . $request->lname . '(' . date("d-m-Y") . ')';
         $path = 'uploadFiles/files/';
-        $sanitaryFilefilename = '';
-        $fireSafetyFilefilename = '';
-        $bfadFilefilename = '';
         
-        if($request->has('dticdaCertFile')){ 
-            $dticdaCertFilefile = $request->file('dticdaCertFile');
-            $dticdaCertFileextention = $dticdaCertFilefile->getClientOriginalExtension();
-            $dticdaCertFilefilename = 'DTI-CDA_Certificate_'. $docFormat .'.'.$dticdaCertFileextention;
-            $dticdaCertFilefile->move($path, $dticdaCertFilefilename);
+        $content = ['dticdaCertFile', 'busPermitFile', 'brgyClearanceFile', 'ctcFile', 'contOfLeaseFile','zoningClearanceFile',
+                    'sanitaryFile', 'fireSafetyFile', 'bfadFile'];
+        
+        $allfiles = [$category->dti_cda_cert, $category->bus_mayor_permit,$category->brgy_clearance,$category->comm_tax_cert,$category->k_of_lease,
+                    $category->zoning_clearance,$category->sanitary_permit,$category->fire_safety_permit,$category->bfad_permit];
 
-            if(File::exists($category->dti_cda_cert)){
-                File::delete($category->dti_cda_cert);
-            }
-        }
-        if($request->has('busPermitFile')){
-            $busPermitFilefile = $request->file('busPermitFile');
-            $busPermitFileextention = $busPermitFilefile->getClientOriginalExtension();
-            $busPermitFilefilename = 'BusinessPermit_'. $docFormat .'.'.$busPermitFileextention;
-            $busPermitFilefile->move($path, $busPermitFilefilename);
+        $fileformat = [$request->get_dticdaCertFile, $request->get_busPermitFile, $request->get_brgyClearanceFile, $request->get_ctcFile, $request->get_contOfLeaseFile,
+                        $request->get_zoningClearanceFile, $request->get_sanitaryFile, $request->get_fireSafetyFile, $request->get_bfadFile];
 
-            if(File::exists($category->bus_mayor_permit)){
-                File::delete($category->bus_mayor_permit);
-            }
-        }
-        if($request->has('brgyClearanceFile')){
-            $brgyClearanceFilefile = $request->file('brgyClearanceFile');
-            $brgyClearanceFileextention = $brgyClearanceFilefile->getClientOriginalExtension();
-            $brgyClearanceFilefilename = 'Brgy.Clearance_'. $docFormat .'.'.$brgyClearanceFileextention;
-            $brgyClearanceFilefile->move($path, $brgyClearanceFilefilename);
+        $filenames = [];
 
-            if(File::exists($category->brgy_clearance)){
-                File::delete($category->brgy_clearance);
-            }
-        }
-        if($request->has('ctcFile')){
-            $ctcFilefile = $request->file('ctcFile');
-            $ctcFileextention = $ctcFilefile->getClientOriginalExtension();
-            $ctcFilefilename = 'CTC_'. $docFormat .'.'.$ctcFileextention;
-            $ctcFilefile->move($path, $ctcFilefilename);
+        for($i = 0;$i < 9; $i++){
+            if($request->has($content[$i])){
 
-            if(File::exists($category->comm_tax_cert)){
-                File::delete($category->comm_tax_cert);
-            }
-        }
-        if($request->has('contOfLeaseFile')){
-            $contOfLeaseFilefile = $request->file('contOfLeaseFile');
-            $contOfLeaseFileextention = $contOfLeaseFilefile->getClientOriginalExtension();
-            $contOfLeaseFilefilename = 'k.OfLease-TitleOfLand_'. $docFormat .'.'.$contOfLeaseFileextention;
-            $contOfLeaseFilefile->move($path, $contOfLeaseFilefilename);
+                $file = $request->file($content[$i]);
+                $extention = $file->getClientOriginalExtension();
+                $filenames[] = $fileformat[$i]. $docFormat .'.'.$extention;
+                $file->move($path, $filenames[$i]);
 
-            if(File::exists($category->k_of_lease)){
-                File::delete($category->k_of_lease);
-            }
-        }
-        if($request->has('zoningClearanceFile')){
-            $zoningClearanceFilefile = $request->file('zoningClearanceFile');
-            $zoningClearanceFileextention = $zoningClearanceFilefile->getClientOriginalExtension();
-            $zoningClearanceFilefilename = 'ZoningClearance_'. $docFormat .'.'.$zoningClearanceFileextention;
-            $zoningClearanceFilefile->move($path, $zoningClearanceFilefilename);
-
-            if(File::exists($category->zoning_clearance)){
-                File::delete($category->zoning_clearance);
-            }
-        }
-
-        if($request->has('sanitaryFile')){
-            $sanitaryFilefile = $request->file('sanitaryFile');
-            $sanitaryFileextention = $sanitaryFilefile->getClientOriginalExtension();
-            $sanitaryFilefilename = 'SanitaryPermit_'. $docFormat .'.'.$sanitaryFileextention;
-            $sanitaryFilefile->move($path, $sanitaryFilefilename);
-
-            if(File::exists($category->sanitary_permit)){
-                File::delete($category->sanitary_permit);
-            }
-        }
-        if($request->has('fireSafetyFile')){
-            $fireSafetyFilefile = $request->file('fireSafetyFile');
-            $fireSafetyFileextention = $fireSafetyFilefile->getClientOriginalExtension();
-            $fireSafetyFilefilename = 'FireSafetyPermit_'. $docFormat .'.'.$fireSafetyFileextention;
-            $fireSafetyFilefile->move($path, $fireSafetyFilefilename);
-
-            if(File::exists($category->fire_safety_permit)){
-                File::delete($category->fire_safety_permit);
-            }
-        }
-        if($request->has('bfadFile')){
-            $bfadFilefile = $request->file('bfadFile');
-            $bfadFileextention = $bfadFilefile->getClientOriginalExtension();
-            $bfadFilefilename = 'BFAD_Permit_'. $docFormat .'.'.$bfadFileextention;
-            $bfadFilefile->move($path, $bfadFilefilename);
-
-            if(File::exists($category->bfad_permit)){
-                File::delete($category->bfad_permit);
+                if(File::exists($path.$allfiles[$i])){
+                    File::delete($path.$allfiles[$i]);
+                }
+            }else{       
+                if($allfiles[$i] != ''){   
+                    $filenames[] = $allfiles[$i];
+                    
+                }else{
+                    $filenames[] = '';
+                }   
             }
         }
 
@@ -310,30 +250,29 @@ class BusPermitController extends Controller
             'b_fname' => $request->fname,
             'b_mname' => $request->mname,
             'b_lname' => $request->lname,
-            'b_address' => $request->address,
             'b_contactNum' => $request->contactNum,
             'b_age' => $request->age,
             'b_birthDate' => $request->bDate,
 
             'bus_structure' => $request->bStructure,
-            'dti_cda_cert' => $path.$dticdaCertFilefilename,
-            'bus_mayor_permit' => $path.$busPermitFilefilename,
-            'brgy_clearance' => $path.$brgyClearanceFilefilename,
-            'comm_tax_cert' => $path.$ctcFilefilename,
-            'k_of_lease' => $path.$contOfLeaseFilefilename,
-            'zoning_clearance' => $path.$zoningClearanceFilefilename,
+            'dti_cda_cert' => $filenames[0],
+            'bus_mayor_permit' => $filenames[1],
+            'brgy_clearance' => $filenames[2],
+            'comm_tax_cert' => $filenames[3],
+            'k_of_lease' => $filenames[4],
+            'zoning_clearance' =>  $filenames[5],
 
-            'sanitary_permit' => $path.$sanitaryFilefilename,
-            'fire_safety_permit' => $path.$fireSafetyFilefilename,
-            'bfad_permit' => $path.$bfadFilefilename,
+            'sanitary_permit' => $filenames[6],
+            'fire_safety_permit' => $filenames[7],
+            'bfad_permit' => $filenames[8],
 
-            'employee_id' => session('loginId')
+            'mun_id' => $request->mun_id,
+            'brgy_id' => $request->brgy_id,
+            'subd_id' => $request->subd_id,
+            'employee_id' => $request->empId
         ]);
         
-
-
-        return redirect(route('business-permits.index'));
-
+        return redirect(route('business-permits.show', $id));
     }
 
     /**
@@ -351,37 +290,27 @@ class BusPermitController extends Controller
             }
         }
         
-        /*
-        if(File::exists($category->dti_cda_cert)){
-            File::delete($category->dti_cda_cert);
-        }
-        if(File::exists($category->bus_mayor_permit)){
-            File::delete($category->bus_mayor_permit);
-        }
-        if(File::exists($category->brgy_clearance)){
-            File::delete($category->brgy_clearance);
-        }
-        if(File::exists($category->comm_tax_cert)){
-            File::delete($category->comm_tax_cert);
-        }
-        if(File::exists($category->k_of_lease)){
-            File::delete($category->k_of_lease);
-        }
-        if(File::exists($category->zoning_clearance)){
-            File::delete($category->zoning_clearance);
-        }
-        if(File::exists($category->sanitary_permit)){
-            File::delete($category->sanitary_permit);
-        }
-        if(File::exists($category->fire_safety_permit)){
-            File::delete($category->fire_safety_permit);
-        }
-        if(File::exists($category->bfad_permit)){
-            File::delete($category->bfad_permit);
-        }
-        */
         $category->delete();
         return redirect(route('business-permits.index'));
+    }
+
+    public function exportBusPermit(Request $request){
+        $request->validate(['busPermitId' => 'required']);
+
+        $get = BusPermitModel::findOrFail($request->busPermitId);
+
+        $data = [
+            'title' => 'Business-Permit',
+            'get_id' => $get->id,
+            'date' => date('F d, Y'),
+            'name' => $get->b_fname. ' '. $get->b_mname. ' '. $get->b_lname,
+            'busType' => $get->bus_structure,
+            'address' => $get->BusToMun->mun_name. ' '. $get->BusToSubd->subd_name . ', '. $get->BusToBrgy->brgy_name,
+            'mun' => $get->BusToMun->mun_name
+        ];
+
+        $pdf = Pdf::loadView('pdfTemplate.busPermitTemp', $data);
+        return $pdf->download(date('d-m-Y')."_". $get->bus_structure. "_". $get->b_fname. '_'. $get->b_mname. '_'. $get->b_lname. '.pdf');
     }
 
 }

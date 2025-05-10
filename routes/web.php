@@ -37,6 +37,7 @@ Route::middleware(AuthCheck::class)->group(function(){
     Route::resource('rqDocuments', rqDocumentController::class); // Request Doc
 
     Route::resource('business-permits', BusPermitController::class);
+    Route::post('business-permits/export', [BusPermitController::class, 'exportBusPermit'])->name('business-permits.export');
 
     Route::resource('complainants', ComplainantController::class); // incidents
     Route::post('complainants/export', [ComplainantController::class, 'exportcomplainants'])->name('complainants.export');

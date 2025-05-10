@@ -11,9 +11,9 @@
     <p style="text-align: center;">OFFICE OF THE BARANGAY CHAIRMAN</p>
 
     <p style="text-decoration: underline;">{{$compName}}</p>
-    <p>Complainant</p><br>
+    <p>Complainant</p>
 
-    <p>Against</p> <br>
+    <p>Against</p>
     
     <p style="text-decoration: underline;">{{$defName}}</p>
     <p>Respondents</p><br>

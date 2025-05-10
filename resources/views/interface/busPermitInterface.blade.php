@@ -47,7 +47,7 @@
                             
                             <tr>
                                 <td>{{$row->b_lname}}, {{$row->b_fname}} {{$row->b_mname}}</td>
-                                <td>{{$row->b_address}}</td>
+                                <td>{{$row->BusToMun->mun_name}}, {{$row->BusToBrgy->brgy_name}} - {{$row->BusToSubd->subd_name}}</td>
                                 <td>{{$row->b_contactNum}}</td>
                                 <td>{{$row->bus_structure}}</td>
                                 <td>{{$row->created_at}}</td>

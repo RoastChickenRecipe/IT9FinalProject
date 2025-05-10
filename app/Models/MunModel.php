@@ -24,4 +24,8 @@ class MunModel extends Model
     public function MunToInc(){
         return $this->hasMany(IncidentModel::class, 'mun_id');
     }
+
+    public function MunToBus(){
+        return $this->hasMany(BusPermitModel::class, 'mun_id');
+    }
 }

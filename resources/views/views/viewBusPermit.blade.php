@@ -7,7 +7,20 @@
         <div class="floating-box osh-bg">
 
             <div class="osh-outline row m-0 align-items-center text-center">
-                <div class="col col-12">
+
+                <div class="col col-12 p-0">
+                    <a href="{{route('business-permits.edit', $busData->id)}}" class="btn btn-dark w-100"><h5>Edit</h5></a>
+                </div>
+
+                <div class="col col-12 p-0 mt-3">
+                    <form action="{{route('business-permits.export')}}" method="post" class="m-0">
+                        @csrf
+                        <input type="text" name="busPermitId" value="{{$busData->id}}" hidden>
+                        <button type="submit" class="btn btn-dark w-100"><h5>Export</h5></button>
+                    </form>
+                </div>
+
+                <div class="col col-12 p-0 mt-5">
                     <form action="{{route('business-permits.destroy', $busData->id)}}" method="post" class="m-0">
                         @csrf
                         @method('delete')
@@ -17,7 +30,7 @@
             </div>
 
             <div class="osh-outline row m-0 mt-5 align-items-center text-center">
-                <div class="col col-12">
+                <div class="col col-12 p-0">
                     <a href="{{route('business-permits.index')}}" class="btn btn-dark w-100"><h5>Go back</h5></a>
                 </div>
             </div>
@@ -37,11 +50,11 @@
                 <h4 class="osh-outline">Name: {{$busData->b_fname}} {{$busData->b_mname}} {{$busData->b_lname}}</h4>
             </div>
 
-            <div class="col col-6 p-0 pe-1">
+            <div class="col col-4 p-0 pe-1 align-self-center">
                 <h4 class="osh-outline">Contact #: {{$busData->b_contactNum}}</h4>
             </div>
-            <div class="col col-6 p-0 ps-1">
-                <h4 class="osh-outline">Address: {{$busData->b_address}}</h4>
+            <div class="col col-8 p-0 ps-1">
+                <h4 class="osh-outline">Address: {{$busData->BusToMun->mun_name}}, {{$busData->BusToBrgy->brgy_name}} - {{$busData->BusToSubd->subd_name}}</h4>
             </div>
 
             <div class="col col-2 p-0 pe-1">
@@ -145,7 +158,7 @@
             <div class="col col-10 p-0 pe-1">
                 <div class="osh-outline">
                     <h4>Sanitary Permit:</h4>
-                    <h5 style="border-bottom: 3px solid black;">{{$busData->sanitary_permit}}</h5>
+                    <h5 style="border-bottom: 3px solid black;">{{$busData->sanitary_permit == '' ? 'None' : $busData->sanitary_permit}}</h5>
                 </div>
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
@@ -157,7 +170,7 @@
 
             <div class="osh-outline col col-10 mt-2">
                 <h4>Fire Safety Permit:</h4>
-                <h5 style="border-bottom: 3px solid black;">{{$busData->fire_safety_permit}}</h5>
+                <h5 style="border-bottom: 3px solid black;">{{$busData->fire_safety_permit == '' ? 'None' : $busData->fire_safety_permit}}</h5>
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
@@ -168,7 +181,7 @@
 
             <div class="osh-outline col col-10 mt-2">
                 <h4>BFAD Permit:</h4>
-                <h5 style="border-bottom: 3px solid black;">{{$busData->bfad_permit}}</h5>
+                <h5 style="border-bottom: 3px solid black;">{{$busData->bfad_permit == '' ? 'None' : $busData->bfad_permit}}</h5>
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">

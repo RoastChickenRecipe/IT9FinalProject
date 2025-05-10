@@ -11,7 +11,6 @@ class ComplainantModel extends Model
         'com_fname',
         'com_lname',
         'com_contactNum',
-        'com_address',
         'def_name',
         'def_conNum',
         'def_address',

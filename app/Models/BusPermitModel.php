@@ -11,7 +11,6 @@ class BusPermitModel extends Model
         'b_fname',
         'b_mname',
         'b_lname',
-        'b_address',
         'b_contactNum',
         'b_age',
         'b_birthDate',
@@ -28,10 +27,26 @@ class BusPermitModel extends Model
         'fire_safety_permit',
         'bfad_permit',
 
+        'mun_id',
+        'brgy_id',
+        'subd_id',
+
         'employee_id'
     ];
 
     public function BusToEmp(){
         return $this->belongsTo(EmployeeModel::class, 'employee_id');
+    }
+
+    public function BusToMun(){
+        return $this->belongsTo(MunModel::class, 'mun_id');
+    }
+
+    public function BusToBrgy(){
+        return $this->belongsTo(BrgyModel::class, 'brgy_id');
+    }
+
+    public function BusToSubd(){
+        return $this->belongsTo(SubdModel::class, 'subd_id');
     }
 }

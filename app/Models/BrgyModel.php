@@ -28,4 +28,8 @@ class BrgyModel extends Model
     public function BrgyToInc(){
         return $this->hasMany(IncidentModel::class, 'brgy_id');
     }
+
+    public function BrgyToBus(){
+        return $this->hasMany(BusPermitModel::class, 'brgy_id');
+    }
 }

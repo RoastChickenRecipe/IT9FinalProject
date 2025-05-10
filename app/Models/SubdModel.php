@@ -24,4 +24,8 @@ class SubdModel extends Model
     public function SubdToInc(){
         return $this->hasMany(IncidentModel::class, 'subd_id');
     }
+
+    public function SubdToBus(){
+        return $this->hasMany(BusPermitModel::class, 'subd_id');
+    }
 }

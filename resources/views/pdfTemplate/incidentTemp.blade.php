@@ -45,7 +45,7 @@
     </div><br>
 
     <div style="border: solid 1px black;">
-        <table width="100%">
+        <table border="1" width="100%">
             <tr>
                 <td width="50%"><p style="text-decoration: underline; margin: 5px;">Date Prepared: {{$date}}</p></td>
                 <td width="50%"><p style="margin: 5px;">Date Received: ______________________________</p></td>
