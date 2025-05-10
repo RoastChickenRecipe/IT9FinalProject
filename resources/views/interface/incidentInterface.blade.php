@@ -3,21 +3,20 @@
 
 @section('content')
 
-    {{-- MAIN CONTENT --}}
-    <div class="container-fluid p-4" style="background-color: #d9f2e6; border-radius: 10px;">
+{{-- MAIN CONTENT --}}
+    <div class="container-fluid p-4" style="background-color: #E8F5E9; border-radius: 10px;">
         {{-- HEADER --}}
-        <div class="row align-items-center justify-content-between mb-3" style="background-color: #b3e6cc; border-radius: 10px; padding: 10px;">
+        <div class="row align-items-center justify-content-between mb-3" style="background-color: #C8E6C9; border-radius: 10px; padding: 10px;">
             <div class="col-6">
                 <h4 class="text-dark">Incidents</h4>
             </div>
-            
             <div class="col-3">
-                <a href="{{ route('incidents.create') }}" class="btn w-100" style="background-color:rgb(65, 219, 90); color: black; border-radius: 10px;">Log Incident</a>
+                <a href="{{ route('rqDocuments.create') }}" class="btn w-100" style="background-color:rgb(1, 110, 34); color: white; border-radius: 10px;">Log Incident</a>
             </div>
         </div>
 
         {{-- LINE --}}
-        <hr style="border: 1px solid #91cfb8; margin: 0;">
+        <hr style="border: 1px solid #A5D6A7; margin: 0;">
 
         {{-- TABLE --}}
         <div class="content-main row">
