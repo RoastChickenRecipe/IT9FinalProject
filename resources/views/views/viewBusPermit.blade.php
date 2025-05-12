@@ -21,13 +21,19 @@
                 </div>
 
                 <div class="col col-12 p-0 mt-5">
-                    <form action="{{route('business-permits.destroy', $busData->id)}}" method="post" class="m-0">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger w-100"><h5>Delete</h5></button>
-                    </form>
+                    
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn w-100 text-white" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background-color: #DC3545;">
+                    <h5>Delete</h5>
+                    </button>
                 </div>
             </div>
+
+            @session('message')
+                <div class="osh-outline mt-3">
+                    <div class="bg-info rounded-3 p-3" style="text-align: center;"><h5>{{$value}}</h5></div>
+                </div>
+            @endsession
 
             <div class="osh-outline row m-0 mt-5 align-items-center text-center">
                 <div class="col col-12 p-0">
@@ -69,11 +75,6 @@
 
         </div>
         
-
-        @session('message')
-            <div class="bg-info rounded-3 mt-2 p-3" style="text-align: center;"><h5>{{$value}}</h5></div>
-        @endsession
-
     </div>
 
     <div class="osh-bg mt-5">
@@ -193,6 +194,31 @@
 
     </div>
     
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel"><strong>DELETE | {{$busData->b_fname}} {{$busData->b_mname}} {{$busData->b_lname}}</strong></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
+                <form action="{{route('business-permits.destroy', $busData->id)}}" method="post" class="m-0">
+                    @csrf
+                    @method('delete')
+
+                    <div class="modal-body">
+                        <h4>Are you sure you want to <strong>DELETE {{$busData->b_fname}} {{$busData->b_mname}} {{$busData->b_lname}}</strong> business permit?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!-- End Delete Modal -->
 
 @endsection

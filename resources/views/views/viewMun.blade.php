@@ -8,13 +8,13 @@
             <div class="osh-bg floating-box">
                 <div class="osh-outline row m-0">
                     <div class="col col-12">
-                        <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#addBrgyModal">
+                        <button type="button" class="btn w-100 text-white" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#addBrgyModal">
                             <h5>Add Brgy.</h5>
                         </button>
                     </div>
 
                     <div class="col col-12 mt-5">
-                        <a href="{{route('municipality.index')}}" class="btn btn-dark w-100"><h5>Go Back</h5></a>
+                        <a href="{{route('municipality.index')}}"  class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Go Back</h5></a>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <h3 class="osh-text-ul">{{$data->MunToHhold->flatMap->HholdToCit->groupBy('id')->count()}}</h3>
             </div>
             <div class="col col-6 align-self-center">
-                <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#editMunModal">
+                <button type="button"class="btn w-100 text-white" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#editMunModal">
                     <h5>Edit</h5>
                 </button>
             </div>
@@ -93,7 +93,7 @@
 
                             <div class="row m-0 mt-3 p-0">
                                 <div class="col col-6 p-1">
-                                    <a href="{{route('barangay.edit', $brgyRow->id)}}" class="btn btn-dark w-100">Edit</a>
+                                    <a href="{{route('barangay.edit', $brgyRow->id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;">Edit</a>
                                 </div>
                                 <div class="col col-6 p-1">
                                     <form action="{{route('barangay.destroy', $brgyRow->id)}}" method="post">
@@ -106,7 +106,7 @@
 
                             <div class="row m-0 mt-3 p-0">
                                 <div class="col col-12 p-0">
-                                    <a href="{{route('subdivision.show', $brgyRow->id)}}" class="btn btn-dark w-100"><h5>Add Subd.</h5></a>
+                                    <a href="{{route('subdivision.show', $brgyRow->id)}}"class="btn w-100 text-white" style="background-color: #4CAF50;"><h5>Add Subd.</h5></a>
                                 </div>
                             </div>
 
@@ -134,7 +134,7 @@
                                         <h4>{{$subdData->first()->subd_name}}</h4>
                                     </div>
                                     <div class="col col-2 align-self-center">
-                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn btn-success w-100">Edit</a>
+                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;">Edit</a>
                                     </div>
                                     <div class="col col-2 align-self-center">
                                         <form action="{{route('subdivision.destroy', $subdData->first()->id)}}" method="post" class="m-0">
@@ -183,14 +183,20 @@
                                 <label for="brgyName"><h2>Barangay Name:</h2></label> <br>
                                 <input type="text" name="brgyName" class="form-control" value="{{old('brgyName')}}">
                                 @error('brgyName')
-                                    <h5 style="color: red;">{{$message}}</h5>
+                                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function(){
+                                            var crDocModal = new bootstrap.Modal(document.getElementById('addBrgyModal'));
+                                            crDocModal.show();
+                                        })
+                                    </script>
                                 @enderror
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-dark">Add Barangay</button>
+                        <button type="submit" class="btn btn-success">Add Barangay</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     
                     </div>
@@ -221,7 +227,13 @@
                                 <label for="munName"><h2>Municipal Name:</h2></label> <br>
                                 <input type="text" name="munName" class="form-control" value="{{$data->mun_name}}">
                                 @error('munName')
-                                    <h5 style="color: red">{{$message}}</h5>
+                                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function(){
+                                            var crDocModal = new bootstrap.Modal(document.getElementById('editMunModal'));
+                                            crDocModal.show();
+                                        })
+                                    </script>
                                 @enderror
                             </div>
                         </div>
@@ -230,7 +242,13 @@
                                 <label for="region"><h2>Region:</h2></label> <br>
                                 <input type="text" name="region" class="form-control" value="{{$data->region}}">
                                 @error('region')
-                                    <h5 style="color: red">{{$message}}</h5>
+                                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function(){
+                                            var crDocModal = new bootstrap.Modal(document.getElementById('editMunModal'));
+                                            crDocModal.show();
+                                        })
+                                    </script>
                                 @enderror
                             </div>
                         </div>

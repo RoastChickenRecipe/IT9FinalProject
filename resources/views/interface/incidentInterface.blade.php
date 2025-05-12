@@ -11,7 +11,7 @@
                 <h4 class="text-dark">Incidents</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('rqDocuments.create') }}" class="btn w-100" style="background-color:rgb(1, 110, 34); color: white; border-radius: 10px;">Log Incident</a>
+                <a href="{{ route('incidents.create') }}" class="btn w-100" style="background-color:rgb(1, 110, 34); color: white; border-radius: 10px;">Log Incident</a>
             </div>
         </div>
 

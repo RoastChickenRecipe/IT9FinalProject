@@ -43,7 +43,8 @@
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Contact #</th>
-                                <th>Incident Reported</th>
+                                <th>Date Reported</th>
+                                <th>Issued By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -51,18 +52,14 @@
                             @foreach($data as $row)
                                 <tr>
                                     <td>{{ $row->com_fname }} {{ $row->com_lname }}</td>
-                                    <td>{{ $row->com_address }}</td>
+                                    <td>{{ $row->ComplToMun->mun_name }}, {{ $row->ComplToBrgy->brgy_name }} {{ $row->ComplToSubd->subd_name }}</td>
                                     <td>{{ $row->com_contactNum }}</td>
-                                    <td>{{ $row->ComplToInc ? $row->ComplToInc->groupBy('id')->count() : 0 }}</td>
+                                    <td>{{ $row->date_reported }}</td>
+                                    <td>{{ $row->ComplToEmp->e_lname }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
                                             <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-success btn-sm" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
                                             <a href="{{ route('complainants.edit', $row->id) }}" class="btn btn-primary btn-sm" style="background-color: #4CAF50; color: white; border-radius: 5px;">Edit</a>
-                                            <form action="{{ route('complainants.destroy', $row->id) }}" method="POST" class="m-0">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" style="background-color: #DC3545; color: white; border-radius: 5px;">Delete</button>
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -124,5 +121,7 @@
             searchInput.dispatchEvent(new Event('input')); // Trigger the input event to reset the table
         });
     </script>
+
+    
 
 @endsection

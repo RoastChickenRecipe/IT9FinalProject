@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\IncidentsExport;
+use App\Http\Requests\complainantRequest;
 use App\Models\BrgyModel;
 use App\Models\ComplainantModel;
 use App\Models\EmployeeModel;
@@ -55,8 +56,9 @@ class ComplainantController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(complainantRequest $request)
     {
+        /*
         $request->validate([
             'com_fname' => 'required',
             'com_lname' => 'required',
@@ -68,6 +70,7 @@ class ComplainantController extends Controller
             'mun_id' => 'required',
             'brgy_id' => 'required',
             'subd_id' => 'required'
+
         ],[
             'com_fname.required' => 'This Field is Required',
             'com_lname.required' => 'This Field is Required',
@@ -79,7 +82,7 @@ class ComplainantController extends Controller
             'rep_date.required' => 'This Field is Required',
             'mun_id.required' => 'This Field is Required',
         ]);
-
+        */
         ComplainantModel::create([
             'com_fname' => $request->com_fname,
             'com_lname' => $request->com_lname,
@@ -143,7 +146,7 @@ class ComplainantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(complainantRequest $request, string $id)
     {
         $request->validate([
             'com_fname' => 'required',
@@ -197,7 +200,7 @@ class ComplainantController extends Controller
     {
         $request->validate(['complId' => 'required']);
 
-        $get = ComplainantModel::where('id', '=', $request->complId)->first();
+        $get = ComplainantModel::findOrFail($request->complId);
 
         $data = [
             'title' => 'Complainant',
@@ -207,11 +210,8 @@ class ComplainantController extends Controller
             'defName' => $get->def_name,
             'mun' => $get->ComplToMun->mun_name,
             'brgy' => $get->ComplToBrgy->brgy_name,
-            'subd' => $get->ComplToSubd->subd_name
-            
+            'subd' => $get->ComplToSubd->subd_name    
         ];
-
-        
 
         $pdf = Pdf::loadView('pdfTemplate.complaintTemp', $data);
         return $pdf->download($get->com_fname. '_'. $get->com_lname. '.pdf');

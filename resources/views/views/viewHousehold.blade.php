@@ -8,19 +8,18 @@
         <div class="floating-box osh-bg">
 
             <div class="osh-outline">
-                <button type="button" class="osh-btn-add btn w-100" data-bs-toggle="modal" data-bs-target="#addCitizenModal">
+                <button type="button"  class="btn w-100 text-white" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#addCitizenModal">
                     <h5>Add Citizen</h5>
                 </button>
 
-                <button type="button" class="btn btn-dark w-100 mt-3" data-bs-toggle="modal" data-bs-target="#editHouseholdModal">
+                <button type="button" class="btn w-100 text-white mt-3" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#editHouseholdModal">
                     <h5>Edit Household</h5>
                 </button>
 
-                <form action="{{route('households.destroy', $house->id)}}" method="post" class="m-0">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger w-100 mt-3"><h5>Delete Household</h5></button>
-                </form>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn w-100 text-white mt-3" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background-color: #DC3545;">
+                <h5>Delete Household</h5>
+                </button>
 
             </div>
             
@@ -29,7 +28,7 @@
             <div class="osh-outline mt-5">
                 <div class="row">
                     <div class="col text-center">
-                        <a href="{{route('households.index')}}" class="osh-btn-back btn w-100"><h5>Go Back</h5></a>
+                        <a href="{{route('households.index')}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Go Back</h5></a>
                     </div>
                 </div>
             </div>
@@ -147,14 +146,40 @@
                         <div class="col col-12 p-0">
                             <div class="row mt-4 mb-2">
                                 <div class="col col-6">
-                                    <a href="{{route('citizens.edit', $row->id)}}" class="btn btn-dark w-100">Edit</a>
+                                    <a href="{{route('citizens.edit', $row->id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;">Edit</a>
                                 </div>
                                 <div class="col col-6">
-                                    <form action="{{route('citizens.destroy', $row->id)}}" method="post" class="m-0">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger w-100">Delete</button>
-                                    </form>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn w-100 text-white" data-bs-toggle="modal" data-bs-target="#deleteModal{{$row->id}}" style="background-color: #DC3545;">
+                                    Delete
+                                    </button>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteModal{{$row->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModal{{$row->id}}Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="deleteModal{{$row->id}}Label"><strong>DELETE | Household</strong></h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+
+                                                <form action="{{route('citizens.destroy', $row->id)}}" method="post" class="m-0">
+                                                    @csrf
+                                                    @method('delete')
+
+                                                    <div class="modal-body">
+                                                        <h4>Are you sure you want to <strong>DELETE</strong> {{$row->lname}}, {{$row->fname}} {{$row->mname}} citizen?</h4>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        
+                                                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
+                                                        
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Delete Modal -->
                                 </div>
                             </div>
                         </div>
@@ -315,7 +340,13 @@
                                 <option value="Apartment">
                             </datalist>
                             @error('householdType')
-                                <div class="text-danger">{{$message}}</div>
+                                <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function(){
+                                        var crDocModal = new bootstrap.Modal(document.getElementById('editHouseholdModal'));
+                                        crDocModal.show();
+                                    })
+                                </script>
                             @enderror
                         </div>
 
@@ -372,25 +403,32 @@
         </div>
     </div>{{-- End Modal | Edit Household --}}
     
-    {{-- Modal | Edit Citizen --}}
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel"><strong>DELETE | Household</strong></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+
+                <form action="{{route('households.destroy', $house->id)}}" method="post" class="m-0">
+                    @csrf
+                    @method('delete')
+
+                    <div class="modal-body">
+                        <h4>Are you sure you want to <strong>DELETE</strong> this household?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
+                        
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+    </div><!-- End Delete Modal -->
       
 
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\IncidentsExport;
+use App\Http\Requests\incidentRequest;
 use App\Models\ComplainantModel;
 use App\Models\EmployeeModel;
 use App\Models\IncidentModel;
@@ -45,30 +46,8 @@ class IncidentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(incidentRequest $request)
     {
-        //return redirect(route('incidents.index'));
-        $request->validate([
-            'mun_id' => 'required',
-            'brgy_id' => 'required',
-            'rep_date' => 'required',
-            'empId' => 'required',
-            'location' => 'required',
-            'dates_time' => 'required',
-
-            'typeOfIncident' => 'required',
-            'description' => 'nullable',
-            'involved' => 'nullable',
-            'action_taken' => 'nullable'
-
-        ], [
-            'mun_id.required' => 'This field is required',
-            'rep_date.required' => 'This field is required',
-            'location.required' => 'This field is required',
-            'typeOfIncident.required' => 'This field is required',
-    
-        ]);
-
         IncidentModel::create([
             'incident_type' => $request->typeOfIncident,
             'description' => $request->description,
@@ -119,28 +98,8 @@ class IncidentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(incidentRequest $request, string $id)
     {
-        $request->validate([
-            'mun_id' => 'required',
-            'brgy_id' => 'required',
-            'rep_date' => 'required',
-            'empId' => 'required',
-            'location' => 'required',
-            'dates_time' => 'required',
-
-            'typeOfIncident' => 'required',
-            'description' => 'nullable',
-            'involved' => 'nullable',
-            'action_taken' => 'nullable'
-
-        ], [
-            'mun_id.required' => 'This field is required',
-            'rep_date.required' => 'This field is required',
-            'location.required' => 'This field is required',
-            'typeOfIncident.required' => 'This field is required',
-    
-        ]);
         IncidentModel::findOrFail($id)->update([
             'incident_type' => $request->typeOfIncident,
             'description' => $request->description,

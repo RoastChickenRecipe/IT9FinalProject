@@ -7,8 +7,8 @@
 </head>
 <style>
     .osh-outline {
-        background-color: rgb(239, 227, 194); 
-        border: solid 2px black;  
+        background-color: #C8E6C9; 
+      
         border-radius:10px;
         padding: 5px;
     }
@@ -50,8 +50,8 @@
     }
 
     .osh-bg {
-        background-color: rgb(133, 169, 71); 
-        border: solid 2px black; 
+        background-color: #E8F5E9; 
+         
         border-radius:10px;
         padding: 5px;
     }
@@ -72,7 +72,7 @@
             @yield('floating')
             <div class="col col-8 py-5">
                 <div class="card shadow">
-                    <div class="card-body">
+                    <div class="card-body" style="background-color: #C8E6C9;">
                         @yield('view-content')
                     </div>
                 </div>

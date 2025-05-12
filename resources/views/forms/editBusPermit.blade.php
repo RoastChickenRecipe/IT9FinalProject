@@ -4,13 +4,13 @@
 @section('sec-content')
 
     
-    <h3>Edit Business Permit</h3>
+    <h3 class="osh-bg text-center">Edit Business Permit</h3>
 
     <form action="{{route('business-permits.update', $busData->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
 
-        <div class="row m-0 mt-3 border">
+        <div class="row m-0 mt-3 osh-bg">
 
             <div class="col col-6 p-1">
                 <label for="set_mun"><h5>Municipality:</h5></label>
@@ -25,26 +25,35 @@
 
         </div>
 
-        <div class="row m-0 mt-3 border">
+        <div class="row m-0 mt-3 osh-bg">
 
-            <div class="col col-12 my-2 text-center p-1"><h4>Basic Personal Info:</h4></div>
+            <div class="col col-12 my-2 text-center p-1"><h4 class="osh-outline text-center">Basic Personal Info:</h4></div>
 
             <div class="col col-4 p-1">
                 <label for="fname"><h5>First Name:</h5></label>
                 <input type="text" name="fname" class="form-control" value="{{$busData->b_fname}}">
+                @error('fname')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-4 p-1">
                 <label for="mname"><h5>Middle Name:</h5></label>
                 <input type="text" name="mname" class="form-control" value="{{$busData->b_mname}}">
+                @error('mname')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-4 p-1">
                 <label for="lname"><h5>Last Name:</h5></label>
                 <input type="text" name="lname" class="form-control" value="{{$busData->b_lname}}">
+                @error('lname')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
 
 
             <div class="col col-6 p-1">
-                <label for="address"><h4>Address:</h4></label>
+                <label for="address"><h5>Address:</h5></label>
                 <select name="address" id="address" class="form-select"  onchange="getId()">
                     <option value="{{$busData->mun_id}},{{$busData->brgy_id}}:{{$busData->subd_id}}">{{$busData->BusToMun->mun_name}}, {{$busData->BusToBrgy->brgy_name}} - {{$busData->BusToSubd->subd_name}}</option>
                     @foreach($address as $row)
@@ -93,21 +102,30 @@
             <div class="col col-2 p-1">
                 <label for="contactNum"><h5>Contact #:</h5></label>
                 <input type="text" name="contactNum" class="form-control" value="{{$busData->b_contactNum}}">
+                @error('contactNum')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-1 p-1">
                 <label for="age"><h5>Age:</h5></label>
                 <input type="text" name="age" class="form-control" value="{{$busData->b_age}}">
+                @error('age')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-3 p-1">
                 <label for="bDate"><h5>Birth Date:</h5></label>
                 <input type="date" name="bDate" class="form-control" value="{{$busData->b_birthDate}}"> 
+                @error('bDate')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             
         </div>
 
-        <div class="row m-0 mt-4 border justify-content-center">
+        <div class="row m-0 mt-4 osh-bg justify-content-center">
 
-            <div class="col col-12 my-2 text-center p-1"><h4>Permits/Files/Certificates:</h4></div>
+            <div class="col col-12 my-2 text-center p-1"><h4 class="osh-outline text-center">Permits/Files/Certificates:</h4></div>
 
             <div class="col col-6 p-1">
                 <label for="bStructure"><h5>Business Structure:</h5></label>
@@ -185,9 +203,9 @@
 
         </div>
 
-        <div class="row m-0 mt-4 border justify-content-center">
+        <div class="row m-0 mt-4 osh-bg justify-content-center">
 
-            <div class="col col-12 my-2 text-center"><h4>Other Permits:</h4></div>
+            <div class="col col-12 my-2 text-center"><h4 class="osh-outline text-center">Other Permits:</h4></div>
 
             <div class="col col-6 p-1">
                 <label for="sanitaryFile"><h5>Sanitary Permit:</h5></label>
@@ -225,10 +243,10 @@
 
         <div class="row mt-5">
             <div class="col col-6">
-                <button type="submit" class="btn btn-primary w-100">Update</button>
+                <button type="submit" class="btn btn-primary w-100"><h5>Update</h5></button>
             </div>
             <div class="col col-6">
-                <a href="{{route('business-permits.show', $busData->id)}}" class="btn btn-secondary w-100">Cancel</a>
+                <a href="{{route('business-permits.show', $busData->id)}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Cancel</h5></a>
             </div>
         </div>
 

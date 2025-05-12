@@ -15,7 +15,9 @@ class rqDocumentController extends Controller
     public function index()
     {
         $doc = rqDocumentModel::orderBy('issue_date', 'desc')->get();
-        return view('interface.rqDocInterface', ['doc' => $doc]);
+        $cit = CitizenModel::all();
+        $emp = EmployeeModel::findOrFail(session('loginId'));
+        return view('interface.rqDocInterface', ['doc' => $doc, 'citizen' => $cit, 'emp' => $emp]);
     }
 
     /**
@@ -65,7 +67,11 @@ class rqDocumentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
+        $data = rqDocumentModel::findOrFail($id);
+        $cit = CitizenModel::where('id', '<>', $data->RqDocToCit->id)->get();
+        $emp = EmployeeModel::findOrFail(session('loginId'));
+        return view('forms.editDocForm', ['rqDocData' => $data, 'emp' => $emp, 'citizen' => $cit]);
     }
 
     /**
@@ -73,7 +79,24 @@ class rqDocumentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'date' => 'required',
+            'sel_cit' => 'required',
+            'docType' => 'required|string',
+            'emp' => 'required',
+        ],[
+            'date.required' => 'This field is empty',
+            'sel_cit.required' => 'This field is empty',
+            'docType.required' => 'This field is empty'
+        ]);
+
+        rqDocumentModel::findOrFail($id)->update([
+            'document_type' => $request->docType,
+            'issue_date' => $request->date,
+            'citizen_id' => $request->sel_cit,
+            'employee_id' => $request->emp
+        ]);
+        return redirect(route('rqDocuments.index'));
     }
 
     /**
@@ -81,6 +104,7 @@ class rqDocumentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        rqDocumentModel::findOrFail($id)->delete();
+        return redirect(route('rqDocuments.index'));
     }
 }

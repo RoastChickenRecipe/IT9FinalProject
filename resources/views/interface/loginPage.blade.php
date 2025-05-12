@@ -84,17 +84,11 @@
                                         <small class="text-danger d-block mt-2">Incorrect Username And Password</small>
                                     @endif
                                 </div>
-                                <div class="form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
-                                </div>
+                                
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
                                 
-                                <div class="text-center mt-3">
-                                    <small>Don't have an account? <a href="{{ route('register') }}">Register here</a></small>
-                                </div>
                             </form>
                         </div>
                     </div>

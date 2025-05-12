@@ -30,6 +30,16 @@ class fakeDataSeeder extends Seeder
             'e_password' => Hash::make('test')
         ]);
 
+        EmployeeModel::create([
+            'e_fname' => 'Maria',
+            'e_lname' => 'Doe',
+            'position' => 'Manager',
+            'e_address' => 'Zone 1 Buhangin San Vicente Davao City',
+            'e_contact_number' => '099514131876',
+            'e_username' => 'm.doe@admin.com',
+            'e_password' => Hash::make('test')
+        ]);
+
         MunModel::create([
             'mun_name' => 'Davao City',
             'region' => 'XI'

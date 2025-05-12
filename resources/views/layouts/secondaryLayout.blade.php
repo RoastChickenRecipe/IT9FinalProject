@@ -7,16 +7,15 @@
 </head>
 <style>
     .osh-outline {
-        background-color: rgb(239, 227, 194); 
-        border: solid 2px black;  
+        background-color: #C8E6C9; 
+      
         border-radius:10px;
         padding: 5px;
     }
 
-
     .osh-bg {
-        background-color: rgb(133, 169, 71); 
-        border: solid 2px black; 
+        background-color: #E8F5E9; 
+         
         border-radius:10px;
         padding: 5px;
     }
@@ -24,10 +23,10 @@
 <body>
     <div class="container-fluid vh-100">
             
-        <div class="row justify-content-center align-items-center h-100">
+        <div class="row justify-content-center">
             <div class="col col-7">
-                <div class="card shadow">
-                    <div class="card-body">
+                <div class="card shadow my-5">
+                    <div class="card-body" style="background-color: #C8E6C9;">
                         @yield('sec-content')
                     </div>
                 </div>

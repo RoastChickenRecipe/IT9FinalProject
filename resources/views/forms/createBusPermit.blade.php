@@ -4,12 +4,12 @@
 @section('sec-content')
 
     
-    <h3>Apply For Business Permit</h3>
+    <h3 class="osh-bg text-center">Apply For Business Permit</h3>
 
     <form action="{{route('business-permits.store')}}" method="post" enctype="multipart/form-data">
         @csrf
 
-        <div class="row m-0 mt-3 border">
+        <div class="osh-bg row m-0 mt-3 border">
 
             <div class="col col-6 p-1">
                 <label for="set_mun"><h5>Municipality:</h5></label>
@@ -24,26 +24,35 @@
 
         </div>
 
-        <div class="row m-0 mt-3 border">
+        <div class="osh-bg row m-0 mt-3">
 
-            <div class="col col-12 my-2 text-center p-1"><h4>Basic Personal Info:</h4></div>
+            <div class="col col-12 my-2 text-center p-1"><h4 class="osh-outline text-center">Basic Personal Info:</h4></div>
 
             <div class="col col-4 p-1">
                 <label for="fname"><h5>First Name:</h5></label>
-                <input type="text" name="fname" class="form-control">
+                <input type="text" name="fname" class="form-control" value="{{old('fname')}}">
+                @error('fname')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-4 p-1">
                 <label for="mname"><h5>Middle Name:</h5></label>
-                <input type="text" name="mname" class="form-control">
+                <input type="text" name="mname" class="form-control" value="{{old('mname')}}">
+                @error('mname')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-4 p-1">
                 <label for="lname"><h5>Last Name:</h5></label>
-                <input type="text" name="lname" class="form-control">
+                <input type="text" name="lname" class="form-control" value="{{old('lname')}}">
+                @error('lname')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
 
 
             <div class="col col-6 p-1">
-                <label for="address"><h4>Address:</h4></label>
+                <label for="address"><h5>Address:</h5></label>
                 <select name="address" id="address" class="form-select"  onchange="getId()">
                     <option value="">None</option>
                     @foreach($address as $row)
@@ -56,7 +65,7 @@
                 <input type="text" name="brgy_id" id="brgy_id" class="form-control" hidden>
                 <input type="text" name="subd_id" id="subd_id" class="form-control" hidden>
                 @error('mun_id')
-                    <span style="color: red">* {{$message}}</span>
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                 @enderror
                 <script>
 
@@ -91,70 +100,100 @@
             </div>
             <div class="col col-2 p-1">
                 <label for="contactNum"><h5>Contact #:</h5></label>
-                <input type="text" name="contactNum" class="form-control">
+                <input type="text" name="contactNum" class="form-control" value="{{old('contactNum')}}">
+                @error('contactNum')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-1 p-1">
                 <label for="age"><h5>Age:</h5></label>
-                <input type="text" name="age" class="form-control">
+                <input type="text" name="age" class="form-control" value="{{old('age')}}">
+                @error('age')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-3 p-1">
                 <label for="bDate"><h5>Birth Date:</h5></label>
-                <input type="date" name="bDate" class="form-control">
+                <input type="date" name="bDate" class="form-control" value="{{old('bDate')}}">
+                @error('bDate')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             
         </div>
 
-        <div class="row m-0 mt-4 border justify-content-center">
+        <div class="osh-bg row m-0 mt-4 border justify-content-center">
 
-            <div class="col col-12 my-2 text-center p-1"><h4>Permits/Files/Certificates:</h4></div>
+            <div class="col col-12 my-2 text-center p-1"><h4 class="osh-outline text-center">Permits/Files/Certificates:</h4></div>
 
             <div class="col col-6 p-1">
                 <label for="bStructure"><h5>Business Structure:</h5></label>
-                <select name="bStructure" id="bStructure" class="form-select">
+                <select name="bStructure" id="bStructure" class="form-select" required>
                     <option value="">------</option>
                     <option value="Sole Proprietorship">Sole Proprietorship</option>
                     <option value="Corporation/Partnership">Corporation/Partnership</option>
                 </select>
+                @error('bStructure')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-6 p-1">
                 <label for="dticdaCertFile"><h5>DTI/CDA Certificate:</h5></label>
-                <input type="file" name="dticdaCertFile" id="dticdaCertFile" class="form-control" onchange="set_dticdaCertFile()"> 
+                <input type="file" name="dticdaCertFile" id="dticdaCertFile" class="form-control" required onchange="set_dticdaCertFile()"> 
                 <input type="text" name="get_dticdaCertFile" id="get_dticdaCertFile" hidden>
+                @error('get_dticdaCertFile')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
 
             <div class="col col-6 p-1">
                 <label for="busPermitFile"><h5>Business/Mayor's Permit:</h5></label>
-                <input type="file" name="busPermitFile" id="busPermitFile" class="form-control" onchange="set_busPermitFile()"> 
+                <input type="file" name="busPermitFile" id="busPermitFile" class="form-control" required onchange="set_busPermitFile()"> 
                 <input type="text" name="get_busPermitFile" id="get_busPermitFile" hidden>
+                @error('get_busPermitFile')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-6 p-1">
                 <label for="brgyClearanceFile"><h5>Brgy. Clearance:</h5></label>
-                <input type="file" name="brgyClearanceFile" id="brgyClearanceFile" class="form-control" onchange="set_brgyClearanceFile()"> 
+                <input type="file" name="brgyClearanceFile" id="brgyClearanceFile" class="form-control" required onchange="set_brgyClearanceFile()"> 
                 <input type="text" name="get_brgyClearanceFile" id="get_brgyClearanceFile" hidden>
+                @error('get_brgyClearanceFile')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
 
             <div class="col col-6 p-1">
                 <label for="ctcFile"><h5>Community Tax Certificate "Cedula":</h5></label>
-                <input type="file" name="ctcFile" id="ctcFile" class="form-control" onchange="set_ctcFile()">
+                <input type="file" name="ctcFile" id="ctcFile" class="form-control" required onchange="set_ctcFile()">
                 <input type="text" name="get_ctcFile" id="get_ctcFile" hidden> 
+                @error('get_ctcFile')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
             <div class="col col-6 p-1">
                 <label for="contOfLeaseFile"><h5>Contract of Lease/Title of Land:</h5></label>
-                <input type="file" name="contOfLeaseFile" id="contOfLeaseFile" class="form-control" onchange="set_contOfLeaseFile()"> 
+                <input type="file" name="contOfLeaseFile" id="contOfLeaseFile" class="form-control" required onchange="set_contOfLeaseFile()"> 
                 <input type="text" name="get_contOfLeaseFile" id="get_contOfLeaseFile" hidden>
+                @error('get_contOfLeaseFile')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
 
             <div class="col col-8 p-1">
                 <label for="zoningClearanceFile"><h5>Zoning Clearance:</h5></label>
-                <input type="file" name="zoningClearanceFile" id="zoningClearanceFile" class="form-control" onchange="set_zoningClearanceFile()"> 
+                <input type="file" name="zoningClearanceFile" id="zoningClearanceFile" class="form-control" required onchange="set_zoningClearanceFile()"> 
                 <input type="text" name="get_zoningClearanceFile" id="get_zoningClearanceFile" hidden>
+                @error('get_zoningClearanceFile')
+                    <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                @enderror
             </div>
 
         </div>
 
-        <div class="row m-0 mt-4 border justify-content-center">
+        <div class="osh-bg row m-0 mt-4 border justify-content-center">
 
-            <div class="col col-12 my-2 text-center"><h4>Other Permits:</h4></div>
+            <div class="col col-12 my-2 text-center"><h4 class="osh-outline text-center">Other Permits:</h4></div>
 
             <div class="col col-6 p-1">
                 <label for="sanitaryFile"><h5>Sanitary Permit:</h5></label>
@@ -177,10 +216,10 @@
 
         <div class="row mt-5">
             <div class="col col-6">
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                <button type="submit" class="btn btn-primary w-100"><h5>Submit</h5></button>
             </div>
             <div class="col col-6">
-                <a href="{{route('business-permits.index')}}" class="btn btn-secondary w-100">Cancel</a>
+                <a href="{{route('business-permits.index')}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Cancel</h5></a>
             </div>
         </div>
 

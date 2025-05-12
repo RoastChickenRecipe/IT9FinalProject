@@ -23,11 +23,11 @@
                 </div>
 
                 <div class="col col-12 mt-4 p-0">
-                    <form action="{{route('incidents.destroy', $data->id)}}" method="post" class="m-0">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger w-100"><h5>Delete</h5></button>
-                    </form>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn w-100 text-white" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background-color: #DC3545;">
+                    <h5>Delete</h5>
+                    </button>
                 </div>
 
             </div>
@@ -66,11 +66,11 @@
                 <h4>Incident Type:</h4>
                 <h3 style="border-bottom: solid 2px black;">{{$data->incident_type}}</h3>
             </div>
-            <div class="col col-4 text-center">
+            <div class="col col-4 text-center align-self-end">
                 <h4>Date Reported:</h4>
                 <h3 style="border-bottom: solid 2px black;">{{$data->date_reported}}</h3>
             </div>
-            <div class="col col-4 text-center">
+            <div class="col col-4 text-center align-self-end">
                 <h4>Issued By:</h4>
                 <h3 style="border-bottom: solid 2px black;">{{$data->IncToEmp->e_fname}} {{$data->IncToEmp->e_lname}}</h3>
             </div>
@@ -114,6 +114,33 @@
         </div>  
 
     </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel"><strong>DELETE</strong></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="{{route('incidents.destroy', $data->id)}}" method="post" class="m-0">
+                    @csrf
+                    @method('delete')
+
+                    <div class="modal-body">
+                        <h4>Are you sure you want to <strong>DELETE</strong> this incident?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!-- End Delete Modal -->
 
 
 @endsection

@@ -21,6 +21,10 @@ class ComplainantModel extends Model
         'employee_id'
     ];
 
+    public function ComplToEmp(){
+        return $this->belongsTo(EmployeeModel::class, 'employee_id');
+    }
+
     public function ComplToMun(){
         return $this->belongsTo(MunModel::class, 'com_mun_id');
     }

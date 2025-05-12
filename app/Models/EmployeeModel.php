@@ -25,6 +25,10 @@ class EmployeeModel extends Model
         return $this->hasMany(rqDocumentModel::class, 'employee_id');
     }
 
+    public function EmpToCompl(){
+        return $this->hasMany(ComplainantModel::class, 'employee_id');
+    } 
+
     public function EmpToInc(){
         return $this->hasMany(IncidentModel::class, 'employee_id');
     } 

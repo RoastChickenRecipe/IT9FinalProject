@@ -5,53 +5,106 @@
     <title>Form | Citizen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+<style>
+    .osh-outline {
+        background-color: #C8E6C9; 
+      
+        border-radius:10px;
+        padding: 5px;
+    }
+
+    .osh-outline-sec {
+        background-color: rgb(39, 57, 28); 
+        border: solid 2px rgb(31, 125, 83);  
+        border-radius:10px;
+        padding: 5px;
+        color: white
+    }
+
+    .osh-text-ul {
+        border-bottom: solid 2px black;"
+    }
+
+    .osh-btn-add {
+        background-color: rgb(163, 209, 198); 
+        border: solid 2px black;  
+        border-radius:10px;
+        color: black;
+    }
+
+    .osh-btn-add:hover{
+        background-color: rgb(61, 141, 122);
+        color: white;
+    }
+
+    .osh-btn-back {
+        background-color: rgb(179, 216, 168); 
+        border: solid 2px black;  
+        border-radius:10px;
+        color: black;
+    }
+
+    .osh-btn-back:hover{
+        background-color: rgb(61, 141, 122);
+        color: white;
+    }
+
+    .osh-bg {
+        background-color: #E8F5E9; 
+         
+        border-radius:10px;
+        padding: 5px;
+    }
+    
+    .floating-box {
+        position: sticky;
+        top: 50px;
+        left: 20px;
+    }
+
+</style>
 <body>
     <div class="container">
         <div class="row justify-content-center align-items-center my-5">
             <div class="col col-10">
                 <div class="card shadow">
-                    <div class="card-body">
-                        <h1>Citizen Form</h1>
+                    <div class="card-body" style="background-color: #C8E6C9;">
+                        <h1 class="osh-bg text-center">Citizen Form</h1>
                         
                         <form action="{{route('households.store')}}" method="post">
                             @csrf
 
                             {{-- HOUSE INFO --}}
-                            <div class="row border mt-5">
-                                <div class="col col-12">
-                                    <h3>House Info:</h3>
+                            <div class="osh-bg row border mt-5">
+                                
+                                <div class="col col-6 p-0 pe-1">
+                                    <div class="osh-outline">
+                                        <label for="htype" class="form-label"><h5>House Type</h5></label>
+                                        <input class="form-control" name="htype" id="htype" list="datalistOptions">
+                                        <datalist id="datalistOptions">
+                                            <option value="Own House">
+                                            <option value="Boarding House">
+                                            <option value="Apartment">
+                                        </datalist>
+                                        @error('htype')
+                                            <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="col col-6">
-                                    <label for="htype" class="form-label"><h5>House Type</h5></label>
-                                    <input class="form-control" name="htype" id="htype" list="datalistOptions">
-                                    <datalist id="datalistOptions">
-                                        <option value="Own House">
-                                        <option value="Boarding House">
-                                        <option value="Apartment">
-                                    </datalist>
-                                    @error('htype')
-                                        <span style="color: red">* {{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
 
-
-                            {{-- ADDRESS INFO --}}
-                            <div class="row border mt-3">
-                                <div class="col col-12">
-                                    <h3>Address</h3>                        
-                                </div>
-                                <div class="col col-12 mt-3">
-                                    <select name="address" id="address" class="form-select"  onchange="getId()">
-                                        <option value="">None</option>
-                                        @foreach($address as $row)
-                                            <option value="{{$row->mun_id}},{{$row->brgy_id}}:{{$row->subd_id}}">{{$row->mun_name}} - {{$row->brgy_name}} - {{$row->subd_name}}</option>
-                                        @endforeach
-    
-                                    </select>
-                                    @error('address')
-                                        <span style="color: red">* {{$message}}</span>
-                                    @enderror
+                                <div class="col col-6 p-0 ps-1">
+                                    <div class="osh-outline">
+                                        <label for="address" class="form-label"><h5>Address</h5></label>
+                                        <select name="address" id="address" class="form-select"  onchange="getId()">
+                                            <option value="">None</option>
+                                            @foreach($address as $row)
+                                                <option value="{{$row->mun_id}},{{$row->brgy_id}}:{{$row->subd_id}}">{{$row->mun_name}} - {{$row->brgy_name}} - {{$row->subd_name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('address')
+                                            <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                     <input type="text" name="mun_id" id="mun_id" class="form-control" hidden>
                                     <input type="text" name="brgy_id" id="brgy_id" class="form-control" hidden>
                                     <input type="text" name="subd_id" id="subd_id" class="form-control" hidden> 
@@ -82,14 +135,10 @@
                                     }
 
                                 </script>
-                                
-                                
                             </div>
 
-
-
                             {{-- PERSONAL INFO --}}
-                            <div class="row border mt-3">
+                            <div class="osh-bg row mt-3">
                                 <div class="col col-12">
                                     <h3>Personal Info:</h3>     
                                 </div>
@@ -227,7 +276,7 @@
             });
 
             $(document).on('click', '.add-more-form', function(){
-                $('.paste-new-form').append('<div class="row border mt-3 main-form">\
+                $('.paste-new-form').append('<div class="osh-bg row border mt-3 main-form">\
                                 <div class="col col-10">\
                                     <h3>Personal Info:</h3>\
                                 </div>\
