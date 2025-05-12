@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\busPermitRequest;
 use App\Models\BusPermitModel;
 use App\Models\EmployeeModel;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -45,43 +46,8 @@ class BusPermitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(busPermitRequest $request)
     {
-        $request->validate([
-            'fname' => 'required|max:100',
-            'mname' => 'required|max:50',
-            'lname' => 'required|max:50',
-            'contactNum' => 'required|max:15',
-            'age' => 'required|max:3',
-            'bDate' => 'required',
-
-            'bStructure' => 'required',
-
-            'dticdaCertFile' => 'required',
-            'get_dticdaCertFile' => 'required',
-            'busPermitFile' => 'required',
-            'get_busPermitFile' => 'required',
-            'brgyClearanceFile' => 'required',
-            'get_brgyClearanceFile' => 'required',
-            'ctcFile' => 'required',
-            'get_ctcFile' => 'required',
-            'contOfLeaseFile' => 'required',
-            'get_contOfLeaseFile' => 'required',
-            'zoningClearanceFile' => 'required',
-            'get_zoningClearanceFile' => 'required',
-
-            'sanitaryFile' => 'nullable',
-            'get_sanitaryFile' => 'nullable',
-            'fireSafetyFile' => 'nullable',
-            'get_fireSafetyFile' => 'nullable',
-            'bfadFile' => 'nullable',
-            'get_bfadFile' => 'nullable',
-
-            'mun_id' => 'required',
-            'brgy_id' => 'required',
-            'subd_id' => 'required',
-            'empId' => 'required'
-        ]);
         $docFormat = $request->fname . '_' . $request->mname . '_' . $request->lname . '(' . date("d-m-Y") . ')';
         $path = 'uploadFiles/files/';
 
@@ -172,45 +138,9 @@ class BusPermitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(busPermitRequest $request, string $id)
     {
         $category = BusPermitModel::findOrFail($id);
-        $request->validate([
-            'fname' => 'required|max:100',
-            'mname' => 'required|max:50',
-            'lname' => 'required|max:50',
-            'contactNum' => 'required|max:15',
-            'age' => 'required|max:3',
-            'bDate' => 'required',
-
-            'bStructure' => 'required',
-
-            'dticdaCertFile' => 'nullable',
-            'get_dticdaCertFile' => 'required',
-            'busPermitFile' => 'nullable',
-            'get_busPermitFile' => 'required',
-            'brgyClearanceFile' => 'nullable',
-            'get_brgyClearanceFile' => 'required',
-            'ctcFile' => 'nullable',
-            'get_ctcFile' => 'required',
-            'contOfLeaseFile' => 'nullable',
-            'get_contOfLeaseFile' => 'required',
-            'zoningClearanceFile' => 'nullable',
-            'get_zoningClearanceFile' => 'required',
-
-            'sanitaryFile' => 'nullable',
-            'get_sanitaryFile' => 'nullable',
-            'fireSafetyFile' => 'nullable',
-            'get_fireSafetyFile' => 'nullable',
-            'bfadFile' => 'nullable',
-            'get_bfadFile' => 'nullable',
-            
-            'mun_id' => 'required',
-            'brgy_id' => 'required',
-            'subd_id' => 'required',
-            'empId' => 'required'
-        ]);
-
         $docFormat = $request->fname . '_' . $request->mname . '_' . $request->lname . '(' . date("d-m-Y") . ')';
         $path = 'uploadFiles/files/';
         
@@ -272,7 +202,7 @@ class BusPermitController extends Controller
             'employee_id' => $request->empId
         ]);
         
-        return redirect(route('business-permits.show', $id));
+        return redirect(route('business-permits.show', $id))->with('message', 'Updated Successfully');
     }
 
     /**
