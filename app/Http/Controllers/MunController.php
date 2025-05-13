@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\BrgyModel;
 use App\Models\MunModel;
 use Illuminate\Http\Request;
@@ -40,9 +39,9 @@ class MunController extends Controller
         ] , [
             'munName.required' => '*This Field is Required',
             'munName.unique' => 'Name Already Added',
-            'munName.max' => 'Maxximum Name of 50 Characters',
+            'munName.max' => 'Maximum Name of 50 Characters',
             'region.required' => '*This Field is Required',
-            'region.max' => 'Maxximum Characters is 10',
+            'region.max' => 'Maximum Characters is 10',
         ]);
 
         MunModel::create([
@@ -51,7 +50,8 @@ class MunController extends Controller
         ]);
 
         $red = MunModel::orderBy('id', 'desc')->take(1)->get();
-        return redirect(route('municipality.show', $red))->with('message', $request->munName . 'Added Successfully');
+        return redirect(route('municipality.show', $red))
+        ->with('message', $request->munName . 'Added Successfully');
     }
 
     /**
@@ -100,7 +100,8 @@ class MunController extends Controller
         ]);
 
         
-        return redirect(route('municipality.show', $id))->with('message', 'Updated Successfully');
+        return redirect(route('municipality.show', $id))
+        ->with('message', 'Updated Successfully');
     }
 
     /**

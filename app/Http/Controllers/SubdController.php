@@ -46,7 +46,8 @@ class SubdController extends Controller
             'barangay_id' => $request->s_brgy
         ]);
         $mun = BrgyModel::where('id', '=', $request->s_brgy)->first();
-        return redirect(route('municipality.show', $mun->municipality_id))->with('message', $request->subdName . ' Added Successfully');
+        return redirect(route('municipality.show', $mun->municipality_id))
+        ->with('message', $request->subdName . ' Added Successfully');
     }
 
     /**
@@ -90,7 +91,8 @@ class SubdController extends Controller
             'barangay_id' => $request->s_brgy
         ]);
         $mun = BrgyModel::where('id', '=', $request->s_brgy)->first();
-        return redirect(route('municipality.show', $mun->municipality_id))->with('message', 'Updated Successfully');
+        return redirect(route('municipality.show', $mun->municipality_id))
+        ->with('message', 'Updated Successfully');
     }
 
     /**

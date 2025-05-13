@@ -11,7 +11,7 @@
                 <h4 class="text-dark">Complainants</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color: #388E3C; color: white; border-radius: 10px;">Report Incident</a>
+                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color: #388E3C; color: white; border-radius: 10px;">Report Complaint</a>
             </div>
         </div>
 

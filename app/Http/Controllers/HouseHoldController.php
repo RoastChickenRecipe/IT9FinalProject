@@ -21,7 +21,6 @@ class HouseHoldController extends Controller
     }
 
     public function create(){
-
         $address = DB::table('municipalities')
                 ->join('barangays', 'municipalities.id', 'barangays.municipality_id')
                 ->join('subdivisions', 'barangays.id', 'subdivisions.barangay_id')
@@ -36,46 +35,37 @@ class HouseHoldController extends Controller
                 ->orderBy('subd_name', 'ASC')
                 ->get();
         
-        
         $munData = MunModel::all()->toArray();
         $brgyData = BrgyModel::all()->toArray();
         $subdData = SubdModel::all()->toArray();
-
         return view('forms.createHousehold', [
             'mun' => $munData,
             'brgy' => $brgyData,
             'subd' => $subdData,
             'address' => $address
         ]);
-        
     }
 
     public function store(citizenForm $request){
-
         $data = [
             'fname' => $request->fname,
             'mname' => $request->mname,
             'lname' => $request->lname,
-            'suff' => $request->suff,
-            
+            'suff' => $request->suff,        
             'sex' => $request->sex,
             'age' => $request->age,
             'religion' => $request->religion,
             'frole' => $request->frole,
             'bType' => $request->bType,
-            'contactNumber' => $request->contactNumber,
-            
+            'contactNumber' => $request->contactNumber,    
             'yrsOfResidency' => $request->yrsOfResidency,
             'birth' => $request->birth,
             'placeOfBirth' => $request->placeOfBirth,
             'educAttainment' => $request->educAttainment,
-
             'citStatus' => $request->citStatus,
             'empStatus' => $request->empStatus,
             'income' => $request->income
-
         ];
-   
         HouseholdModel::create([
             'household_type' => $request->htype,
             'municipality_id' => $request->mun_id,
@@ -83,16 +73,13 @@ class HouseHoldController extends Controller
             'subdivision_id' => $request->subd_id,
             'employee_id' => session('loginId')
         ]);
-
         $house = HouseholdModel::orderBy('id','desc')->take(1)->value('id');
-
         foreach($data['fname'] as $index => $row){
             CitizenModel::create([
                 'fname' => $data['fname'][$index],
                 'mname' => $data['mname'][$index],
                 'lname' => $data['lname'][$index],
                 'suffix' => $data['suff'][$index],
-
                 'sex' => $data['sex'][$index],
                 'age' => $data['age'][$index],
                 'family_role' => $data['frole'][$index],
@@ -100,25 +87,20 @@ class HouseHoldController extends Controller
                 'place_of_birth' => $data['placeOfBirth'][$index],
                 'blood_type' => $data['bType'][$index],
                 'religion' => $data['religion'][$index],
-
                 'contactNum' => $data['contactNumber'][$index],
                 'years_of_residency' => $data['yrsOfResidency'][$index],
                 'educational_attainment' => $data['educAttainment'][$index],
                 'citizen_status' => $data['citStatus'][$index],
                 'employment_status' => $data['empStatus'][$index],
                 'income' => $data['income'][$index],
-
                 'household_id' => $house
             ]);
         }
         $id = $house;
         return redirect(route('households.show', $id))->with('message', 'Household and Citizen/s Added Successfully');
-
     }
 
     public function show($id){
-
-        //$house = HouseholdModel::query()->where('id' , '=', $id)->first();
         $house = HouseholdModel::findOrFail($id);
         $munData = MunModel::where('id', '<>', $house->municipality_id)->get();
         $brgyData = BrgyModel::where('id', '<>', $house->barangay_id)->get();
@@ -145,23 +127,10 @@ class HouseHoldController extends Controller
             'brgy' => $brgyData,
             'subd' => $subdData,
             'address' => $address]);
-
     }
     
     public function edit($id){
-        //$munData = MunModel::all()->toArray();
-        
-        /*
-        $data = HouseholdModel::findOrFail($id);
-        $munData = MunModel::where('id', '<>', $data->municipality_id)->get();
-        $brgyData = BrgyModel::where('id', '<>', $data->barangay_id)->get();
-        $subdData = SubdModel::where('id', '<>', $data->subdivision_id)->get();
-        return view('forms.edHousehold', [
-            'data' => $data,
-            'mun' => $munData,
-            'brgy' => $brgyData,
-            'subd' => $subdData]);
-        */
+        //
     }
 
     public function update(Request $request, $id){

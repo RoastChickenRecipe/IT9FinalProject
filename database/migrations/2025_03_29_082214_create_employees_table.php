@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('e_lname', 50);
             $table->string('position', 50);
             $table->string('e_address');
-            $table->string('e_contact_number', 20);
+            $table->string('e_contact_number', 15);
             $table->string('e_username', 100)->unique();
             $table->string('e_password');
             $table->timestamps();

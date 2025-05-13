@@ -35,19 +35,16 @@ class CitizenController extends Controller
             'lname' => 'required|max:50',
             'mname' => 'required|max:50',
             'suff' => 'max:10',
-            
             'sex' => 'required|max:10',
             'age' => 'required|max:10',
             'religion' => 'required|max:50',
             'frole' => 'required|max:50',
             'bType' => 'required',
             'contactNumber' => 'required|max:15',
-            
             'yrsOfResidency' => 'required|max:50',
             'birth' => 'required|max:50',
             'placeOfBirth' => 'required|max:50',
             'educAttainment' => 'required|max:100',
-
             'citStatus' => 'max:100',
             'empStatus' => 'required|max:100',
             'income' => 'required'
@@ -64,23 +61,19 @@ class CitizenController extends Controller
             'mname' => $request->mname,
             'lname' => $request->lname,
             'suffix' => $request->suff,
-            
             'sex' => $request->sex,
             'age' => $request->age,
             'religion' => $request->religion,
             'family_role' => $request->frole,
             'blood_type' => $request->bType,
             'contactNum' => $request->contactNumber,
-            
             'years_of_residency' => $request->yrsOfResidency,
             'birth_date' => $request->birth,
             'place_of_birth' => $request->placeOfBirth,
             'educational_attainment' => $request->educAttainment,
-
             'citizen_status' => $request->citStatus,
             'employment_status' => $request->empStatus,
             'income' => $request->income,
-
             'household_id' => $request->hholdId
 
         ]);
