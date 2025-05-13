@@ -8,7 +8,7 @@
             <h4>Dashboard Overview</h4>
         </div>
 
-
+        {{-- Statistic Cards --}}
         <div class="row g-4 mb-4">
             <div class="col-md-4">
                 <div class="card text-white bg-primary shadow">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mx-auto">
                 <div class="card text-white bg-danger shadow">
                     <div class="card-body">
                         <h5 class="card-title">Complaints</h5>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mx-auto">
                 <div class="card text-white bg-dark shadow">
                     <div class="card-body">
                         <h5 class="card-title">Incidents</h5>
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-
+        {{-- Overview + Age Bracket Distribution --}}
         <div class="row g-4 mb-4">
             <div class="col-md-6">
                 <div class="card shadow">
@@ -62,17 +62,19 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6">
                 <div class="card shadow">
-                    <div class="card-header bg-light fw-bold">Distribution Chart</div>
+                    <div class="card-header bg-success text-white fw-bold">Age Bracket Distribution</div>
                     <div class="card-body">
-                        <canvas id="doughnutChart"></canvas>
+                        <canvas id="ageChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card shadow mb-5">
+        {{-- Recently Added Citizens --}}
+        <div class="card shadow mb-4">
             <div class="card-header bg-light fw-bold">Recently Added Citizens</div>
             <div class="card-body p-0">
                 <table class="table table-striped mb-0">
@@ -97,8 +99,30 @@
                 </table>
             </div>
         </div>
+
+        {{-- Distribution Chart + Sex Summary --}}
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-light fw-bold">Distribution Chart</div>
+                    <div class="card-body">
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white fw-bold">Sex Summary</div>
+                    <div class="card-body">
+                        <canvas id="sexChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    {{-- Chart.js Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -153,6 +177,50 @@
                         position: 'bottom'
                     }
                 }
+            }
+        });
+
+        const ageChart = new Chart(document.getElementById('ageChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Minor (0–17)', 'Adult (18–59)', 'Senior (60+)'],
+                datasets: [{
+                    label: 'No. of Citizens',
+                    data: [
+                        {{ $ageBrackets['minor'] }},
+                        {{ $ageBrackets['adult'] }},
+                        {{ $ageBrackets['senior'] }}
+                    ],
+                    backgroundColor: ['#81C784', '#4CAF50', '#2E7D32']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+
+        const sexChart = new Chart(document.getElementById('sexChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    data: [
+                        {{ $sexSummary['male'] }},
+                        {{ $sexSummary['female'] }}
+                    ],
+                    backgroundColor: ['#64B5F6', '#F48FB1']
+                }]
+            },
+            options: {
+                responsive: true
             }
         });
     </script>

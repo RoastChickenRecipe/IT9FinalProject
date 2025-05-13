@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\BusPermitModel;
 use App\Models\CitizenModel;
@@ -27,13 +27,47 @@ class DashboardController extends Controller
 
         $recentCitizens = CitizenModel::latest()->take(5)->get();
 
+        $citizens = CitizenModel::select('birth_date', 'sex')->get();
+
+        $ageBrackets = [
+            'minor' => 0,
+            'adult' => 0,
+            'senior' => 0,
+        ];
+        $sexSummary = [
+            'male' => 0,
+            'female' => 0,
+        ];
+
+        foreach ($citizens as $citizen) {
+            $age = Carbon::parse($citizen->birthdate)->age;
+
+            // Age brackets
+            if ($age < 18) {
+                $ageBrackets['minor']++;
+            } elseif ($age < 60) {
+                $ageBrackets['adult']++;
+            } else {
+                $ageBrackets['senior']++;
+            }
+
+            // Sex summary
+            if (strtolower($citizen->sex) === 'male') {
+                $sexSummary['male']++;
+            } elseif (strtolower($citizen->sex) === 'female') {
+                $sexSummary['female']++;
+            }
+        }
+
         return view('interface.dashboardInterface', compact(
             'citizenCount',
             'householdCount',
             'complaintCount',
             'permitCount',
             'incidentCount',
-            'recentCitizens'
+            'recentCitizens',
+            'ageBrackets',
+            'sexSummary'
         ));
     }
 
