@@ -96,9 +96,8 @@ class BusPermitController extends Controller
             'employee_id' => $request->empId
         ]);
         
-
-
-        return redirect(route('business-permits.index'));
+        $id = BusPermitModel::orderBy('id','desc')->take(1)->value('id');
+        return redirect(route('business-permits.show', $id));
         
     }
 
@@ -157,17 +156,21 @@ class BusPermitController extends Controller
 
         for($i = 0;$i < 9; $i++){
             if($request->has($content[$i])){
-
                 $file = $request->file($content[$i]);
                 $extention = $file->getClientOriginalExtension();
                 $filenames[] = $fileformat[$i]. $docFormat .'.'.$extention;
                 $file->move($path, $filenames[$i]);
-
                 if(File::exists($path.$allfiles[$i])){
                     File::delete($path.$allfiles[$i]);
                 }
-            }else{       
-                if($allfiles[$i] != ''){   
+            }else{ 
+                if($allfiles[$i] != '' AND $fileformat[$i] == ''){
+                    if(File::exists($path.$allfiles[$i])){
+                        File::delete($path.$allfiles[$i]);
+                    }
+                    $filenames[] = '';
+                }      
+                elseif($allfiles[$i] != ''){   
                     $filenames[] = $allfiles[$i];
                     
                 }else{
