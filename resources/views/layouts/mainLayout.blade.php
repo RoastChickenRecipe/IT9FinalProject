@@ -140,7 +140,6 @@
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h4 class="ms-3"><em>Barangay Profiling System</em></h4>
                 <div class="me-3">
-                    {{-- Optional: Add user info or logout button here --}}
                 </div>
             </div>
         </div>
@@ -149,7 +148,7 @@
             {{-- Sidebar --}}
             <div class="col-2 sidebar p-3">
                 <div class="text-center mb-4">
-                    <img src="{{ asset('images/barangaylogo.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 80px;">
+                    <img src="{{ asset('images/barangaylogotrans.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 100px;">
                 </div>
                 <a href="{{ route('dashboard.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard

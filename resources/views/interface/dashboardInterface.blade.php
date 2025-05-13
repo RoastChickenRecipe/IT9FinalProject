@@ -11,42 +11,42 @@
         {{-- Statistic Cards --}}
         <div class="row g-4 mb-4">
             <div class="col-md-4">
-                <div class="card text-white bg-primary shadow">
+                <div class="card shadow" style="background-color: #64B5F6; color:rgb(3, 16, 36);"> <!-- Softer blue with dark blue text -->
                     <div class="card-body">
-                        <h5 class="card-title">Total Citizens</h5>
-                        <p class="card-text fs-4">{{ $citizenCount }}</p>
+                        <h5 class="card-title text-stroke">Total Citizens</h5>
+                        <p class="card-text fs-4 text-stroke">{{ $citizenCount }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-white bg-success shadow">
+                <div class="card shadow" style="background-color: #81C784; color:rgb(12, 75, 16);"> <!-- Softer green with dark green text -->
                     <div class="card-body">
-                        <h5 class="card-title">Total Households</h5>
-                        <p class="card-text fs-4">{{ $householdCount }}</p>
+                        <h5 class="card-title text-stroke">Total Households</h5>
+                        <p class="card-text fs-4 text-stroke">{{ $householdCount }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-white bg-warning shadow">
+                <div class="card shadow" style="background-color: #FFEB3B; color:rgb(100, 58, 22);"> <!-- Softer yellow with dark yellow text -->
                     <div class="card-body">
-                        <h5 class="card-title">Business Permits</h5>
-                        <p class="card-text fs-4">{{ $permitCount }}</p>
+                        <h5 class="card-title text-stroke">Business Permits</h5>
+                        <p class="card-text fs-4 text-stroke">{{ $permitCount }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mx-auto">
-                <div class="card text-white bg-danger shadow">
+                <div class="card shadow" style="background-color: #F28B82; color:rgb(85, 14, 14);"> <!-- Softer red with dark red text -->
                     <div class="card-body">
-                        <h5 class="card-title">Complaints</h5>
-                        <p class="card-text fs-4">{{ $complaintCount }}</p>
+                        <h5 class="card-title text-stroke">Complaints</h5>
+                        <p class="card-text fs-4 text-stroke">{{ $complaintCount }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mx-auto">
-                <div class="card text-white bg-dark shadow">
+                <div class="card shadow" style="background-color: #343a40; color: #FFFFFF;"> <!-- Black remains the same with white text -->
                     <div class="card-body">
-                        <h5 class="card-title">Incidents</h5>
-                        <p class="card-text fs-4">{{ $incidentCount }}</p>
+                        <h5 class="card-title text-stroke">Incidents</h5>
+                        <p class="card-text fs-4 text-stroke">{{ $incidentCount }}</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
         <div class="row g-4 mb-4">
             <div class="col-md-6">
                 <div class="card shadow">
-                    <div class="card-header bg-light fw-bold">Overview Chart</div>
+                    <div class="card-header bg-success text-white fw-bold">Overview Chart</div> <!-- Keep green for key sections -->
                     <div class="card-body">
                         <canvas id="barChart"></canvas>
                     </div>
@@ -65,7 +65,7 @@
 
             <div class="col-md-6">
                 <div class="card shadow">
-                    <div class="card-header bg-success text-white fw-bold">Age Bracket Distribution</div>
+                    <div class="card-header bg-light text-success fw-bold">Age Bracket Distribution</div> <!-- Neutral header -->
                     <div class="card-body">
                         <canvas id="ageChart"></canvas>
                     </div>
@@ -75,7 +75,7 @@
 
         {{-- Recently Added Citizens --}}
         <div class="card shadow mb-4">
-            <div class="card-header bg-light fw-bold">Recently Added Citizens</div>
+            <div class="card-header bg-light text-success fw-bold">Recently Added Citizens</div> <!-- Neutral header -->
             <div class="card-body p-0">
                 <table class="table table-striped mb-0">
                     <thead>
@@ -224,4 +224,23 @@
             }
         });
     </script>
+
+    <style>
+        .row.g-4.mb-4 {
+            margin-bottom: 2rem; 
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card-title {
+            font-size: 1.2rem; 
+        }
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+}
+    </style>
 @endsection

@@ -2,24 +2,22 @@
 @section('view-title', 'Municipality')
 @section('floating')
     
-    
-    <div class="col col-2">
-
-        <div class="osh-bg floating-box">
-            <div class="osh-outline row m-0">
-                <div class="col col-12">
-                    <button type="button" class="btn w-100 text-white" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#addBrgyModal">
-                        <h5>Add Brgy.</h5>
-                    </button>
-                </div>
-
-                <div class="col col-12 mt-5">
-                    <a href="{{route('municipality.index')}}"  class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Go Back</h5></a>
-                </div>
+<div class="col col-2">
+    <div class="osh-bg floating-box">
+        <div class="osh-outline row m-0">
+            <div class="col col-12 p-0">
+                <button type="button" class="btn btn-success w-100 text-white" data-bs-toggle="modal" data-bs-target="#addBrgyModal">
+                    <h5>Add Brgy.</h5>
+                </button>
+            </div>
+            <div class="col col-12 p-0 mt-2">
+                <a href="{{route('municipality.index')}}" class="btn btn-secondary w-100 text-white">
+                    <h5>Go Back</h5>
+                </a>
             </div>
         </div>
-
     </div>
+</div>
     
 
 @endsection
@@ -51,7 +49,7 @@
                 <h3 class="osh-text-ul">{{$data->MunToHhold->flatMap->HholdToCit->groupBy('id')->count()}}</h3>
             </div>
             <div class="col col-6 align-self-center text-center">
-                <button type="button"class="btn w-100 text-white" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#editMunModal">
+                <button type="button"class="btn w-100 text-white" style="background-color:rgb(0, 65, 163);" data-bs-toggle="modal" data-bs-target="#editMunModal">
                     <h5>Edit</h5>
                 </button>
             </div>
@@ -122,7 +120,7 @@
 
                             <div class="row m-0 mt-3 p-0">
                                 <div class="col col-6 p-1">
-                                    <a href="{{route('barangay.edit', $brgyRow->id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;">Edit</a>
+                                    <a href="{{route('barangay.edit', $brgyRow->id)}}" class="btn w-100 text-white" style="background-color:rgb(0, 65, 163);">Edit</a>
                                 </div>
                                 <div class="col col-6 p-1">  
 
@@ -191,7 +189,7 @@
                                         <h4>{{$subdData->first()->subd_name}}</h4>
                                     </div>
                                     <div class="col col-2 align-self-center">
-                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;">Edit</a>
+                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn w-100 text-white" style="background-color:rgb(0, 65, 163);">Edit</a>
                                     </div>
                                     <div class="col col-2 align-self-center">
                                         <!-- Button trigger modal -->
