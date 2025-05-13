@@ -213,6 +213,7 @@
                 
                 <label for="get_sanitaryFile"><strong>Current File:</strong></label>
                 <input type="text" name="get_sanitaryFile" id="get_sanitaryFile" value="{{$busData->sanitary_permit}}" class="form-control" readonly>
+                <button class="btn btn-danger w-100" id="rmSanitary">Remove File</button>
                 @error('get_sanitaryFile')
                     <span>{{$message}}</span>
                 @enderror
@@ -222,7 +223,9 @@
                 <input type="file" name="fireSafetyFile" id="fireSafetyFile" class="form-control mb-2" onchange="set_fireSafetyFile()"> 
                 
                 <label for="get_fireSafetyFile"><strong>Current File:</strong></label>
-                <input type="text" name="get_fireSafetyFile" id="get_fireSafetyFile" value="{{$busData->fire_safety_permit}}" class="form-control" readonly>
+                <input name="get_fireSafetyFile" id="get_fireSafetyFile" value="{{$busData->fire_safety_permit}}" class="form-control" readonly>
+                <button type="button" class="btn btn-danger w-100" id="rmFiresafety">Remove File</button>
+                
                 @error('get_fireSafetyFile')
                     <span>{{$message}}</span>
                 @enderror
@@ -234,6 +237,8 @@
                 
                 <label for="get_bfadFile"><strong>Current File:</strong></label>
                 <input type="text" name="get_bfadFile" id="get_bfadFile" value="{{$busData->bfad_permit}}" class="form-control" readonly>
+                <button class="btn btn-danger w-100" id="rmBFAD">Remove File</button>
+                
                 @error('get_bfadFile')
                     <span>{{$message}}</span>
                 @enderror
@@ -243,7 +248,7 @@
 
         <div class="row mt-5">
             <div class="col col-6">
-                <button type="submit" class="btn btn-primary w-100"><h5>Update</h5></button>
+                <button class="btn btn-primary w-100"><h5>Update</h5></button>
             </div>
             <div class="col col-6">
                 <a href="{{route('business-permits.show', $busData->id)}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Cancel</h5></a>
@@ -253,6 +258,24 @@
     </form>
 
     <script>
+
+        document.getElementById('rmSanitary').addEventListener('click', function(event){
+            event.preventDefault();  
+            document.getElementById('get_sanitaryFile').value = '';
+            document.getElementById('sanitaryFile').value = null;
+        });
+
+        document.getElementById('rmFiresafety').addEventListener('click', function(event){
+            event.preventDefault();  
+            document.getElementById('get_fireSafetyFile').value = '';
+            document.getElementById('fireSafetyFile').value = null;
+        });
+
+        document.getElementById('rmBFAD').addEventListener('click', function(event){
+            event.preventDefault();   
+            document.getElementById('get_bfadFile').value = '';
+            document.getElementById('bfadFile').value = null;
+        });
             
         function set_dticdaCertFile(){
             var get = document.getElementById('dticdaCertFile');

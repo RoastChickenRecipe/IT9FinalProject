@@ -146,7 +146,7 @@
 
         <div class="row">
             {{-- Sidebar --}}
-            <div class="col-2 sidebar p-3">
+            <div class="col-2 sidebar p-3" style="position:sticky; top: 50px;">
                 <div class="text-center mb-4">
                     <img src="{{ asset('images/barangaylogotrans.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 100px;">
                 </div>

@@ -24,10 +24,8 @@ class DashboardController extends Controller
         $complaintCount = ComplainantModel::count();
         $permitCount = BusPermitModel::count();
         $incidentCount = IncidentModel::count();
-
         $recentCitizens = CitizenModel::latest()->take(5)->get();
-
-        $citizens = CitizenModel::select('birth_date', 'sex')->get();
+        $citizens = CitizenModel::select('birth_date','age', 'sex')->get();
 
         $ageBrackets = [
             'minor' => 0,
@@ -40,8 +38,8 @@ class DashboardController extends Controller
         ];
 
         foreach ($citizens as $citizen) {
-            $age = Carbon::parse($citizen->birthdate)->age;
-
+            //$age = Carbon::parse($citizen->birthdate)->age;
+            $age = (int)$citizen->age;
             // Age brackets
             if ($age < 18) {
                 $ageBrackets['minor']++;
