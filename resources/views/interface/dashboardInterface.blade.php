@@ -90,8 +90,8 @@
                         @foreach ($recentCitizens as $citizen)
                             <tr>
                                 <td>{{ $citizen->id }}</td>
-                                <td>{{ $citizen->first_name }} {{ $citizen->last_name }}</td>
-                                <td>{{ $citizen->gender }}</td>
+                                <td>{{ $citizen->fname }} {{ $citizen->lname }}</td>
+                                <td>{{ $citizen->sex }}</td>
                                 <td>{{ $citizen->created_at->format('M d, Y') }}</td>
                             </tr>
                         @endforeach
