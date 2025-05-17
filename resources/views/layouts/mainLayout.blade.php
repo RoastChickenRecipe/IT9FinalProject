@@ -12,6 +12,64 @@
             font-family: 'Inter', sans-serif;
         }
 
+        .osh-md-bg {
+            background-color: #81C784;     
+            padding: 5px;
+        }
+
+        .osh-outline {
+            background-color: #C8E6C9; 
+            border-radius:10px;
+            padding: 5px;
+        }
+
+        .osh-btn-primary {
+            background-color: #E8F5E9;
+            border: 1px black solid;
+            border-radius: 10px;
+        }
+
+        .osh-btn-primary:hover {
+            background-color: #4CAF50;
+            border: 1px black solid;
+            border-radius: 10px;
+        }
+
+        .osh-btn-secondary {
+            border: 2px black solid;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .osh-btn-secondary:hover {
+            background-color: black;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .osh-btn-edit {
+        background-color: #E8F5E9;
+        border: solid 2px blue;  
+        border-radius:10px;
+        color: blue;
+        }
+
+        .osh-btn-edit:hover {
+            background-color: blue;
+            color: white;
+        }
+
+        .osh-btn-del {
+        background-color: #E8F5E9;
+        border: solid 2px tomato;  
+        border-radius:10px;
+        color: red;
+        }
+
+        .osh-btn-del:hover {
+            background-color: tomato;
+            color: white;
+        }
+
         /* Header Styling */
         .header {
             background-color: #4CAF50; /* Primary Green for the header */
@@ -32,7 +90,8 @@
 
         /* Sidebar Links */
         .sidebar a {
-            background-color: #A5D6A7; /* Subtle Green */
+            /*background-color: #A5D6A7;  Subtle Green */
+            border: 1px black solid;
             border-radius: 8px;
             color: black;
             text-decoration: none;
@@ -59,8 +118,8 @@
         }
 
         .sidebar .logout {
-            background-color: #DC3545; /* Red for logout button */
-            color: white;
+            /*background-color: #DC3545;  Red for logout button */
+            border: 1px black solid;
             border-radius: 8px;
             text-align: center;
             font-weight: 500;
@@ -140,7 +199,6 @@
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h4 class="ms-3"><em>Barangay Profiling System</em></h4>
                 <div class="me-3">
-                    {{-- Optional: Add user info or logout button here --}}
                 </div>
             </div>
         </div>
@@ -149,7 +207,7 @@
             {{-- Sidebar --}}
             <div class="col-2 sidebar p-3" style="position:sticky; top: 50px;">
                 <div class="text-center mb-4">
-                    <img src="{{ asset('images/barangaylogo.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 80px;">
+                    <img src="{{ asset('images/barangaylogotrans.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 100px;">
                 </div>
                 <a href="{{ route('dashboard.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard

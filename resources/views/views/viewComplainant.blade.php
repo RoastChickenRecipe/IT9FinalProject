@@ -10,7 +10,7 @@
 
                 <div class="col col-12 p-0">
 
-                    <a href="{{route('complainants.edit', $compl->id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;"><h5>Edit Complaint</h5></a>
+                    <a href="{{route('complainants.edit', $compl->id)}}" class="btn w-100 osh-btn-add"><h5>Edit Complaint</h5></a>
                     
                 </div>
 
@@ -18,7 +18,7 @@
                     <form action="{{route('complainants.export')}}" method="post" class="m-0">
                         @csrf
 
-                        <button type="submit" class="btn w-100 text-white" style="background-color: #4CAF50;"><h5>Export</h5></button>
+                        <button type="submit" class="btn w-100 osh-btn-add"><h5>Export</h5></button>
                         <input type="text" name="complId" value="{{$compl->id}}" hidden>
 
                     </form>
@@ -26,7 +26,7 @@
 
                 <div class="col col-12 mt-5 p-0">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn w-100 text-white" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background-color: #DC3545;">
+                    <button type="button" class="btn w-100 osh-btn-del" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     <h5>Delete</h5>
                     </button>
                     
@@ -44,7 +44,7 @@
 
             <div class="osh-outline row m-0 mt-5 align-items-center text-center">
                 <div class="col col-12 p-0">
-                    <a href="{{route('complainants.index')}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Go back</h5></a>
+                    <a href="{{route('complainants.index')}}" class="btn w-100 osh-btn-add"><h5>Go back</h5></a>
                 </div>
             </div>
 
@@ -169,10 +169,14 @@
                         <h4>Are you sure you want to <strong>DELETE {{$compl->com_fname}} {{$compl->com_lname}}</strong> complaint?</h4>
                     </div>
                     <div class="modal-footer">
-                        
-                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
-                        
+                        <div class="row w-100">
+                            <div class="col col-6">
+                                <button type="submit" class="btn text-white w-100" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                            </div>
+                            <div class="col col-6">
+                                <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+                            </div>
+                        </div>   
                     </div>
                 </form>
             </div>

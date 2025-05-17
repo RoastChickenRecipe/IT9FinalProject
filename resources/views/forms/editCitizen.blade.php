@@ -6,10 +6,15 @@
     <form action="{{route('citizens.update', $citData->id)}}" method="post" class="m-0">
         @csrf
         @method('put')
-        <div class="row mt-3">
+
+        <div class="row m-0 p-0 mt-2 osh-bg">
             <div class="col col-12">
                 <h3>Edit Personal Info:</h3>
             </div>
+        </div>
+
+        <div class="row mt-2">
+
             <div class="col col-4 mt-2">
                 <label for="fname"><h5>First Name:</h5></label>
                 <input type="text" name="fname" id="fname" class="form-control" value="{{$citData->fname}}">
@@ -43,6 +48,11 @@
                     <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                 @enderror
             </div>
+
+        </div>
+
+        <div class="row mt-2">
+
             <div class="col col-2 mt-2">
                 <label for="sex"><h5>Sex:</h5></label>
                 <select name="sex" id="sex" class="form-select">
@@ -94,6 +104,11 @@
                     <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                 @enderror
             </div>
+
+        </div>
+
+        <div class="row mt-2">
+
             <div class="col col-2 mt-2">
                 <label for="yrsOfResidency"><h5>Yrs. of Residency</h5></label>
                 <input type="text" name="yrsOfResidency" id="yrsOfResidency" class="form-control" value="{{$citData->years_of_residency}}">
@@ -101,14 +116,14 @@
                     <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col col-3 mt-2">
+            <div class="col col-3 mt-2 align-self-end">
                 <label for="birth"><h5>Birth Date:</h5></label>
                 <input type="date" name="birth" id="birth" class="form-control" value="{{$citData->birth_date}}">
                 @error('birth')
                     <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col col-4 mt-2">
+            <div class="col col-4 mt-2 align-self-end">
                 <label for="placeOfBirth"><h5>Place Of Birth:</h5></label>
                 <input type="text" name="placeOfBirth" id="placeOfBirth" class="form-control" value="{{$citData->place_of_birth}}">
                 @error('placeOfBirth')
@@ -122,6 +137,12 @@
                     <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                 @enderror
             </div>
+
+        </div>
+
+
+        <div class="row mt-2">
+            
             <div class="col col-4 mt-2">
                 <label for="citStatus"><h5>Citizen Status:</h5></label>
                 <input type="text" name="citStatus" id="citStatus" class="form-control" list="citStatusList" value="{{$citData->citizen_status}}">
@@ -151,12 +172,13 @@
 
         <div class="row mt-5">
             <div class="col col-6">
-                <button type="submit" class="btn btn-secondary w-100">Update</button>
+                <button type="submit" class="btn btn-success w-100"><h5>Update</h5></button>
             </div>
             <div class="col col-6">
-                <a href="{{route('households.show', $citData->household_id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;">Cancel</a>
+                <a href="{{route('households.show', $citData->household_id)}}" class="btn osh-btn-cancel w-100"><h5>Cancel</h5></a>
             </div>
         </div>
+
     </form>
 
 

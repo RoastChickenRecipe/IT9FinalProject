@@ -11,7 +11,7 @@
                 <h4 class="text-dark">Complainants</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color: #388E3C; color: white; border-radius: 10px;">Report Complaint</a>
+                <a href="{{ route('complainants.create') }}" class="btn w-100 osh-btn-primary">Report Complaint</a>
             </div>
         </div>
 
@@ -27,9 +27,18 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-4 text-end">
-                <button id="sortButton" class="btn btn-primary w-100" onclick="toggleSort()" style="background-color: #4CAF50; color: white; border-radius: 10px;">
-                    Sort Name <span id="sortArrow">↑</span>
-                </button>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:rgb(0, 24, 245); color: white; border-radius: 10px;">
+                        Sort By
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                        <li><a class="dropdown-item sort-option" data-column="0" href="#">Name</a></li>
+                        <li><a class="dropdown-item sort-option" data-column="1" href="#">Address</a></li>
+                        <li><a class="dropdown-item sort-option" data-column="2" href="#">Contact #</a></li>
+                        <li><a class="dropdown-item sort-option" data-column="3" href="#">Date Reported</a></li>
+                        <li><a class="dropdown-item sort-option" data-column="4" href="#">Issued By</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -37,7 +46,7 @@
         <div class="content-main row">
             <div class="col-12" style="overflow: auto;">
                 <div class="table-responsive" style="background-color: #E8F5E9; border-radius: 10px; padding: 10px;">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead style="background-color: #4CAF50; color: white;">
                             <tr>
                                 <th>Name</th>
@@ -58,8 +67,8 @@
                                     <td>{{ $row->ComplToEmp->e_lname }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-success btn-sm" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
-                                            <a href="{{ route('complainants.edit', $row->id) }}" class="btn btn-primary btn-sm" style="background-color: #4CAF50; color: white; border-radius: 5px;">Edit</a>
+                                            <a href="{{ route('complainants.edit', $row->id) }}" class="btn osh-btn-edit">Edit</a>
+                                            <a href="{{ route('complainants.show', $row->id) }}" class="btn osh-btn-edit">View</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -75,28 +84,36 @@
     <script>
         let sortOrder = 'asc'; // Default sort order
 
-        function toggleSort() {
+        // Sorting Functionality
+        document.querySelectorAll('.sort-option').forEach(option => {
+            option.addEventListener('click', function (e) {
+                e.preventDefault();
+                const column = this.getAttribute('data-column');
+                toggleSort(column);
+            });
+        });
+
+        function toggleSort(column) {
             const table = document.querySelector("#tableBody");
             const rows = Array.from(table.rows);
 
-            // Sort rows based on the first column (Name)
+            // Sort rows based on the selected column
             rows.sort((a, b) => {
-                const cellA = a.cells[0].innerText.toLowerCase();
-                const cellB = b.cells[0].innerText.toLowerCase();
+                const cellA = a.cells[column].innerText.toLowerCase();
+                const cellB = b.cells[column].innerText.toLowerCase();
 
                 if (sortOrder === 'asc') {
-                    return cellA.localeCompare(cellB);
+                    return cellA.localeCompare(cellB, undefined, { numeric: true });
                 } else {
-                    return cellB.localeCompare(cellA);
+                    return cellB.localeCompare(cellA, undefined, { numeric: true });
                 }
             });
 
             // Reorder rows in the table
             rows.forEach(row => table.appendChild(row));
 
-            // Toggle sort order and update arrow
+            // Toggle sort order
             sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-            document.getElementById('sortArrow').innerText = sortOrder === 'asc' ? '↑' : '↓';
         }
 
         // Search Functionality
@@ -121,7 +138,5 @@
             searchInput.dispatchEvent(new Event('input')); // Trigger the input event to reset the table
         });
     </script>
-
-    
 
 @endsection

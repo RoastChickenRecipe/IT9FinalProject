@@ -25,8 +25,8 @@ class busPermitRequest extends FormRequest
             'fname' => 'required|max:100',
             'mname' => 'required|max:50',
             'lname' => 'required|max:50',
-            'contactNum' => 'required|max:15',
-            'age' => 'required|max:3',
+            'contactNum' => 'required|digits_between:10,13',
+            'age' => 'required|integer|gt:17',
             'bDate' => 'required',
 
             'bStructure' => 'required',
@@ -65,6 +65,7 @@ class busPermitRequest extends FormRequest
             'mname.required' => 'This field is required',
             'lname.required' => 'This field is required',
             'contactNum.required' => 'This field is required',
+            'contactNum.digits_between' => '10 - 13 character only.',
             'age.required' => 'This field is required',
             'bDate.required' => 'This field is required',
 
@@ -78,7 +79,7 @@ class busPermitRequest extends FormRequest
             'get_zoningClearanceFile.required' => 'A File is required',
             
             'mun_id.required' => 'This field is required',
-            'empId.required'
+            'empId.required' => 'This field is required'
         ];
     }
 }

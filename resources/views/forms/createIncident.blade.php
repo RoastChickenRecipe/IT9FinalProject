@@ -145,10 +145,10 @@
         {{-- For Buttons --}}
         <div class="row mt-5">
             <div class="col col-6">
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                <button type="submit" class="btn btn-success w-100"><h5>Submit</h5></button>
             </div>
             <div class="col col-6">
-                <a href="{{route('incidents.index')}}" class="btn btn-secondary w-100">Cancel</a>
+                <a href="{{route('incidents.index')}}" class="btn osh-btn-cancel w-100"><h5>Cancel</h5></a>
             </div>
         </div>
 

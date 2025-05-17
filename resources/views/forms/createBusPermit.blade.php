@@ -214,12 +214,12 @@
 
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="col col-6">
-                <button type="submit" class="btn btn-primary w-100"><h5>Submit</h5></button>
+                <button type="submit" class="btn btn-success w-100"><h5>Submit</h5></button>
             </div>
             <div class="col col-6">
-                <a href="{{route('business-permits.index')}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Cancel</h5></a>
+                <a href="{{route('business-permits.index')}}" class="btn w-100 osh-btn-cancel"><h5>Cancel</h5></a>
             </div>
         </div>
 

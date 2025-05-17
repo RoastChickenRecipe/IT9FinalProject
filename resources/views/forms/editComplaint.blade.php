@@ -89,7 +89,7 @@
                             @endforeach
                         </select>
                         @error('address')
-                            <span style="background-color: red; color: red">* {{$message}}</span>
+                            <div style="background-color: red; color: red">* {{$message}}</div>
                         @enderror
                     </div>
                     <input type="text" name="mun_id" id="mun_id" class="form-control" value="{{$complData->com_mun_id}}" hidden>
@@ -137,7 +137,7 @@
                         <label for="defendant"><h4>Defendant Name:</h4></label>
                         <input type="text" name="defendant" value="{{$complData->def_name}}" class="form-control">
                         @error('defendant')
-                            <span class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</span>
+                            <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                         @enderror
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                         <label for="defContact"><h4>Defendant Contact Number:</h4></label>
                         <input type="text" name="defContact" placeholder="( If Any )" value="{{$complData->def_conNum}}" class="form-control">
                         @error('defContact')
-                            <span class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</span>
+                            <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                         @enderror
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                         <label for="defAddress"><h4>Defendant Address:</h4></label>
                         <input type="text" name="defAddress" placeholder="( If Any )" value="{{$complData->def_address}}" class="form-control">
                         @error('defAddress')
-                            <span class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</span>
+                            <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                         @enderror
                     </div>
                 </div>
@@ -167,10 +167,10 @@
         {{-- For Buttons --}}
         <div class="row mt-5">
             <div class="col col-6">
-                <button type="submit" class="btn btn-primary w-100"><h5>Update</h5></button>
+                <button type="submit" class="btn btn-success w-100"><h5>Update</h5></button>
             </div>
             <div class="col col-6">
-                <a href="{{route('complainants.show', $complData->id)}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Cancel</h5></a>
+                <a href="{{route('complainants.show', $complData->id)}}" class="btn w-100 osh-btn-cancel"><h5>Cancel</h5></a>
             </div>
         </div>
 

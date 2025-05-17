@@ -74,28 +74,26 @@ class HouseHoldController extends Controller
             'employee_id' => session('loginId')
         ]);
         $house = HouseholdModel::orderBy('id','desc')->take(1)->value('id');
-        foreach($data['fname'] as $index => $row){
-            CitizenModel::create([
-                'fname' => $data['fname'][$index],
-                'mname' => $data['mname'][$index],
-                'lname' => $data['lname'][$index],
-                'suffix' => $data['suff'][$index],
-                'sex' => $data['sex'][$index],
-                'age' => $data['age'][$index],
-                'family_role' => $data['frole'][$index],
-                'birth_date' => $data['birth'][$index],
-                'place_of_birth' => $data['placeOfBirth'][$index],
-                'blood_type' => $data['bType'][$index],
-                'religion' => $data['religion'][$index],
-                'contactNum' => $data['contactNumber'][$index],
-                'years_of_residency' => $data['yrsOfResidency'][$index],
-                'educational_attainment' => $data['educAttainment'][$index],
-                'citizen_status' => $data['citStatus'][$index],
-                'employment_status' => $data['empStatus'][$index],
-                'income' => $data['income'][$index],
-                'household_id' => $house
-            ]);
-        }
+        CitizenModel::create([
+            'fname' => $request->fname,
+            'mname' => $request->mname,
+            'lname' => $request->lname,
+            'suffix' => $request->suff,  
+            'sex' => $request->sex,
+            'age' => $request->age,
+            'family_role' => $request->religion,
+            'birth_date' => $request->birth,
+            'place_of_birth' => $request->placeOfBirth,
+            'blood_type' => $request->bType,
+            'religion' => $request->religion,
+            'contactNum' => $request->contactNumber,   
+            'years_of_residency' => $request->yrsOfResidency,
+            'educational_attainment' => $request->educAttainment,
+            'citizen_status' => $request->citStatus,
+            'employment_status' => $request->empStatus,
+            'income' => $request->income,
+            'household_id' => $house
+        ]);
         $id = $house;
         return redirect(route('households.show', $id))->with('message', 'Household and Citizen/s Added Successfully');
     }

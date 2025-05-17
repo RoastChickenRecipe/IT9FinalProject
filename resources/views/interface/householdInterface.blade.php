@@ -11,7 +11,7 @@
                 <h4 class="text-dark">HouseHold</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('households.create') }}" class="btn w-100" style="background-color:rgb(1, 110, 34); color: white; border-radius: 10px;">Create Citizen's Form</a>
+                <a href="{{ route('households.create') }}" class="btn w-100 osh-btn-primary">Create Citizen's Form</a>
             </div>
         </div>
 
@@ -27,9 +27,17 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-4 text-end">
-                <button id="sortButton" class="btn btn-primary w-100" onclick="toggleSort()" style="background-color: #4CAF50; color: white; border-radius: 10px;">
-                    Sort Address <span id="sortArrow">↑</span>
-                </button>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:rgb(0, 4, 238); color: white; border-radius: 10px;">
+                        Sort By
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                        <li><a class="dropdown-item sort-option" data-column="0" href="#">Address</a></li>
+                        <li><a class="dropdown-item sort-option" data-column="1" href="#">Family Count</a></li>
+                        <li><a class="dropdown-item sort-option" data-column="2" href="#">Household Type</a></li>
+                        <li><a class="dropdown-item sort-option" data-column="3" href="#">Family Income</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -37,7 +45,7 @@
         <div class="content-main row">
             <div class="col-12">
                 <div class="table-responsive" style="background-color: #E8F5E9; border-radius: 10px; padding: 10px;">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead style="background-color: #4CAF50; color: white;">
                             <tr>
                                 <th>Address</th>
@@ -55,7 +63,7 @@
                                     <td>{{ $row->household_type }}</td>
                                     <td>{{ $row->HholdToCit->sum('income') }}</td>
                                     <td>
-                                        <a href="{{ route('households.show', $row->id) }}" class="btn btn-success btn-sm" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
+                                        <a href="{{ route('households.show', $row->id) }}" class="btn btn-success w-100" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -70,28 +78,36 @@
     <script>
         let sortOrder = 'asc'; // Default sort order
 
-        function toggleSort() {
+        // Sorting Functionality
+        document.querySelectorAll('.sort-option').forEach(option => {
+            option.addEventListener('click', function (e) {
+                e.preventDefault();
+                const column = this.getAttribute('data-column');
+                toggleSort(column);
+            });
+        });
+
+        function toggleSort(column) {
             const table = document.querySelector("#tableBody");
             const rows = Array.from(table.rows);
 
-            // Sort rows based on the first column (Address)
+            // Sort rows based on the selected column
             rows.sort((a, b) => {
-                const cellA = a.cells[0].innerText.toLowerCase();
-                const cellB = b.cells[0].innerText.toLowerCase();
+                const cellA = a.cells[column].innerText.toLowerCase();
+                const cellB = b.cells[column].innerText.toLowerCase();
 
                 if (sortOrder === 'asc') {
-                    return cellA.localeCompare(cellB);
+                    return cellA.localeCompare(cellB, undefined, { numeric: true });
                 } else {
-                    return cellB.localeCompare(cellA);
+                    return cellB.localeCompare(cellA, undefined, { numeric: true });
                 }
             });
 
             // Reorder rows in the table
             rows.forEach(row => table.appendChild(row));
 
-            // Toggle sort order and update arrow
+            // Toggle sort order
             sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-            document.getElementById('sortArrow').innerText = sortOrder === 'asc' ? '↑' : '↓';
         }
 
         // Search Functionality
