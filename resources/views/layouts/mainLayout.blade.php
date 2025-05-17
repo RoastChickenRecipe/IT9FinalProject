@@ -47,10 +47,10 @@
         }
 
         .osh-btn-edit {
-        background-color: #E8F5E9;
-        border: solid 2px blue;  
-        border-radius:10px;
-        color: blue;
+            background-color: #E8F5E9;
+            border: solid 2px blue;  
+            border-radius:10px;
+            color: blue;
         }
 
         .osh-btn-edit:hover {
@@ -59,10 +59,10 @@
         }
 
         .osh-btn-del {
-        background-color: #E8F5E9;
-        border: solid 2px tomato;  
-        border-radius:10px;
-        color: red;
+            background-color: #E8F5E9;
+            border: solid 2px tomato;  
+            border-radius:10px;
+            color: red;
         }
 
         .osh-btn-del:hover {

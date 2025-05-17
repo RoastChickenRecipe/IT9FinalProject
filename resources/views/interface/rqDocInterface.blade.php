@@ -67,12 +67,45 @@
                                     <td>{{ $row->RqDocToEmp->e_fname }} {{ $row->RqDocToEmp->e_lname }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{route('rqDocuments.edit', $row->id)}}" class="btn btn-primary btn-sm" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">Edit</a>
-                                            <form action="{{route('rqDocuments.destroy', $row->id)}}" method="post" class="m-0">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-sm" style="background-color: #DC3545; color: white; border-radius: 5px;">Delete</button>
-                                            </form>
+                                            <a href="{{route('rqDocuments.edit', $row->id)}}" class="btn w-100 osh-btn-edit">Edit</a>
+                                            
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn w-100 osh-btn-del" data-bs-toggle="modal" data-bs-target="#deleteModalDoc{{$row->id}}">
+                                            Delete
+                                            </button>
+
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="deleteModalDoc{{$row->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalDoc{{$row->id}}Label" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5 text-dark" id="deleteModalDoc{{$row->id}}Label"><strong>DELETE | Document</strong></h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <form action="{{route('rqDocuments.destroy', $row->id)}}" method="post" class="m-0">
+                                                            @csrf
+                                                            @method('delete')
+
+                                                            <div class="modal-body text-dark">
+                                                                <h4>Are you sure you want to <strong>DELETE {{ $row->RqDocToCit->lname }}, {{ $row->RqDocToCit->fname }} {{ $row->RqDocToCit->mname }}'s</strong> document?</h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <div class="row w-100">
+                                                                    <div class="col col-6">
+                                                                        <button type="submit" class="btn text-white w-100" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col col-6">
+                                                                        <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div><!-- End Delete Modal -->
                                         </div>
                                     </td>
                                 </tr>

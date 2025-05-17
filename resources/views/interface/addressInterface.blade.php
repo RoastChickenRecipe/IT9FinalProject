@@ -128,8 +128,16 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success w-50"><h5>Add</h5></button>
-                        <button type="button" class="btn btn-dark w-50" data-bs-dismiss="modal"><h5>Close</h5></button>
+                        <div class="row w-100">
+                            <div class="col col-6">
+                                <button type="submit" class="btn btn-success w-100"><h5>Add</h5></button>
+                            </div>
+                            <div class="col col-6">
+                                <button type="button" class="btn btn-dark w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                 </form>
 

@@ -63,7 +63,7 @@
                                     <td>{{ $row->household_type }}</td>
                                     <td>{{ $row->HholdToCit->sum('income') }}</td>
                                     <td>
-                                        <a href="{{ route('households.show', $row->id) }}" class="btn btn-success w-100" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
+                                        <a href="{{ route('households.show', $row->id) }}" class="btn osh-btn-edit w-100">View</a>
                                     </td>
                                 </tr>
                             @endforeach

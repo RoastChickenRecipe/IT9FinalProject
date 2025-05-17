@@ -67,8 +67,8 @@
                                     <td>{{ $row->ComplToEmp->e_lname }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{ route('complainants.edit', $row->id) }}" class="btn osh-btn-edit">Edit</a>
-                                            <a href="{{ route('complainants.show', $row->id) }}" class="btn osh-btn-edit">View</a>
+                                            <a href="{{ route('complainants.edit', $row->id) }}" class="btn osh-btn-edit w-100">Edit</a>
+                                            <a href="{{ route('complainants.show', $row->id) }}" class="btn osh-btn-edit w-100">View</a>
                                         </div>
                                     </td>
                                 </tr>
