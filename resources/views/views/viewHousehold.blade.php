@@ -8,16 +8,16 @@
         <div class="floating-box osh-bg">
 
             <div class="osh-outline">
-                <button type="button"  class="btn w-100 text-white" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#addCitizenModal">
+                <button type="button"  class="btn w-100 osh-btn-add" data-bs-toggle="modal" data-bs-target="#addCitizenModal">
                     <h5>Add Citizen</h5>
                 </button>
 
-                <button type="button" class="btn w-100 text-white mt-3" style="background-color: #4CAF50;" data-bs-toggle="modal" data-bs-target="#editHouseholdModal">
+                <button type="button" class="btn w-100 osh-btn-add mt-3" data-bs-toggle="modal" data-bs-target="#editHouseholdModal">
                     <h5>Edit Household</h5>
                 </button>
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn w-100 text-white mt-3" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background-color: #DC3545;">
+                <button type="button" class="btn w-100 osh-btn-del mt-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
                 <h5>Delete Household</h5>
                 </button>
 
@@ -28,7 +28,7 @@
             <div class="osh-outline mt-5">
                 <div class="row">
                     <div class="col text-center">
-                        <a href="{{route('households.index')}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Go Back</h5></a>
+                        <a href="{{route('households.index')}}" class="btn w-100 osh-btn-add"><h5>Go Back</h5></a>
                     </div>
                 </div>
             </div>
@@ -146,11 +146,11 @@
                         <div class="col col-12 p-0">
                             <div class="row mt-4 mb-2">
                                 <div class="col col-6">
-                                    <a href="{{route('citizens.edit', $row->id)}}" class="btn w-100 text-white" style="background-color: #4CAF50;">Edit</a>
+                                    <a href="{{route('citizens.edit', $row->id)}}" class="btn w-100 osh-btn-add">Edit</a>
                                 </div>
                                 <div class="col col-6">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn w-100 text-white" data-bs-toggle="modal" data-bs-target="#deleteModal{{$row->id}}" style="background-color: #DC3545;">
+                                    <button type="button" class="btn w-100 osh-btn-del" data-bs-toggle="modal" data-bs-target="#deleteModal{{$row->id}}">
                                     Delete
                                     </button>
 
@@ -172,8 +172,14 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         
-                                                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
+                                                        <div class="row w-100">
+                                                            <div class="col col-6">
+                                                                <button type="submit" class="btn text-white w-100" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                                                            </div>
+                                                            <div class="col col-6">
+                                                                <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+                                                            </div>
+                                                        </div>
                                                         
                                                     </div>
                                                 </form>
@@ -198,117 +204,159 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addCitizenModalLabel">Add Household:</h1>
+                    <h1 class="modal-title fs-5" id="addCitizenModalLabel">Add Citizen</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <form action="{{route('citizens.store')}}" method="post">
                     @csrf
-                    <div class="modal-body"> 
+                    <div class="modal-body osh-md-bg"> 
                     
-                        <div class="row mt-2">
-                            <div class="col col-4">
-                                <label for="fname"><h5>First Name:</h5></label>
-                                <input type="text" name="fname" id="fname" class="form-control" required>
-                                <input type="text" name="hholdId" class="form-control" hidden value="{{$house->id}}">
+                        <div class="row m-0 mt-3">
+                            <div class="col col-4 p-1">
+                                <div class="osh-outline">
+                                    <label for="fname"><h5>First Name:</h5></label>
+                                    <input type="text" name="fname" id="fname" class="form-control" required>
+                                    <input type="text" name="hholdId" class="form-control" hidden value="{{$house->id}}">
+                                </div>
                             </div>
-                            <div class="col col-3">
-                                <label for="mname"><h5>Middle Name:</h5></label>
-                                <input type="text" name="mname" id="mname" class="form-control" required>
+                            <div class="col col-3 p-1">
+                                <div class="osh-outline">
+                                    <label for="mname"><h5>Middle Name:</h5></label>
+                                    <input type="text" name="mname" id="mname" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="col col-3">
-                                <label for="lname"><h5>Last Name:</h5></label>
-                                <input type="text" name="lname" id="lname" class="form-control" required>
+                            <div class="col col-3 p-1">
+                                <div class="osh-outline">
+                                    <label for="lname"><h5>Last Name:</h5></label>
+                                    <input type="text" name="lname" id="lname" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="col col-2">
-                                <label for="suff"><h5>Suffix:</h5></label>
-                                <input type="text" name="suff" id="suff" class="form-control" list="suffixOptions">
-                                <datalist id="suffixOptions">
-                                    <option value="Jr.">
-                                    <option value="Sr.">
-                                </datalist>
-                            </div>
-                        </div>
-                
-                        <div class="row mt-2">
-                            <div class="col col-2">
-                                <label for="sex"><h5>Sex:</h5></label>
-                                <select name="sex" id="sex" class="form-select" required>
-                                    <option value="">----</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                            <div class="col col-1">
-                                <label for="age"><h5>Age:</h5></label>
-                                <input type="text" name="age" id="age" class="form-control" required>
-                            </div>
-                            <div class="col col-2">
-                                <label for="religion"><h5>Religion:</h5></label>
-                                <input type="text" name="religion" id="religion" class="form-control" required>
-                            </div>
-                            <div class="col col-2">
-                                <label for="frole"><h5>Family Role:</h5></label>
-                                <input type="text" name="frole" id="frole" class="form-control" list="frolelist" required>
-                                <datalist id="frolelist">
-                                    <option value="Father">
-                                    <option value="Mother">
-                                    <option value="Child">
-                                </datalist>
-                            </div>
-                            <div class="col col-2">
-                                <label for="bType"><h5>Blood Type:</h5></label>
-                                <input type="text" name="bType" id="bType" class="form-control" required>
-                            </div>
-                            <div class="col col-3">
-                                <label for="contactNumber"><h5>Contact Number:</h5></label>
-                                <input type="text" name="contactNumber" id="contactNumber" class="form-control" required>
+                            <div class="col col-2 p-1">
+                                <div class="osh-outline">
+                                    <label for="suff"><h5>Suffix:</h5></label>
+                                    <input type="text" name="suff" id="suff" class="form-control" list="suffixOptions">
+                                    <datalist id="suffixOptions">
+                                        <option value="Jr.">
+                                        <option value="Sr.">
+                                    </datalist>
+                                </div>
                             </div>
                         </div>
                 
-                        <div class="row mt-2">
-                            <div class="col col-2">
-                                <label for="yrsOfResidency"><h5>Yrs. of Residency</h5></label>
-                                <input type="text" name="yrsOfResidency" id="yrsOfResidency" class="form-control" required>
+                        <div class="row m-0 mt-3">
+                            <div class="col col-2 p-1">
+                                <div class="osh-outline">
+                                    <label for="sex"><h5>Sex:</h5></label>
+                                    <select name="sex" id="sex" class="form-select" required>
+                                        <option value="">----</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col col-3 align-self-end">
-                                <label for="birth"><h5>Birth Date:</h5></label>
-                                <input type="date" name="birth" id="birth" class="form-control" required>
+                            <div class="col col-1 p-1">
+                                <div class="osh-outline">
+                                    <label for="age"><h5>Age:</h5></label>
+                                    <input type="text" name="age" id="age" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="col col-4 align-self-end">
-                                <label for="placeOfBirth"><h5>Place Of Birth:</h5></label>
-                                <input type="text" name="placeOfBirth" id="placeOfBirth" class="form-control" required>
+                            <div class="col col-2 p-1">
+                                <div class="osh-outline">
+                                    <label for="religion"><h5>Religion:</h5></label>
+                                    <input type="text" name="religion" id="religion" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="col col-3">
-                                <label for="educAttainment"><h5>Educational Attainment:</h5></label>
-                                <input type="text" name="educAttainment" id="educAttainment" class="form-control" required>
+                            <div class="col col-2 p-1">
+                                <div class="osh-outline">
+                                    <label for="frole"><h5>Family Role:</h5></label>
+                                    <input type="text" name="frole" id="frole" class="form-control" list="frolelist" required>
+                                    <datalist id="frolelist">
+                                        <option value="Father">
+                                        <option value="Mother">
+                                        <option value="Child">
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div class="col col-2 p-1">
+                                <div class="osh-outline">
+                                    <label for="bType"><h5>Blood Type:</h5></label>
+                                    <input type="text" name="bType" id="bType" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col col-3 p-1">
+                                <div class="osh-outline">
+                                    <label for="contactNumber"><h5>Contact Number:</h5></label>
+                                    <input type="text" name="contactNumber" id="contactNumber" class="form-control" required>
+                                </div>
                             </div>
                         </div>
                 
-                        <div class="row mt-2">
-                            <div class="col col-4">
-                                <label for="citStatus"><h5>Citizen Status:</h5></label>
-                                <input type="text" name="citStatus" id="citStatus" class="form-control" list="citStatusList">
-                                <datalist id="citStatusList">
-                                    <option value="Senior Citizen">
-                                    <option value="Pwd(Person with Disability)">
-                                </datalist>
+                        <div class="row m-0 mt-3">
+                            <div class="col col-2 p-1">
+                                <div class="osh-outline">
+                                    <label for="yrsOfResidency"><h5>Yrs. of Residency</h5></label>
+                                    <input type="text" name="yrsOfResidency" id="yrsOfResidency" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="col col-4">
-                                <label for="empStatus"><h5>Employment Status:</h5></label>
-                                <input type="text" name="empStatus" id="empStatus" class="form-control" required>
+                            <div class="col col-3 p-1 align-self-end">
+                                <div class="osh-outline">
+                                    <label for="birth"><h5>Birth Date:</h5></label>
+                                    <input type="date" name="birth" id="birth" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="col col-4">
-                                <label for="income"><h5>Income:</h5></label>
-                                <input type="text" name="income" id="income" class="form-control" required>
+                            <div class="col col-4 p-1 align-self-end">
+                                <div class="osh-outline">
+                                    <label for="placeOfBirth"><h5>Place Of Birth:</h5></label>
+                                    <input type="text" name="placeOfBirth" id="placeOfBirth" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col col-3 p-1">
+                                <div class="osh-outline">
+                                    <label for="educAttainment"><h5>Educational Attainment:</h5></label>
+                                    <input type="text" name="educAttainment" id="educAttainment" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="row m-0 mt-3">
+                            <div class="col col-4 p-1">
+                                <div class="osh-outline">
+                                    <label for="citStatus"><h5>Citizen Status:</h5></label>
+                                    <input type="text" name="citStatus" id="citStatus" class="form-control" list="citStatusList">
+                                    <datalist id="citStatusList">
+                                        <option value="Senior Citizen">
+                                        <option value="Pwd(Person with Disability)">
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div class="col col-4 p-1">
+                                <div class="osh-outline">
+                                    <label for="empStatus"><h5>Employment Status:</h5></label>
+                                    <input type="text" name="empStatus" id="empStatus" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col col-4 p-1">
+                                <div class="osh-outline">
+                                    <label for="income"><h5>Income:</h5></label>
+                                    <input type="text" name="income" id="income" class="form-control" required>
+                                </div>
                             </div>
                         </div>
                     
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary">Add citizen</button>
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                        <div class="row w-100">
+                            <div class="col col-6">
+                                <button type="submit" class="btn btn-success w-100"><h5>Add citizen</h5></button>
+                            </div>
+                            <div class="col col-6">
+                                <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                 </form>
 
@@ -328,20 +376,24 @@
             <form action="{{route('households.update', $house->id)}}" method="post">
                 @csrf
                 @method('put')
-                <div class="modal-body">
+                <div class="modal-body osh-md-bg">
                 
-                    <div class="row justify-content-center">
-                        <div class="col col-6">
-                            <label for="householdType"><h4>Household Type:</h4></label>
-                            <input type="text" name="householdType" class="form-control" list="datalistOptions" value="{{$house->household_type}}">
-                            <datalist id="datalistOptions">
-                                <option value="Own House">
-                                <option value="Boarding House">
-                                <option value="Apartment">
-                            </datalist>
+                    <div class="row justify-content-center m-0">
+                        <div class="col col-12 p-1">
+                            <div class="osh-outline">
+                                <label for="householdType"><h4>Household Type:</h4></label>
+                                <input type="text" name="householdType" class="form-control" list="datalistOptions" value="{{$house->household_type}}">
+                                <datalist id="datalistOptions">
+                                    <option value="Own House">
+                                    <option value="Boarding House">
+                                    <option value="Apartment">
+                                </datalist>
+                            </div>
                             @error('householdType')
                                 <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
                                 <script>
+                                    console.log('hello');
+                                    
                                     document.addEventListener('DOMContentLoaded', function(){
                                         var crDocModal = new bootstrap.Modal(document.getElementById('editHouseholdModal'));
                                         crDocModal.show();
@@ -351,14 +403,16 @@
                         </div>
 
 
-                        <div class="col col-12">
-                            <label for="address"><h4>Address:</h4></label>
-                            <select name="address" id="address" class="form-select" onchange="getId()">
-                                <option value="{{$house->municipality_id}},{{$house->barangay_id}}:{{$house->subdivision_id}}">{{$house->HholdToMun->mun_name}} - {{$house->HholdToBrgy->brgy_name}} - {{$house->HholdToSubd->subd_name}}</option>
-                                @foreach($address as $addressRow)
-                                    <option value="{{$addressRow->mun_id}},{{$addressRow->brgy_id}}:{{$addressRow->subd_id}}">{{$addressRow->mun_name}} - {{$addressRow->brgy_name}} - {{$addressRow->subd_name}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col col-12 mt-2 p-1">
+                            <div class="osh-outline">
+                                <label for="address"><h4>Address:</h4></label>
+                                <select name="address" id="address" class="form-select" onchange="getId()">
+                                    <option value="{{$house->municipality_id}},{{$house->barangay_id}}:{{$house->subdivision_id}}">{{$house->HholdToMun->mun_name}} - {{$house->HholdToBrgy->brgy_name}} - {{$house->HholdToSubd->subd_name}}</option>
+                                    @foreach($address as $addressRow)
+                                        <option value="{{$addressRow->mun_id}},{{$addressRow->brgy_id}}:{{$addressRow->subd_id}}">{{$addressRow->mun_name}} - {{$addressRow->brgy_name}} - {{$addressRow->subd_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <input type="text" name="mun_id" id="mun_id" class="form-control" value="{{$house->municipality_id}}" hidden>
                             <input type="text" name="brgy_id" id="brgy_id" class="form-control" value="{{$house->barangay_id}}" hidden>
                             <input type="text" name="subd_id" id="subd_id" class="form-control" value="{{$house->subdivision_id}}" hidden> 
@@ -393,9 +447,16 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                
+
+                    <div class="row w-100">
+                        <div class="col col-6">
+                            <button type="submit" class="btn btn-success w-100"><h5>Save changes</h5></button>
+                        </div>
+                        <div class="col col-6">
+                            <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+                        </div>
+                    </div>  
+          
                 </div>
             </form>
 
@@ -420,9 +481,15 @@
                         <h4>Are you sure you want to <strong>DELETE</strong> this household?</h4>
                     </div>
                     <div class="modal-footer">
-                        
-                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
+
+                        <div class="row w-100">
+                            <div class="col col-6">
+                                <button type="submit" class="btn text-white w-100" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                            </div>
+                            <div class="col col-6">
+                                <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+                            </div>
+                        </div>
                         
                     </div>
                 </form>

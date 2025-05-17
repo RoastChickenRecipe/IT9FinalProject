@@ -10,7 +10,7 @@
                 <h4 class="text-dark">Address</h4>
             </div>
             <div class="col-3">
-                <button type="button"  class="btn w-100 text-white" style="background-color:rgb(1, 110, 34); border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#addMunModal">
+                <button type="button"  class="btn osh-btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addMunModal">
                     Add Municipality
                 </button>
             </div>
@@ -38,7 +38,7 @@
         <div class="content-main row">
             <div class="col-12">
                 <div class="table-responsive" style="background-color: #E8F5E9; border-radius: 10px; padding: 10px;">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead style="background-color: #4CAF50; color: white;">
                             <tr>
                                 <th>Municipality</th>
@@ -59,7 +59,7 @@
                                     <td>{{ $row->MunToBrgy->flatMap->BrgyToSubd->groupBy('id')->count() }}</td>
                                     <td>{{ $row->MunToHhold->flatMap->HholdToCit->groupBy('id')->count() }}</td>
                                     <td>
-                                        <a href="{{ route('municipality.show', $row->id) }}" class="btn btn-success btn-sm" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">
+                                        <a href="{{ route('municipality.show', $row->id) }}" class="btn btn-success w-100" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">
                                             View
                                         </a>
                                     </td>
@@ -82,11 +82,11 @@
 
                 <form action="{{route('municipality.store')}}" method="post">
                     @csrf
-                    <div class="modal-body"> 
+                    <div class="modal-body osh-md-bg"> 
                     
                         {{-- For Input Form --}}
-                        <div class="row justify-content-center mt-5">
-                            <div class="col col-8">
+                        <div class="row justify-content-center mt-2">
+                            <div class="col col-12">
                                 <label for="munName"><h4>Municipal Name:</h4></label> <br>
                                 <input type="text" name="munName" class="form-control" value="{{old('munName')}}">
                                 @error('munName')
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="row justify-content-center mt-2">
-                            <div class="col col-8">
+                            <div class="col col-12">
                                 <label for="region"><h4>Region:</h4></label> <br>
                                 <input type="text" name="region" class="form-control" value="{{old('region')}}">
                                 @error('region')
@@ -119,8 +119,16 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success "><h5>Add</h5></button>
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal"><h5>Close</h5></button>
+                        <div class="row w-100 m-0 p-0">
+                            <div class="col col-6">
+                                <button type="submit" class="btn btn-success w-100"><h5>Add</h5></button>
+                            </div>
+                            <div class="col col-6">
+                                <button type="button" class="btn btn-outline-dark w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+
+                            </div>
+                        </div>
+                        
                     </div>
                 </form>
 

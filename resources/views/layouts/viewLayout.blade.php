@@ -8,8 +8,12 @@
 <style>
     .osh-outline {
         background-color: #C8E6C9; 
-      
         border-radius:10px;
+        padding: 5px;
+    }
+
+    .osh-md-bg {
+        background-color: #81C784;     
         padding: 5px;
     }
 
@@ -26,7 +30,7 @@
     }
 
     .osh-btn-add {
-        background-color: rgb(163, 209, 198); 
+        background-color: #E8F5E9; 
         border: solid 2px black;  
         border-radius:10px;
         color: black;
@@ -37,11 +41,23 @@
         color: white;
     }
 
+    .osh-btn-del {
+        background-color: #E8F5E9;
+        border: solid 2px tomato;  
+        border-radius:10px;
+        color: red;
+    }
+
+    .osh-btn-del:hover {
+        background-color: tomato;
+        color: white;
+    }
+
     .osh-btn-back {
-        background-color: rgb(179, 216, 168); 
+        background-color: #388E3C;
         border: solid 2px black;  
         border-radius:10px;
-        color: black;
+        color: white;
     }
 
     .osh-btn-back:hover{
@@ -49,9 +65,15 @@
         color: white;
     }
 
+    .osh-btn-cancel {
+        background-color: #E8F5E9;
+        border: solid 2px black;  
+        border-radius:10px;
+        color: black;
+    }
+
     .osh-bg {
         background-color: #E8F5E9; 
-         
         border-radius:10px;
         padding: 5px;
     }

@@ -11,7 +11,7 @@
                 <h4 class="text-dark">HouseHold</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('households.create') }}" class="btn w-100" style="background-color:rgb(1, 110, 34); color: white; border-radius: 10px;">Create Citizen's Form</a>
+                <a href="{{ route('households.create') }}" class="btn w-100 osh-btn-primary">Create Citizen's Form</a>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
         <div class="content-main row">
             <div class="col-12">
                 <div class="table-responsive" style="background-color: #E8F5E9; border-radius: 10px; padding: 10px;">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead style="background-color: #4CAF50; color: white;">
                             <tr>
                                 <th>Address</th>
@@ -55,7 +55,7 @@
                                     <td>{{ $row->household_type }}</td>
                                     <td>{{ $row->HholdToCit->sum('income') }}</td>
                                     <td>
-                                        <a href="{{ route('households.show', $row->id) }}" class="btn btn-success btn-sm" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
+                                        <a href="{{ route('households.show', $row->id) }}" class="btn btn-success w-100" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
                                     </td>
                                 </tr>
                             @endforeach

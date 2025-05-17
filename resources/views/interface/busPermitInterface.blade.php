@@ -10,7 +10,7 @@
                 <h4 class="text-dark">Business Permit</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('business-permits.create') }}" class="btn w-100" style="background-color: #388E3C; color: white; border-radius: 10px;">Apply Permit</a>
+                <a href="{{ route('business-permits.create') }}" class="btn w-100 osh-btn-primary">Apply Permit</a>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
         <div class="content-main row">
             <div class="col-12">
                 <div class="table-responsive" style="background-color: #E8F5E9; border-radius: 10px; padding: 10px;">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead style="background-color: #4CAF50; color: white;">
                         <tr>
                             <th>Name</th>
@@ -55,7 +55,7 @@
                                 <td>{{$row->b_contactNum}}</td>
                                 <td>{{$row->bus_structure}}</td>
                                 <td>{{$row->created_at}}</td>
-                                <td><a href="{{route('business-permits.show', $row->id)}}" class="btn btn-success btn-sm"  style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">
+                                <td><a href="{{route('business-permits.show', $row->id)}}" class="btn osh-btn-edit">
                                 View</a></td>
                             </tr>
                         @endforeach

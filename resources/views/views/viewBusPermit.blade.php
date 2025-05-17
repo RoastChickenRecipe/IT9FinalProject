@@ -9,21 +9,21 @@
             <div class="osh-outline row m-0 align-items-center text-center">
 
                 <div class="col col-12 p-0">
-                    <a href="{{route('business-permits.edit', $busData->id)}}" class="btn btn-dark w-100"><h5>Edit</h5></a>
+                    <a href="{{route('business-permits.edit', $busData->id)}}" class="btn osh-btn-add w-100"><h5>Edit</h5></a>
                 </div>
 
                 <div class="col col-12 p-0 mt-3">
                     <form action="{{route('business-permits.export')}}" method="post" class="m-0">
                         @csrf
                         <input type="text" name="busPermitId" value="{{$busData->id}}" hidden>
-                        <button type="submit" class="btn btn-dark w-100"><h5>Export</h5></button>
+                        <button type="submit" class="btn osh-btn-add w-100"><h5>Export</h5></button>
                     </form>
                 </div>
 
                 <div class="col col-12 p-0 mt-5">
                     
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn w-100 text-white" data-bs-toggle="modal" data-bs-target="#deleteModal" style="background-color: #DC3545;">
+                    <button type="button" class="btn w-100 osh-btn-del" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     <h5>Delete</h5>
                     </button>
                 </div>
@@ -37,7 +37,7 @@
 
             <div class="osh-outline row m-0 mt-5 align-items-center text-center">
                 <div class="col col-12 p-0">
-                    <a href="{{route('business-permits.index')}}" class="btn btn-dark w-100"><h5>Go back</h5></a>
+                    <a href="{{route('business-permits.index')}}" class="btn osh-btn-add w-100"><h5>Go back</h5></a>
                 </div>
             </div>
 
@@ -89,7 +89,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <a href="/uploadFiles/files/{{$busData->dti_cda_cert}}" target="_blank" class="btn btn-info w-100"><h5>Download</h5></a>
+                    <a href="/uploadFiles/files/{{$busData->dti_cda_cert}}" target="_blank" class="btn btn-outline-info w-100 text-dark"><h5>Download</h5></a>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <a href="/uploadFiles/files/{{$busData->bus_mayor_permit}}" target="_blank" class="btn btn-info w-100"><h5>Download</h5></a>
+                    <a href="/uploadFiles/files/{{$busData->bus_mayor_permit}}" target="_blank" class="btn btn-outline-info w-100 text-dark"><h5>Download</h5></a>
                 </div>
             </div>
 
@@ -111,7 +111,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <a href="/uploadFiles/files/{{$busData->brgy_clearance}}" target="_blank" class="btn btn-info w-100"><h5>Download</h5></a>
+                    <a href="/uploadFiles/files/{{$busData->brgy_clearance}}" target="_blank" class="btn btn-outline-info w-100 text-dark"><h5>Download</h5></a>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <a href="/uploadFiles/files/{{$busData->comm_tax_cert}}" target="_blank" class="btn btn-info w-100"><h5>Download</h5></a>
+                    <a href="/uploadFiles/files/{{$busData->comm_tax_cert}}" target="_blank" class="btn btn-outline-info w-100 text-dark"><h5>Download</h5></a>
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <a href="/uploadFiles/files/{{$busData->k_of_lease}}" target="_blank" class="btn btn-info w-100"><h5>Download</h5></a>
+                    <a href="/uploadFiles/files/{{$busData->k_of_lease}}" target="_blank" class="btn btn-outline-info w-100 text-dark"><h5>Download</h5></a>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <a href="/uploadFiles/files/{{$busData->zoning_clearance}}" target="_blank" class="btn btn-info w-100"><h5>Download</h5></a>
+                    <a href="/uploadFiles/files/{{$busData->zoning_clearance}}" target="_blank" class="btn btn-outline-info w-100 text-dark"><h5>Download</h5></a>
                 </div>
             </div>
             
@@ -164,7 +164,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <button class="btn btn-info w-100" {{$busData->sanitary_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->sanitary_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
+                    <button class="btn btn-outline-info w-100" {{$busData->sanitary_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->sanitary_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
 
                 </div>
             </div>
@@ -175,7 +175,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <button class="btn btn-info w-100" {{$busData->fire_safety_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->fire_safety_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
+                    <button class="btn btn-outline-info w-100" {{$busData->fire_safety_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->fire_safety_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
 
                 </div>
             </div>
@@ -186,7 +186,7 @@
             </div>
             <div class="col col-2 p-0 ps-1 align-self-center">
                 <div class="osh-outline">
-                    <button class="btn btn-info w-100" {{$busData->bfad_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->bfad_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
+                    <button class="btn btn-outline-info w-100" {{$busData->bfad_permit == '' ? 'disabled' : ''}}><a href="/uploadFiles/files/{{$busData->bfad_permit}}" target="_blank" style="text-decoration: none; color:black;"><h5>Download</h5></a></button>
                 </div>
             </div>
 
@@ -211,9 +211,18 @@
                         <h4>Are you sure you want to <strong>DELETE {{$busData->b_fname}} {{$busData->b_mname}} {{$busData->b_lname}}</strong> business permit?</h4>
                     </div>
                     <div class="modal-footer">
+
+                        <div class="row w-100">
+                            <div class="col col-6">
+                                <button type="submit" class="btn text-white w-100" style="background-color: #DC3545;"><h5>Delete</h5></button>
+                            </div>
+                            <div class="col col-6">
+                                <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
+                            </div>
+                        </div>
                         
-                        <button type="submit" class="btn text-white" style="background-color: #DC3545;"><h5>Delete</h5></button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h5>Close</h5></button>
+                        
+                        
                         
                     </div>
                 </form>

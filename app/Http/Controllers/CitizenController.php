@@ -36,24 +36,28 @@ class CitizenController extends Controller
             'mname' => 'required|max:50',
             'suff' => 'max:10',
             'sex' => 'required|max:10',
-            'age' => 'required|max:10',
+            'age' => 'required|digits_between:1,3|integer|min:1',
             'religion' => 'required|max:50',
             'frole' => 'required|max:50',
             'bType' => 'required',
-            'contactNumber' => 'required|max:15',
+            'contactNumber' => 'required|digits_between:10,13',
             'yrsOfResidency' => 'required|max:50',
             'birth' => 'required|max:50',
             'placeOfBirth' => 'required|max:50',
             'educAttainment' => 'required|max:100',
             'citStatus' => 'max:100',
             'empStatus' => 'required|max:100',
-            'income' => 'required'
+            'income' => 'required|numeric|gt:0'
         ], [
             'htype.required' => 'This field is required.',
             'fhead.required' => 'This field is required.',
             's_mun.required' => 'This field is required.',
             's_brgy.required' => 'This field is required.',
             's_subd.required' => 'This field is required.',
+            'age.min' => 'Age cannot be 0.',
+            'age.digits_between' => '1 - 3 charater only.',
+            'contactNumber.digits_between' => '10 - 13 character only.',
+            'income.gt' => 'Cannot be negative number'
         ]);
         
         CitizenModel::create([
@@ -111,11 +115,11 @@ class CitizenController extends Controller
             'suff' => 'max:10',
             
             'sex' => 'required|max:20',
-            'age' => 'required|max:10',
+            'age' => 'required|digits_between:1,3|integer|min:1',
             'religion' => 'required|max:50',
             'frole' => 'required|max:50',
             'bType' => 'required',
-            'contactNumber' => 'required|max:15',
+            'contactNumber' => 'required|digits_between:10,13',
             
             'yrsOfResidency' => 'required|max:50',
             'birth' => 'required|max:50',
@@ -124,13 +128,17 @@ class CitizenController extends Controller
 
             'citStatus' => 'max:100',
             'empStatus' => 'required|max:100',
-            'income' => 'required'
+            'income' => 'required|numeric|gt:0'
         ], [
             'htype.required' => 'This field is required.',
             'fhead.required' => 'This field is required.',
             's_mun.required' => 'This field is required.',
             's_brgy.required' => 'This field is required.',
             's_subd.required' => 'This field is required.',
+            'age.min' => 'Age cannot be 0.',
+            'age.digits_between' => '1 - 3 charater only.',
+            'contactNumber.digits_between' => '10 - 13 character only.',
+            'income.gt' => 'Cannot be negative number'
         ]);
         
         CitizenModel::findOrFail($id)->update([

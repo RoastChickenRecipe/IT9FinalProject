@@ -8,16 +8,39 @@
 <style>
     .osh-outline {
         background-color: #C8E6C9; 
-      
         border-radius:10px;
         padding: 5px;
     }
 
     .osh-bg {
         background-color: #E8F5E9; 
-         
         border-radius:10px;
         padding: 5px;
+    }
+
+    .osh-btn-cancel {
+        background-color: #E8F5E9;
+        border: solid 2px black;  
+        border-radius:8px;
+        color: black;
+    }
+
+    .osh-btn-cancel:hover {
+        background-color: gray;
+        border-radius:10px;
+        color: white;
+    }
+
+    .osh-btn-del {
+        background-color: #E8F5E9;
+        border: solid 2px tomato;  
+        border-radius:10px;
+        color: red;
+    }
+
+    .osh-btn-del:hover {
+        background-color: tomato;
+        color: white;
     }
 </style>
 <body>

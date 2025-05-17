@@ -148,7 +148,7 @@
                 @enderror
             </div>
 
-            <div class="col col-6 p-1">
+            <div class="col col-6 p-1 mt-3">
                 <label for="busPermitFile"><h5>Business/Mayor's Permit:</h5></label>
                 <input type="file" name="busPermitFile" id="busPermitFile" class="form-control mb-2" onchange="set_busPermitFile()"> 
 
@@ -158,7 +158,7 @@
                     <span>{{$message}}</span>
                 @enderror
             </div>
-            <div class="col col-6 p-1">
+            <div class="col col-6 p-1 mt-3">
                 <label for="brgyClearanceFile"><h5>Brgy. Clearance:</h5></label>
                 <input type="file" name="brgyClearanceFile" id="brgyClearanceFile" class="form-control mb-2" onchange="set_brgyClearanceFile()"> 
 
@@ -169,7 +169,7 @@
                 @enderror
             </div>
 
-            <div class="col col-6 p-1">
+            <div class="col col-6 p-1 mt-3">
                 <label for="ctcFile"><h5>Community Tax Certificate "Cedula":</h5></label>
                 <input type="file" name="ctcFile" id="ctcFile" class="form-control mb-2" onchange="set_ctcFile()">
                 
@@ -179,7 +179,7 @@
                     <span>{{$message}}</span>
                 @enderror
             </div>
-            <div class="col col-6 p-1">
+            <div class="col col-6 p-1 mt-3">
                 <label for="contOfLeaseFile"><h5>Contract of Lease/Title of Land:</h5></label>
                 <input type="file" name="contOfLeaseFile" id="contOfLeaseFile" class="form-control mb-2" onchange="set_contOfLeaseFile()"> 
 
@@ -190,7 +190,7 @@
                 @enderror
             </div>
 
-            <div class="col col-8 p-1">
+            <div class="col col-8 p-1 mt-3">
                 <label for="zoningClearanceFile"><h5>Zoning Clearance:</h5></label>
                 <input type="file" name="zoningClearanceFile" id="zoningClearanceFile" class="form-control mb-2" onchange="set_zoningClearanceFile()">
                 
@@ -213,7 +213,7 @@
                 
                 <label for="get_sanitaryFile"><strong>Current File:</strong></label>
                 <input type="text" name="get_sanitaryFile" id="get_sanitaryFile" value="{{$busData->sanitary_permit}}" class="form-control" readonly>
-                <button class="btn btn-danger w-100" id="rmSanitary">Remove File</button>
+                <button class="btn osh-btn-del w-100 mt-2" id="rmSanitary">Remove File</button>
                 @error('get_sanitaryFile')
                     <span>{{$message}}</span>
                 @enderror
@@ -224,7 +224,7 @@
                 
                 <label for="get_fireSafetyFile"><strong>Current File:</strong></label>
                 <input name="get_fireSafetyFile" id="get_fireSafetyFile" value="{{$busData->fire_safety_permit}}" class="form-control" readonly>
-                <button type="button" class="btn btn-danger w-100" id="rmFiresafety">Remove File</button>
+                <button type="button" class="btn osh-btn-del w-100 mt-2" id="rmFiresafety">Remove File</button>
                 
                 @error('get_fireSafetyFile')
                     <span>{{$message}}</span>
@@ -237,7 +237,7 @@
                 
                 <label for="get_bfadFile"><strong>Current File:</strong></label>
                 <input type="text" name="get_bfadFile" id="get_bfadFile" value="{{$busData->bfad_permit}}" class="form-control" readonly>
-                <button class="btn btn-danger w-100" id="rmBFAD">Remove File</button>
+                <button class="btn osh-btn-del w-100 mt-2" id="rmBFAD">Remove File</button>
                 
                 @error('get_bfadFile')
                     <span>{{$message}}</span>
@@ -248,10 +248,10 @@
 
         <div class="row mt-5">
             <div class="col col-6">
-                <button class="btn btn-primary w-100"><h5>Update</h5></button>
+                <button class="btn btn-success w-100"><h5>Update</h5></button>
             </div>
             <div class="col col-6">
-                <a href="{{route('business-permits.show', $busData->id)}}" class="btn w-100 text-white" style="background-color: #388E3C;"><h5>Cancel</h5></a>
+                <a href="{{route('business-permits.show', $busData->id)}}" class="btn w-100 osh-btn-cancel"><h5>Cancel</h5></a>
             </div>
         </div>
 

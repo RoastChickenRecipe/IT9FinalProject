@@ -11,7 +11,7 @@
                 <h4 class="text-dark">Incidents</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('incidents.create') }}" class="btn w-100" style="background-color:rgb(1, 110, 34); color: white; border-radius: 10px;">Log Incident</a>
+                <a href="{{ route('incidents.create') }}" class="btn w-100 osh-btn-primary">Log Incident</a>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
         <div class="content-main row">
             <div class="col-12" style="overflow: auto;">
                 <div class="table-responsive" style="background-color: #d9f2e6; border-radius: 10px; padding: 10px;">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead style="background-color: #91cfb8; color: black;">
                             <tr>
                                 <th>Incident Type</th>
@@ -37,7 +37,7 @@
                                 <tr>
                                     <td>{{$row->incident_type}}</td>
                                     <td>{{$row->inc_address}}</td>
-                                    <td>{{$row->IncToEmp->e_fname}} {{$row->IncToEmp->e_fname}}</td>
+                                    <td>{{$row->IncToEmp->e_fname}} {{$row->IncToEmp->e_lname}}</td>
                                     <td>{{$row->date_reported}}</td>
                                     <td>
                                         <a href="{{route('incidents.show', $row->id)}}" class="btn btn-success btn-sm">Show</a>

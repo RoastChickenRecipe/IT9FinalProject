@@ -11,7 +11,7 @@
                 <h4 class="text-dark">Complainants</h4>
             </div>
             <div class="col-3">
-                <a href="{{ route('complainants.create') }}" class="btn w-100" style="background-color: #388E3C; color: white; border-radius: 10px;">Report Complaint</a>
+                <a href="{{ route('complainants.create') }}" class="btn w-100 osh-btn-primary">Report Complaint</a>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
         <div class="content-main row">
             <div class="col-12" style="overflow: auto;">
                 <div class="table-responsive" style="background-color: #E8F5E9; border-radius: 10px; padding: 10px;">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead style="background-color: #4CAF50; color: white;">
                             <tr>
                                 <th>Name</th>
@@ -58,8 +58,8 @@
                                     <td>{{ $row->ComplToEmp->e_lname }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{ route('complainants.show', $row->id) }}" class="btn btn-success btn-sm" style="background-color:rgb(34, 62, 219); color: white; border-radius: 5px;">View</a>
-                                            <a href="{{ route('complainants.edit', $row->id) }}" class="btn btn-primary btn-sm" style="background-color: #4CAF50; color: white; border-radius: 5px;">Edit</a>
+                                            <a href="{{ route('complainants.edit', $row->id) }}" class="btn osh-btn-edit">Edit</a>
+                                            <a href="{{ route('complainants.show', $row->id) }}" class="btn osh-btn-edit">View</a>
                                         </div>
                                     </td>
                                 </tr>
