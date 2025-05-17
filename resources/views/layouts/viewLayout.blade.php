@@ -94,6 +94,7 @@
         font-weight: bold;
     }
 
+<<<<<<< HEAD
     .osh-btn-add {
         background-color: #E8F5E9; 
         border: solid 2px black;  
@@ -143,6 +144,9 @@
         padding: 5px;
     }
     
+=======
+    /* Floating Box Styling */
+>>>>>>> 28ec3a77f1fe63dd89cdbd55cdccd74e60da84e4
     .floating-box {
         position: sticky;
         top: 50px;
