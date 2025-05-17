@@ -59,7 +59,7 @@
                     <div class="row g-0">
                         <!-- Left Panel -->
                         <div class="col-md-6 left-panel d-flex flex-column justify-content-center align-items-center p-4">
-                            <img src="{{ asset('images/barangaylogo.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                            <img src="{{ asset('images/barangaylogotrans.png') }}" alt="Barangay Logo" class="img-fluid mb-3" style="max-width: 150px;">
                             <h3>Barangay Profiling System</h3>
                         </div>
                         <!-- Right Panel -->

@@ -18,8 +18,8 @@
                 </div>
             </div>
         </div>
-
     </div>
+</div>
     
 
 @endsection
@@ -199,7 +199,7 @@
                                         <h4>{{$subdData->first()->subd_name}}</h4>
                                     </div>
                                     <div class="col col-2 align-self-center">
-                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn w-100 osh-btn-add">Edit</a>
+                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn w-100 text-white" style="background-color:rgb(0, 65, 163);">Edit</a>
                                     </div>
                                     <div class="col col-2 align-self-center">
                                         <!-- Button trigger modal -->

@@ -28,9 +28,18 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-4 text-end">
-                <button id="sortButton" class="btn btn-primary w-100" onclick="toggleSort()" style="background-color: #4CAF50; color: white; border-radius: 10px;">
-                    Sort Municipality <span id="sortArrow">↑</span>
-                </button>
+                <div class="dropdown">
+                    <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:rgb(0, 45, 243); color: white; border-radius: 10px;">
+                        Sort By
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="sortTable(0)">Municipality</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortTable(1)">Region</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortTable(2)">Total Brgy</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortTable(3)">Total Subd</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortTable(4)">Population</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -76,7 +85,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addMunModalLabel">Add Household:</h1>
+                    <h1 class="modal-title fs-5" id="addMunModalLabel">Add Municipality:</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -119,16 +128,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <div class="row w-100 m-0 p-0">
-                            <div class="col col-6">
-                                <button type="submit" class="btn btn-success w-100"><h5>Add</h5></button>
-                            </div>
-                            <div class="col col-6">
-                                <button type="button" class="btn btn-outline-dark w-100" data-bs-dismiss="modal"><h5>Close</h5></button>
-
-                            </div>
-                        </div>
-                        
+                        <button type="submit" class="btn btn-success w-50"><h5>Add</h5></button>
+                        <button type="button" class="btn btn-dark w-50" data-bs-dismiss="modal"><h5>Close</h5></button>
                     </div>
                 </form>
 
@@ -162,6 +163,20 @@
             // Toggle sort order and update arrow
             sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
             document.getElementById('sortArrow').innerText = sortOrder === 'asc' ? '↑' : '↓';
+        }
+
+        function sortTable(columnIndex) {
+            const table = document.querySelector("#tableBody");
+            const rows = Array.from(table.rows);
+
+            rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].innerText.toLowerCase();
+                const cellB = b.cells[columnIndex].innerText.toLowerCase();
+
+                return cellA.localeCompare(cellB);
+            });
+
+            rows.forEach(row => table.appendChild(row));
         }
 
         // Search Functionality
