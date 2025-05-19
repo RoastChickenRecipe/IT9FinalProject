@@ -48,14 +48,40 @@
 
         .osh-btn-edit {
             background-color: #E8F5E9;
-            border: solid 2px blue;  
+            border: solid 2px rgb(99, 99, 255);  
             border-radius:10px;
-            color: blue;
+            color: rgb(99, 99, 255);
         }
 
         .osh-btn-edit:hover {
-            background-color: blue;
+            background-color: rgb(99, 99, 255);
+            border: solid 2px rgb(99, 99, 255);
             color: white;
+        }
+
+        .osh-btn-cancel {
+            background-color: #E8F5E9;
+            border: solid 2px black;  
+            border-radius:8px;
+            color: black;
+        }
+
+        .osh-btn-cancel:hover {
+            background-color: gray;
+            border-radius:10px;
+            color: white;
+        }
+
+        .osh-drop {
+            background-color: #E8F5E9;
+            border: solid 1px black;
+            color: black
+        }
+
+        .osh-drop:hover {
+            background-color: #b3e6cc;
+            border: solid 1px black;
+            color: black
         }
 
         .osh-btn-del {
@@ -127,6 +153,7 @@
         }
         .sidebar .logout:hover {
             background-color: #A71D2A;
+            color: white;
         }
 
         /* Content Header Styling */
@@ -212,6 +239,7 @@
                 <a href="{{ route('dashboard.index') }}" class="sidebar-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
+                
                 <a href="{{ route('municipality.index') }}" class="sidebar-link {{ request()->routeIs('municipality.index') ? 'active' : '' }}">
                     <i class="bi bi-geo-alt"></i> Address
                 </a>

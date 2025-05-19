@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-3 col-sm-4 text-end">
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:rgb(0, 24, 245); color: white; border-radius: 10px;">
+                    <button class="btn osh-drop dropdown-toggle w-100" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         Sort By
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="sortDropdown">

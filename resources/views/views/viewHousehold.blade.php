@@ -22,6 +22,12 @@
                 </button>
 
             </div>
+
+            @session('message')
+                <div class="osh-outline mt-3">
+                    <div class="bg-info rounded-3 p-3" style="text-align: center;"><h5>{{$value}}</h5></div>
+                </div>
+            @endsession
             
 
 
@@ -51,10 +57,6 @@
         <h4 class="osh-outline">House Type: {{$house->household_type}}</h4>
         <h4 class="osh-outline">Address: {{$house->HHoldToMun->mun_name}}, {{$house->HHoldToBrgy->brgy_name}} {{$house->HHoldToSubd->subd_name}}</h4>
         <h4 class="osh-outline">Family Income: ₱ {{$getCitizen->sum('income')}}</h4>
-
-        @session('message')
-            <div class="bg-info rounded-3 mt-2 p-2" style="text-align: center;"><h5>{{$value}}</h5></div>            
-        @endsession
         
     </div>
 

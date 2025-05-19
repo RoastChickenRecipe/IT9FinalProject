@@ -113,6 +113,19 @@
         color: white;
     }
 
+    .osh-btn-edit {
+        background-color: #E8F5E9;
+        border: solid 2px rgb(99, 99, 255);  
+        border-radius:10px;
+        color: rgb(99, 99, 255);
+    }
+
+    .osh-btn-edit:hover {
+        background-color: rgb(99, 99, 255);
+        border: solid 2px rgb(99, 99, 255);
+        color: white;
+    }
+
     .osh-btn-del {
         background-color: #E8F5E9;
         border: solid 2px tomato;  
@@ -140,8 +153,14 @@
     .osh-btn-cancel {
         background-color: #E8F5E9;
         border: solid 2px black;  
-        border-radius:10px;
+        border-radius:8px;
         color: black;
+    }
+
+    .osh-btn-cancel:hover {
+        background-color: gray;
+        border-radius:10px;
+        color: white;
     }
 
     .osh-bg {

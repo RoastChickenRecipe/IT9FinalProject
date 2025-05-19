@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-3 col-sm-4 text-end">
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:rgb(0, 76, 241); color: white; border-radius: 10px;">
+                    <button class="btn osh-drop dropdown-toggle w-100" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         Sort By
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="sortDropdown">
@@ -181,7 +181,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="reqDocLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="reqDocLabel">Request Document</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{route('rqDocuments.store')}}" method="post">
@@ -200,13 +200,7 @@
                                     <label for="issue_date"><h3>Issued At:</h3></label>
                                     <input type="date" name="date" class="form-control" value="{{old('date')}}">
                                     @error('date')                               
-                                        <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
-                                        <script>
-                                            document.addEventListener('DOMContentLoaded', function(){
-                                                var crDocModal = new bootstrap.Modal(document.getElementById('addMunModal'));
-                                                crDocModal.show();
-                                            })
-                                        </script>                                    
+                                        <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>                                   
                                     @enderror
                                 </div>
                             </div>
@@ -225,13 +219,7 @@
                                         @endforeach
                                     </select>
                                     @error('sel_cit')                                  
-                                        <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>
-                                        <script>
-                                            document.addEventListener('DOMContentLoaded', function(){
-                                                var crDocModal = new bootstrap.Modal(document.getElementById('addMunModal'));
-                                                crDocModal.show();
-                                            })
-                                        </script>                                
+                                        <div class="mt-1 text-center" style="background-color: rgb(255, 100, 100); border-radius:10px;">{{$message}}</div>                               
                                     @enderror
                                 </div>
                             </div>
@@ -275,8 +263,6 @@
             </div>
         </div>
     </div><!-- End Request Doc Modal -->
-
-    
 
     @if($errors->any())
 

@@ -14,18 +14,24 @@
         .card {
             border-radius: 15px;
             overflow: hidden;
+            background-color: transparent;
         }
         .left-panel {
-            background-color: rgb(145, 207, 137);
+            /*background-color: rgb(145, 207, 137);*/
+            background-color: transparent;
             color: black;
             text-align: center;
         }
+        
         .right-panel {
             background-color: #f8f9fa;
+            /*background-color: transparent;*/
         }
+            
         .form-control {
             border-radius: 10px;
-            background-color: #e9f5e9; 
+            /*
+            background-color: #e9f5e9; */
             border: 1px solid #91cf89; 
         }
         .form-control:focus {

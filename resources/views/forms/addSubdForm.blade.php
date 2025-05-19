@@ -6,7 +6,7 @@
 
     <form action="{{route('subdivision.store')}}" method="post">
         @csrf
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center mt-3">
             <div class="col col-12">
                 <div class="osh-bg">
                     <label for="s_brgy"><h4>Barangay</h4></label> <br>

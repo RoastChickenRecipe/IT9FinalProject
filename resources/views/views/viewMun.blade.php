@@ -6,21 +6,26 @@
     <div class="col col-2">
 
         <div class="osh-bg floating-box">
-            <div class="osh-outline row m-0">
-                <div class="col col-12">
-                    <button type="button" class="btn w-100 osh-btn-add" data-bs-toggle="modal" data-bs-target="#addBrgyModal">
-                        <h5>Add Brgy.</h5>
-                    </button>
-                </div>
-
-                <div class="col col-12 mt-5">
-                    <a href="{{route('municipality.index')}}"  class="btn w-100 osh-btn-add"><h5>Go Back</h5></a>
-                </div>
+            
+            <div class="osh-outline">
+                <button type="button" class="btn w-100 osh-btn-add" data-bs-toggle="modal" data-bs-target="#addBrgyModal">
+                    <h5>Add Brgy.</h5>
+                </button>
+                
             </div>
+
+            @session('message')
+                <div class="osh-outline mt-3">
+                    <div class="bg-info rounded-3 p-3" style="text-align: center;"><h5>{{$value}}</h5></div>
+                </div>
+            @endsession
+
+            <div class="osh-outline mt-5">
+                <a href="{{route('municipality.index')}}"  class="btn w-100 osh-btn-add"><h5>Go Back</h5></a>
+            </div>
+            
         </div>
     </div>
-</div>
-    
 
 @endsection
 
@@ -102,9 +107,6 @@
 
             </div>
 
-            @session('message')
-                <div class="bg-info rounded-3 mt-2 p-2" style="text-align: center;"><h5>{{$value}}</h5></div>
-            @endsession
 
         </div>
     </div>
@@ -199,7 +201,7 @@
                                         <h4>{{$subdData->first()->subd_name}}</h4>
                                     </div>
                                     <div class="col col-2 align-self-center">
-                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn w-100 text-white" style="background-color:rgb(0, 65, 163);">Edit</a>
+                                        <a href="{{route('subdivision.edit', $subdData->first()->id)}}" class="btn osh-btn-edit w-100">Edit</a>
                                     </div>
                                     <div class="col col-2 align-self-center">
                                         <!-- Button trigger modal -->
